@@ -85,6 +85,7 @@ func (x *TestMoney) GetNanos() int32 {
 type TestAsset struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -126,6 +127,13 @@ func (x *TestAsset) GetName() string {
 	return ""
 }
 
+func (x *TestAsset) GetPrice() int64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
 var File_gridx_test_v1_test_asset_proto protoreflect.FileDescriptor
 
 const file_gridx_test_v1_test_asset_proto_rawDesc = "" +
@@ -134,9 +142,10 @@ const file_gridx_test_v1_test_asset_proto_rawDesc = "" +
 	"\tTestMoney\x12#\n" +
 	"\rcurrency_code\x18\x01 \x01(\tR\fcurrencyCode\x12\x14\n" +
 	"\x05units\x18\x02 \x01(\x03R\x05units\x12\x14\n" +
-	"\x05nanos\x18\x03 \x01(\x05R\x05nanos\"\x1f\n" +
+	"\x05nanos\x18\x03 \x01(\x05R\x05nanos\"5\n" +
 	"\tTestAsset\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04nameBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/test/v1;testv1b\x06proto3"
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05price\x18\x02 \x01(\x03R\x05priceBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/test/v1;testv1b\x06proto3"
 
 var (
 	file_gridx_test_v1_test_asset_proto_rawDescOnce sync.Once
