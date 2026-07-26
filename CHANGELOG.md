@@ -30,3 +30,7 @@ Generated from p2p-energy-trading-platform/protobuf@v0.7.0.
 ## v0.7.1
 
 Generated from p2p-energy-trading-platform/protobuf@v0.7.1.
+
+## v1.0.0
+
+Generated from p2p-energy-trading-platform/protobuf@v1.0.0.

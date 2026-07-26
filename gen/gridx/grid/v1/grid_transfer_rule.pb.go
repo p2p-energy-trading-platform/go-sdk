@@ -23,11 +23,7 @@ const (
 )
 
 type GridTransferRule struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in gridx/grid/v1/grid_transfer_rule.proto.
-	SellerGridZone string `protobuf:"bytes,1,opt,name=seller_grid_zone,json=sellerGridZone,proto3" json:"seller_grid_zone,omitempty"`
-	// Deprecated: Marked as deprecated in gridx/grid/v1/grid_transfer_rule.proto.
-	BuyerGridZone    string                 `protobuf:"bytes,2,opt,name=buyer_grid_zone,json=buyerGridZone,proto3" json:"buyer_grid_zone,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
 	Allowed          bool                   `protobuf:"varint,3,opt,name=allowed,proto3" json:"allowed,omitempty"`
 	GridFeePerKwh    int64                  `protobuf:"varint,4,opt,name=grid_fee_per_kwh,json=gridFeePerKwh,proto3" json:"grid_fee_per_kwh,omitempty"`
 	Version          uint32                 `protobuf:"varint,5,opt,name=version,proto3" json:"version,omitempty"`
@@ -66,22 +62,6 @@ func (x *GridTransferRule) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GridTransferRule.ProtoReflect.Descriptor instead.
 func (*GridTransferRule) Descriptor() ([]byte, []int) {
 	return file_gridx_grid_v1_grid_transfer_rule_proto_rawDescGZIP(), []int{0}
-}
-
-// Deprecated: Marked as deprecated in gridx/grid/v1/grid_transfer_rule.proto.
-func (x *GridTransferRule) GetSellerGridZone() string {
-	if x != nil {
-		return x.SellerGridZone
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in gridx/grid/v1/grid_transfer_rule.proto.
-func (x *GridTransferRule) GetBuyerGridZone() string {
-	if x != nil {
-		return x.BuyerGridZone
-	}
-	return ""
 }
 
 func (x *GridTransferRule) GetAllowed() bool {
@@ -130,17 +110,15 @@ var File_gridx_grid_v1_grid_transfer_rule_proto protoreflect.FileDescriptor
 
 const file_gridx_grid_v1_grid_transfer_rule_proto_rawDesc = "" +
 	"\n" +
-	"&gridx/grid/v1/grid_transfer_rule.proto\x12\rgridx.grid.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe0\x02\n" +
-	"\x10GridTransferRule\x12,\n" +
-	"\x10seller_grid_zone\x18\x01 \x01(\tB\x02\x18\x01R\x0esellerGridZone\x12*\n" +
-	"\x0fbuyer_grid_zone\x18\x02 \x01(\tB\x02\x18\x01R\rbuyerGridZone\x12\x18\n" +
+	"&gridx/grid/v1/grid_transfer_rule.proto\x12\rgridx.grid.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb5\x02\n" +
+	"\x10GridTransferRule\x12\x18\n" +
 	"\aallowed\x18\x03 \x01(\bR\aallowed\x12'\n" +
 	"\x10grid_fee_per_kwh\x18\x04 \x01(\x03R\rgridFeePerKwh\x12\x18\n" +
 	"\aversion\x18\x05 \x01(\rR\aversion\x129\n" +
 	"\n" +
 	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12-\n" +
 	"\x13seller_grid_zone_id\x18\a \x01(\rR\x10sellerGridZoneId\x12+\n" +
-	"\x12buyer_grid_zone_id\x18\b \x01(\rR\x0fbuyerGridZoneIdBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/grid/v1;gridv1b\x06proto3"
+	"\x12buyer_grid_zone_id\x18\b \x01(\rR\x0fbuyerGridZoneIdJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x10seller_grid_zoneR\x0fbuyer_grid_zoneBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/grid/v1;gridv1b\x06proto3"
 
 var (
 	file_gridx_grid_v1_grid_transfer_rule_proto_rawDescOnce sync.Once
