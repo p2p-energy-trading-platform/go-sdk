@@ -357,6 +357,86 @@ func (x *LogoutResponse) GetSuccess() bool {
 	return false
 }
 
+type LogoutAllRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutAllRequest) Reset() {
+	*x = LogoutAllRequest{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutAllRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutAllRequest) ProtoMessage() {}
+
+func (x *LogoutAllRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutAllRequest.ProtoReflect.Descriptor instead.
+func (*LogoutAllRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{6}
+}
+
+type LogoutAllResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutAllResponse) Reset() {
+	*x = LogoutAllResponse{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutAllResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutAllResponse) ProtoMessage() {}
+
+func (x *LogoutAllResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutAllResponse.ProtoReflect.Descriptor instead.
+func (*LogoutAllResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *LogoutAllResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_gridx_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_gridx_auth_v1_auth_proto_rawDesc = "" +
@@ -384,11 +464,15 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\rLogoutRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"*\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xe5\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x12\n" +
+	"\x10LogoutAllRequest\"-\n" +
+	"\x11LogoutAllResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xb5\x02\n" +
 	"\vAuthService\x12K\n" +
 	"\bRegister\x12\x1e.gridx.auth.v1.RegisterRequest\x1a\x1f.gridx.auth.v1.RegisterResponse\x12B\n" +
 	"\x05Login\x12\x1b.gridx.auth.v1.LoginRequest\x1a\x1c.gridx.auth.v1.LoginResponse\x12E\n" +
-	"\x06Logout\x12\x1c.gridx.auth.v1.LogoutRequest\x1a\x1d.gridx.auth.v1.LogoutResponseBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/auth/v1;authv1b\x06proto3"
+	"\x06Logout\x12\x1c.gridx.auth.v1.LogoutRequest\x1a\x1d.gridx.auth.v1.LogoutResponse\x12N\n" +
+	"\tLogoutAll\x12\x1f.gridx.auth.v1.LogoutAllRequest\x1a .gridx.auth.v1.LogoutAllResponseBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/auth/v1;authv1b\x06proto3"
 
 var (
 	file_gridx_auth_v1_auth_proto_rawDescOnce sync.Once
@@ -402,24 +486,28 @@ func file_gridx_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_gridx_auth_v1_auth_proto_rawDescData
 }
 
-var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_gridx_auth_v1_auth_proto_goTypes = []any{
-	(*RegisterRequest)(nil),  // 0: gridx.auth.v1.RegisterRequest
-	(*RegisterResponse)(nil), // 1: gridx.auth.v1.RegisterResponse
-	(*LoginRequest)(nil),     // 2: gridx.auth.v1.LoginRequest
-	(*LoginResponse)(nil),    // 3: gridx.auth.v1.LoginResponse
-	(*LogoutRequest)(nil),    // 4: gridx.auth.v1.LogoutRequest
-	(*LogoutResponse)(nil),   // 5: gridx.auth.v1.LogoutResponse
+	(*RegisterRequest)(nil),   // 0: gridx.auth.v1.RegisterRequest
+	(*RegisterResponse)(nil),  // 1: gridx.auth.v1.RegisterResponse
+	(*LoginRequest)(nil),      // 2: gridx.auth.v1.LoginRequest
+	(*LoginResponse)(nil),     // 3: gridx.auth.v1.LoginResponse
+	(*LogoutRequest)(nil),     // 4: gridx.auth.v1.LogoutRequest
+	(*LogoutResponse)(nil),    // 5: gridx.auth.v1.LogoutResponse
+	(*LogoutAllRequest)(nil),  // 6: gridx.auth.v1.LogoutAllRequest
+	(*LogoutAllResponse)(nil), // 7: gridx.auth.v1.LogoutAllResponse
 }
 var file_gridx_auth_v1_auth_proto_depIdxs = []int32{
 	0, // 0: gridx.auth.v1.AuthService.Register:input_type -> gridx.auth.v1.RegisterRequest
 	2, // 1: gridx.auth.v1.AuthService.Login:input_type -> gridx.auth.v1.LoginRequest
 	4, // 2: gridx.auth.v1.AuthService.Logout:input_type -> gridx.auth.v1.LogoutRequest
-	1, // 3: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
-	3, // 4: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
-	5, // 5: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	6, // 3: gridx.auth.v1.AuthService.LogoutAll:input_type -> gridx.auth.v1.LogoutAllRequest
+	1, // 4: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
+	3, // 5: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
+	5, // 6: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
+	7, // 7: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -436,7 +524,7 @@ func file_gridx_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_auth_v1_auth_proto_rawDesc), len(file_gridx_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
