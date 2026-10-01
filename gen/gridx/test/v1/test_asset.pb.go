@@ -88,6 +88,7 @@ type TestAsset struct {
 	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	TestPrice     int32                  `protobuf:"varint,4,opt,name=test_price,json=testPrice,proto3" json:"test_price,omitempty"`
+	FixBump       string                 `protobuf:"bytes,5,opt,name=fix_bump,json=fixBump,proto3" json:"fix_bump,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -150,6 +151,13 @@ func (x *TestAsset) GetTestPrice() int32 {
 	return 0
 }
 
+func (x *TestAsset) GetFixBump() string {
+	if x != nil {
+		return x.FixBump
+	}
+	return ""
+}
+
 var File_gridx_test_v1_test_asset_proto protoreflect.FileDescriptor
 
 const file_gridx_test_v1_test_asset_proto_rawDesc = "" +
@@ -158,13 +166,14 @@ const file_gridx_test_v1_test_asset_proto_rawDesc = "" +
 	"\tTestMoney\x12#\n" +
 	"\rcurrency_code\x18\x01 \x01(\tR\fcurrencyCode\x12\x14\n" +
 	"\x05units\x18\x02 \x01(\x03R\x05units\x12\x14\n" +
-	"\x05nanos\x18\x03 \x01(\x05R\x05nanos\"h\n" +
+	"\x05nanos\x18\x03 \x01(\x05R\x05nanos\"\x83\x01\n" +
 	"\tTestAsset\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x02 \x01(\x03R\x05price\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1d\n" +
 	"\n" +
-	"test_price\x18\x04 \x01(\x05R\ttestPriceBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/test/v1;testv1b\x06proto3"
+	"test_price\x18\x04 \x01(\x05R\ttestPrice\x12\x19\n" +
+	"\bfix_bump\x18\x05 \x01(\tR\afixBumpBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/test/v1;testv1b\x06proto3"
 
 var (
 	file_gridx_test_v1_test_asset_proto_rawDescOnce sync.Once
