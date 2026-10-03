@@ -79,6 +79,7 @@ type RegisterResponse struct {
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,6 +138,13 @@ func (x *RegisterResponse) GetStatus() string {
 func (x *RegisterResponse) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -441,10 +449,9 @@ type UserProfile struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	FirstName     string                 `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName      string                 `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Name          string                 `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -493,20 +500,6 @@ func (x *UserProfile) GetEmail() string {
 	return ""
 }
 
-func (x *UserProfile) GetFirstName() string {
-	if x != nil {
-		return x.FirstName
-	}
-	return ""
-}
-
-func (x *UserProfile) GetLastName() string {
-	if x != nil {
-		return x.LastName
-	}
-	return ""
-}
-
 func (x *UserProfile) GetStatus() string {
 	if x != nil {
 		return x.Status
@@ -517,6 +510,13 @@ func (x *UserProfile) GetStatus() string {
 func (x *UserProfile) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserProfile) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -603,8 +603,7 @@ func (x *GetProfileResponse) GetProfile() *UserProfile {
 
 type UpdateProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FirstName     string                 `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName      string                 `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -639,16 +638,9 @@ func (*UpdateProfileRequest) Descriptor() ([]byte, []int) {
 	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *UpdateProfileRequest) GetFirstName() string {
+func (x *UpdateProfileRequest) GetName() string {
 	if x != nil {
-		return x.FirstName
-	}
-	return ""
-}
-
-func (x *UpdateProfileRequest) GetLastName() string {
-	if x != nil {
-		return x.LastName
+		return x.Name
 	}
 	return ""
 }
@@ -1160,13 +1152,14 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x18gridx/auth/v1/auth.proto\x12\rgridx.auth.v1\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"x\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\x8c\x01\n" +
 	"\x10RegisterResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\tR\tcreatedAt\"@\n" +
+	"created_at\x18\x04 \x01(\tR\tcreatedAt\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\"@\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xa5\x01\n" +
@@ -1183,23 +1176,21 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x12\n" +
 	"\x10LogoutAllRequest\"-\n" +
 	"\x11LogoutAllResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xaf\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xaa\x01\n" +
 	"\vUserProfile\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1d\n" +
-	"\n" +
-	"first_name\x18\x03 \x01(\tR\tfirstName\x12\x1b\n" +
-	"\tlast_name\x18\x04 \x01(\tR\blastName\x12\x16\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\tR\tcreatedAt\"\x13\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12\x12\n" +
+	"\x04name\x18\a \x01(\tR\x04nameJ\x04\b\x03\x10\x04J\x04\b\x04\x10\x05R\n" +
+	"first_nameR\tlast_name\"\x13\n" +
 	"\x11GetProfileRequest\"J\n" +
 	"\x12GetProfileResponse\x124\n" +
-	"\aprofile\x18\x01 \x01(\v2\x1a.gridx.auth.v1.UserProfileR\aprofile\"R\n" +
-	"\x14UpdateProfileRequest\x12\x1d\n" +
-	"\n" +
-	"first_name\x18\x01 \x01(\tR\tfirstName\x12\x1b\n" +
-	"\tlast_name\x18\x02 \x01(\tR\blastName\"M\n" +
+	"\aprofile\x18\x01 \x01(\v2\x1a.gridx.auth.v1.UserProfileR\aprofile\"M\n" +
+	"\x14UpdateProfileRequest\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04nameJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\n" +
+	"first_nameR\tlast_name\"M\n" +
 	"\x15UpdateProfileResponse\x124\n" +
 	"\aprofile\x18\x01 \x01(\v2\x1a.gridx.auth.v1.UserProfileR\aprofile\"e\n" +
 	"\x15ChangePasswordRequest\x12)\n" +
