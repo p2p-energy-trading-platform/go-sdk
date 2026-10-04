@@ -30,6 +30,8 @@ const (
 	AuthService_ResetPassword_FullMethodName        = "/gridx.auth.v1.AuthService/ResetPassword"
 	AuthService_RequestEmailChange_FullMethodName   = "/gridx.auth.v1.AuthService/RequestEmailChange"
 	AuthService_VerifyEmailChange_FullMethodName    = "/gridx.auth.v1.AuthService/VerifyEmailChange"
+	AuthService_GetUser_FullMethodName              = "/gridx.auth.v1.AuthService/GetUser"
+	AuthService_CheckPermission_FullMethodName      = "/gridx.auth.v1.AuthService/CheckPermission"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -47,6 +49,8 @@ type AuthServiceClient interface {
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	RequestEmailChange(ctx context.Context, in *RequestEmailChangeRequest, opts ...grpc.CallOption) (*RequestEmailChangeResponse, error)
 	VerifyEmailChange(ctx context.Context, in *VerifyEmailChangeRequest, opts ...grpc.CallOption) (*VerifyEmailChangeResponse, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 }
 
 type authServiceClient struct {
@@ -167,6 +171,26 @@ func (c *authServiceClient) VerifyEmailChange(ctx context.Context, in *VerifyEma
 	return out, nil
 }
 
+func (c *authServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckPermissionResponse)
+	err := c.cc.Invoke(ctx, AuthService_CheckPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -182,6 +206,8 @@ type AuthServiceServer interface {
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	RequestEmailChange(context.Context, *RequestEmailChangeRequest) (*RequestEmailChangeResponse, error)
 	VerifyEmailChange(context.Context, *VerifyEmailChangeRequest) (*VerifyEmailChangeResponse, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -224,6 +250,12 @@ func (UnimplementedAuthServiceServer) RequestEmailChange(context.Context, *Reque
 }
 func (UnimplementedAuthServiceServer) VerifyEmailChange(context.Context, *VerifyEmailChangeRequest) (*VerifyEmailChangeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifyEmailChange not implemented")
+}
+func (UnimplementedAuthServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedAuthServiceServer) CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckPermission not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -444,6 +476,42 @@ func _AuthService_VerifyEmailChange_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_CheckPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).CheckPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_CheckPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).CheckPermission(ctx, req.(*CheckPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -494,6 +562,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyEmailChange",
 			Handler:    _AuthService_VerifyEmailChange_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _AuthService_GetUser_Handler,
+		},
+		{
+			MethodName: "CheckPermission",
+			Handler:    _AuthService_CheckPermission_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
