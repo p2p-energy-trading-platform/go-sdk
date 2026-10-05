@@ -78,3 +78,7 @@ Generated from p2p-energy-trading-platform/protobuf@v1.7.0.
 ## v1.8.0
 
 Generated from p2p-energy-trading-platform/protobuf@v1.8.0.
+
+## v1.9.0
+
+Generated from p2p-energy-trading-platform/protobuf@v1.9.0.

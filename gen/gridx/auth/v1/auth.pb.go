@@ -1249,6 +1249,198 @@ func (x *VerifyEmailChangeResponse) GetProfile() *UserProfile {
 	return nil
 }
 
+type VerifyEmailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Otp           string                 `protobuf:"bytes,2,opt,name=otp,proto3" json:"otp,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyEmailRequest) Reset() {
+	*x = VerifyEmailRequest{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyEmailRequest) ProtoMessage() {}
+
+func (x *VerifyEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyEmailRequest.ProtoReflect.Descriptor instead.
+func (*VerifyEmailRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *VerifyEmailRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *VerifyEmailRequest) GetOtp() string {
+	if x != nil {
+		return x.Otp
+	}
+	return ""
+}
+
+type VerifyEmailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyEmailResponse) Reset() {
+	*x = VerifyEmailResponse{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyEmailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyEmailResponse) ProtoMessage() {}
+
+func (x *VerifyEmailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyEmailResponse.ProtoReflect.Descriptor instead.
+func (*VerifyEmailResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *VerifyEmailResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *VerifyEmailResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type ResendOtpRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResendOtpRequest) Reset() {
+	*x = ResendOtpRequest{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResendOtpRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResendOtpRequest) ProtoMessage() {}
+
+func (x *ResendOtpRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResendOtpRequest.ProtoReflect.Descriptor instead.
+func (*ResendOtpRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ResendOtpRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type ResendOtpResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResendOtpResponse) Reset() {
+	*x = ResendOtpResponse{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResendOtpResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResendOtpResponse) ProtoMessage() {}
+
+func (x *ResendOtpResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResendOtpResponse.ProtoReflect.Descriptor instead.
+func (*ResendOtpResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ResendOtpResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 type GetUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -1258,7 +1450,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[25]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1270,7 +1462,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[25]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1283,7 +1475,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{25}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetUserRequest) GetUserId() string {
@@ -1306,7 +1498,7 @@ type GetUserResponse struct {
 
 func (x *GetUserResponse) Reset() {
 	*x = GetUserResponse{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[26]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1318,7 +1510,7 @@ func (x *GetUserResponse) String() string {
 func (*GetUserResponse) ProtoMessage() {}
 
 func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[26]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1331,7 +1523,7 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
 func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{26}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetUserResponse) GetUserId() string {
@@ -1379,7 +1571,7 @@ type CheckPermissionRequest struct {
 
 func (x *CheckPermissionRequest) Reset() {
 	*x = CheckPermissionRequest{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[27]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1391,7 +1583,7 @@ func (x *CheckPermissionRequest) String() string {
 func (*CheckPermissionRequest) ProtoMessage() {}
 
 func (x *CheckPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[27]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1404,7 +1596,7 @@ func (x *CheckPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckPermissionRequest.ProtoReflect.Descriptor instead.
 func (*CheckPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{27}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *CheckPermissionRequest) GetUserId() string {
@@ -1430,7 +1622,7 @@ type CheckPermissionResponse struct {
 
 func (x *CheckPermissionResponse) Reset() {
 	*x = CheckPermissionResponse{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[28]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1442,7 +1634,7 @@ func (x *CheckPermissionResponse) String() string {
 func (*CheckPermissionResponse) ProtoMessage() {}
 
 func (x *CheckPermissionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[28]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1455,7 +1647,7 @@ func (x *CheckPermissionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckPermissionResponse.ProtoReflect.Descriptor instead.
 func (*CheckPermissionResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{28}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *CheckPermissionResponse) GetAllowed() bool {
@@ -1541,7 +1733,17 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x18VerifyEmailChangeRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"Q\n" +
 	"\x19VerifyEmailChangeResponse\x124\n" +
-	"\aprofile\x18\x01 \x01(\v2\x1a.gridx.auth.v1.UserProfileR\aprofile\")\n" +
+	"\aprofile\x18\x01 \x01(\v2\x1a.gridx.auth.v1.UserProfileR\aprofile\"<\n" +
+	"\x12VerifyEmailRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
+	"\x03otp\x18\x02 \x01(\tR\x03otp\"I\n" +
+	"\x13VerifyEmailResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"(\n" +
+	"\x10ResendOtpRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"-\n" +
+	"\x11ResendOtpResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x80\x01\n" +
 	"\x0fGetUserResponse\x12\x17\n" +
@@ -1554,7 +1756,7 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12'\n" +
 	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\"3\n" +
 	"\x17CheckPermissionResponse\x12\x18\n" +
-	"\aallowed\x18\x01 \x01(\bR\aallowed2\xe8\t\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed2\x8e\v\n" +
 	"\vAuthService\x12K\n" +
 	"\bRegister\x12\x1e.gridx.auth.v1.RegisterRequest\x1a\x1f.gridx.auth.v1.RegisterResponse\x12B\n" +
 	"\x05Login\x12\x1b.gridx.auth.v1.LoginRequest\x1a\x1c.gridx.auth.v1.LoginResponse\x12E\n" +
@@ -1569,7 +1771,9 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x12RequestEmailChange\x12(.gridx.auth.v1.RequestEmailChangeRequest\x1a).gridx.auth.v1.RequestEmailChangeResponse\x12f\n" +
 	"\x11VerifyEmailChange\x12'.gridx.auth.v1.VerifyEmailChangeRequest\x1a(.gridx.auth.v1.VerifyEmailChangeResponse\x12H\n" +
 	"\aGetUser\x12\x1d.gridx.auth.v1.GetUserRequest\x1a\x1e.gridx.auth.v1.GetUserResponse\x12`\n" +
-	"\x0fCheckPermission\x12%.gridx.auth.v1.CheckPermissionRequest\x1a&.gridx.auth.v1.CheckPermissionResponse\x12W\n" +
+	"\x0fCheckPermission\x12%.gridx.auth.v1.CheckPermissionRequest\x1a&.gridx.auth.v1.CheckPermissionResponse\x12T\n" +
+	"\vVerifyEmail\x12!.gridx.auth.v1.VerifyEmailRequest\x1a\".gridx.auth.v1.VerifyEmailResponse\x12N\n" +
+	"\tResendOtp\x12\x1f.gridx.auth.v1.ResendOtpRequest\x1a .gridx.auth.v1.ResendOtpResponse\x12W\n" +
 	"\fRefreshToken\x12\".gridx.auth.v1.RefreshTokenRequest\x1a#.gridx.auth.v1.RefreshTokenResponseBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/auth/v1;authv1b\x06proto3"
 
 var (
@@ -1584,7 +1788,7 @@ func file_gridx_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_gridx_auth_v1_auth_proto_rawDescData
 }
 
-var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_gridx_auth_v1_auth_proto_goTypes = []any{
 	(*RegisterRequest)(nil),              // 0: gridx.auth.v1.RegisterRequest
 	(*RegisterResponse)(nil),             // 1: gridx.auth.v1.RegisterResponse
@@ -1611,10 +1815,14 @@ var file_gridx_auth_v1_auth_proto_goTypes = []any{
 	(*RequestEmailChangeResponse)(nil),   // 22: gridx.auth.v1.RequestEmailChangeResponse
 	(*VerifyEmailChangeRequest)(nil),     // 23: gridx.auth.v1.VerifyEmailChangeRequest
 	(*VerifyEmailChangeResponse)(nil),    // 24: gridx.auth.v1.VerifyEmailChangeResponse
-	(*GetUserRequest)(nil),               // 25: gridx.auth.v1.GetUserRequest
-	(*GetUserResponse)(nil),              // 26: gridx.auth.v1.GetUserResponse
-	(*CheckPermissionRequest)(nil),       // 27: gridx.auth.v1.CheckPermissionRequest
-	(*CheckPermissionResponse)(nil),      // 28: gridx.auth.v1.CheckPermissionResponse
+	(*VerifyEmailRequest)(nil),           // 25: gridx.auth.v1.VerifyEmailRequest
+	(*VerifyEmailResponse)(nil),          // 26: gridx.auth.v1.VerifyEmailResponse
+	(*ResendOtpRequest)(nil),             // 27: gridx.auth.v1.ResendOtpRequest
+	(*ResendOtpResponse)(nil),            // 28: gridx.auth.v1.ResendOtpResponse
+	(*GetUserRequest)(nil),               // 29: gridx.auth.v1.GetUserRequest
+	(*GetUserResponse)(nil),              // 30: gridx.auth.v1.GetUserResponse
+	(*CheckPermissionRequest)(nil),       // 31: gridx.auth.v1.CheckPermissionRequest
+	(*CheckPermissionResponse)(nil),      // 32: gridx.auth.v1.CheckPermissionResponse
 }
 var file_gridx_auth_v1_auth_proto_depIdxs = []int32{
 	10, // 0: gridx.auth.v1.GetProfileResponse.profile:type_name -> gridx.auth.v1.UserProfile
@@ -1631,25 +1839,29 @@ var file_gridx_auth_v1_auth_proto_depIdxs = []int32{
 	19, // 11: gridx.auth.v1.AuthService.ResetPassword:input_type -> gridx.auth.v1.ResetPasswordRequest
 	21, // 12: gridx.auth.v1.AuthService.RequestEmailChange:input_type -> gridx.auth.v1.RequestEmailChangeRequest
 	23, // 13: gridx.auth.v1.AuthService.VerifyEmailChange:input_type -> gridx.auth.v1.VerifyEmailChangeRequest
-	25, // 14: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
-	27, // 15: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
-	4,  // 16: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
-	1,  // 17: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
-	3,  // 18: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
-	7,  // 19: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
-	9,  // 20: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
-	12, // 21: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
-	14, // 22: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
-	16, // 23: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
-	18, // 24: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
-	20, // 25: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
-	22, // 26: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
-	24, // 27: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
-	26, // 28: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
-	28, // 29: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
-	5,  // 30: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
-	17, // [17:31] is the sub-list for method output_type
-	3,  // [3:17] is the sub-list for method input_type
+	29, // 14: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
+	31, // 15: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
+	25, // 16: gridx.auth.v1.AuthService.VerifyEmail:input_type -> gridx.auth.v1.VerifyEmailRequest
+	27, // 17: gridx.auth.v1.AuthService.ResendOtp:input_type -> gridx.auth.v1.ResendOtpRequest
+	4,  // 18: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
+	1,  // 19: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
+	3,  // 20: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
+	7,  // 21: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
+	9,  // 22: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
+	12, // 23: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
+	14, // 24: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
+	16, // 25: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
+	18, // 26: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
+	20, // 27: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
+	22, // 28: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
+	24, // 29: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
+	30, // 30: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
+	32, // 31: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
+	26, // 32: gridx.auth.v1.AuthService.VerifyEmail:output_type -> gridx.auth.v1.VerifyEmailResponse
+	28, // 33: gridx.auth.v1.AuthService.ResendOtp:output_type -> gridx.auth.v1.ResendOtpResponse
+	5,  // 34: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
+	19, // [19:35] is the sub-list for method output_type
+	3,  // [3:19] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
 	3,  // [3:3] is the sub-list for extension extendee
 	0,  // [0:3] is the sub-list for field type_name
@@ -1666,7 +1878,7 @@ func file_gridx_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_auth_v1_auth_proto_rawDesc), len(file_gridx_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
