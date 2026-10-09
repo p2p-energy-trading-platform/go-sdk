@@ -34,6 +34,7 @@ const (
 	AuthService_CheckPermission_FullMethodName      = "/gridx.auth.v1.AuthService/CheckPermission"
 	AuthService_VerifyEmail_FullMethodName          = "/gridx.auth.v1.AuthService/VerifyEmail"
 	AuthService_ResendOtp_FullMethodName            = "/gridx.auth.v1.AuthService/ResendOtp"
+	AuthService_SubmitKyc_FullMethodName            = "/gridx.auth.v1.AuthService/SubmitKyc"
 	AuthService_RefreshToken_FullMethodName         = "/gridx.auth.v1.AuthService/RefreshToken"
 )
 
@@ -56,6 +57,7 @@ type AuthServiceClient interface {
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	ResendOtp(ctx context.Context, in *ResendOtpRequest, opts ...grpc.CallOption) (*ResendOtpResponse, error)
+	SubmitKyc(ctx context.Context, in *SubmitKycRequest, opts ...grpc.CallOption) (*SubmitKycResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 }
 
@@ -217,6 +219,16 @@ func (c *authServiceClient) ResendOtp(ctx context.Context, in *ResendOtpRequest,
 	return out, nil
 }
 
+func (c *authServiceClient) SubmitKyc(ctx context.Context, in *SubmitKycRequest, opts ...grpc.CallOption) (*SubmitKycResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubmitKycResponse)
+	err := c.cc.Invoke(ctx, AuthService_SubmitKyc_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RefreshTokenResponse)
@@ -246,6 +258,7 @@ type AuthServiceServer interface {
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	ResendOtp(context.Context, *ResendOtpRequest) (*ResendOtpResponse, error)
+	SubmitKyc(context.Context, *SubmitKycRequest) (*SubmitKycResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
@@ -301,6 +314,9 @@ func (UnimplementedAuthServiceServer) VerifyEmail(context.Context, *VerifyEmailR
 }
 func (UnimplementedAuthServiceServer) ResendOtp(context.Context, *ResendOtpRequest) (*ResendOtpResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResendOtp not implemented")
+}
+func (UnimplementedAuthServiceServer) SubmitKyc(context.Context, *SubmitKycRequest) (*SubmitKycResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SubmitKyc not implemented")
 }
 func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RefreshToken not implemented")
@@ -596,6 +612,24 @@ func _AuthService_ResendOtp_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_SubmitKyc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitKycRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SubmitKyc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SubmitKyc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SubmitKyc(ctx, req.(*SubmitKycRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefreshTokenRequest)
 	if err := dec(in); err != nil {
@@ -680,6 +714,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResendOtp",
 			Handler:    _AuthService_ResendOtp_Handler,
+		},
+		{
+			MethodName: "SubmitKyc",
+			Handler:    _AuthService_SubmitKyc_Handler,
 		},
 		{
 			MethodName: "RefreshToken",
