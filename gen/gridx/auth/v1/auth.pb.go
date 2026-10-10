@@ -136,6 +136,9 @@ type RegisterResponse struct {
 	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	CreatedAtTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at_time,json=createdAtTime,proto3" json:"created_at_time,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,7,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,8,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,9,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -211,6 +214,27 @@ func (x *RegisterResponse) GetCreatedAtTime() *timestamppb.Timestamp {
 		return x.CreatedAtTime
 	}
 	return nil
+}
+
+func (x *RegisterResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetExpiresIn() int64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
 }
 
 type LoginRequest struct {
@@ -1974,7 +1998,7 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x18gridx/auth/v1/auth.proto\x12\rgridx.auth.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16google/type/date.proto\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xd4\x01\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xbb\x02\n" +
 	"\x10RegisterResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -1982,7 +2006,11 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\tB\x02\x18\x01R\tcreatedAt\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12B\n" +
-	"\x0fcreated_at_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\rcreatedAtTime\"@\n" +
+	"\x0fcreated_at_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\rcreatedAtTime\x12!\n" +
+	"\faccess_token\x18\a \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\b \x01(\tR\frefreshToken\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\t \x01(\x03R\texpiresIn\"@\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xa5\x01\n" +
