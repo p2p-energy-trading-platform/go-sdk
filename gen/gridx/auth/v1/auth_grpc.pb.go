@@ -23,6 +23,7 @@ const (
 	AuthService_Login_FullMethodName                = "/gridx.auth.v1.AuthService/Login"
 	AuthService_Logout_FullMethodName               = "/gridx.auth.v1.AuthService/Logout"
 	AuthService_LogoutAll_FullMethodName            = "/gridx.auth.v1.AuthService/LogoutAll"
+	AuthService_CreateKycUploadUrl_FullMethodName   = "/gridx.auth.v1.AuthService/CreateKycUploadUrl"
 	AuthService_GetProfile_FullMethodName           = "/gridx.auth.v1.AuthService/GetProfile"
 	AuthService_UpdateProfile_FullMethodName        = "/gridx.auth.v1.AuthService/UpdateProfile"
 	AuthService_ChangePassword_FullMethodName       = "/gridx.auth.v1.AuthService/ChangePassword"
@@ -47,6 +48,7 @@ type AuthServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	LogoutAll(ctx context.Context, in *LogoutAllRequest, opts ...grpc.CallOption) (*LogoutAllResponse, error)
+	CreateKycUploadUrl(ctx context.Context, in *CreateKycUploadUrlRequest, opts ...grpc.CallOption) (*CreateKycUploadUrlResponse, error)
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileResponse, error)
 	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
@@ -105,6 +107,16 @@ func (c *authServiceClient) LogoutAll(ctx context.Context, in *LogoutAllRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LogoutAllResponse)
 	err := c.cc.Invoke(ctx, AuthService_LogoutAll_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) CreateKycUploadUrl(ctx context.Context, in *CreateKycUploadUrlRequest, opts ...grpc.CallOption) (*CreateKycUploadUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateKycUploadUrlResponse)
+	err := c.cc.Invoke(ctx, AuthService_CreateKycUploadUrl_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -259,6 +271,7 @@ type AuthServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	LogoutAll(context.Context, *LogoutAllRequest) (*LogoutAllResponse, error)
+	CreateKycUploadUrl(context.Context, *CreateKycUploadUrlRequest) (*CreateKycUploadUrlResponse, error)
 	GetProfile(context.Context, *GetProfileRequest) (*GetProfileResponse, error)
 	UpdateProfile(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error)
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
@@ -294,6 +307,9 @@ func (UnimplementedAuthServiceServer) Logout(context.Context, *LogoutRequest) (*
 }
 func (UnimplementedAuthServiceServer) LogoutAll(context.Context, *LogoutAllRequest) (*LogoutAllResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LogoutAll not implemented")
+}
+func (UnimplementedAuthServiceServer) CreateKycUploadUrl(context.Context, *CreateKycUploadUrlRequest) (*CreateKycUploadUrlResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateKycUploadUrl not implemented")
 }
 func (UnimplementedAuthServiceServer) GetProfile(context.Context, *GetProfileRequest) (*GetProfileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProfile not implemented")
@@ -426,6 +442,24 @@ func _AuthService_LogoutAll_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).LogoutAll(ctx, req.(*LogoutAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_CreateKycUploadUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateKycUploadUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).CreateKycUploadUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_CreateKycUploadUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).CreateKycUploadUrl(ctx, req.(*CreateKycUploadUrlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -704,6 +738,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LogoutAll",
 			Handler:    _AuthService_LogoutAll_Handler,
+		},
+		{
+			MethodName: "CreateKycUploadUrl",
+			Handler:    _AuthService_CreateKycUploadUrl_Handler,
 		},
 		{
 			MethodName: "GetProfile",
