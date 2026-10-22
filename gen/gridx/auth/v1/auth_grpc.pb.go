@@ -36,6 +36,7 @@ const (
 	AuthService_VerifyEmail_FullMethodName          = "/gridx.auth.v1.AuthService/VerifyEmail"
 	AuthService_ResendOtp_FullMethodName            = "/gridx.auth.v1.AuthService/ResendOtp"
 	AuthService_SubmitKyc_FullMethodName            = "/gridx.auth.v1.AuthService/SubmitKyc"
+	AuthService_ExtractKycNicOcr_FullMethodName     = "/gridx.auth.v1.AuthService/ExtractKycNicOcr"
 	AuthService_RefreshToken_FullMethodName         = "/gridx.auth.v1.AuthService/RefreshToken"
 	AuthService_LoginWithGoogle_FullMethodName      = "/gridx.auth.v1.AuthService/LoginWithGoogle"
 )
@@ -61,6 +62,7 @@ type AuthServiceClient interface {
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	ResendOtp(ctx context.Context, in *ResendOtpRequest, opts ...grpc.CallOption) (*ResendOtpResponse, error)
 	SubmitKyc(ctx context.Context, in *SubmitKycRequest, opts ...grpc.CallOption) (*SubmitKycResponse, error)
+	ExtractKycNicOcr(ctx context.Context, in *ExtractKycNicOcrRequest, opts ...grpc.CallOption) (*ExtractKycNicOcrResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	LoginWithGoogle(ctx context.Context, in *LoginWithGoogleRequest, opts ...grpc.CallOption) (*LoginWithGoogleResponse, error)
 }
@@ -243,6 +245,16 @@ func (c *authServiceClient) SubmitKyc(ctx context.Context, in *SubmitKycRequest,
 	return out, nil
 }
 
+func (c *authServiceClient) ExtractKycNicOcr(ctx context.Context, in *ExtractKycNicOcrRequest, opts ...grpc.CallOption) (*ExtractKycNicOcrResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExtractKycNicOcrResponse)
+	err := c.cc.Invoke(ctx, AuthService_ExtractKycNicOcr_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RefreshTokenResponse)
@@ -284,6 +296,7 @@ type AuthServiceServer interface {
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	ResendOtp(context.Context, *ResendOtpRequest) (*ResendOtpResponse, error)
 	SubmitKyc(context.Context, *SubmitKycRequest) (*SubmitKycResponse, error)
+	ExtractKycNicOcr(context.Context, *ExtractKycNicOcrRequest) (*ExtractKycNicOcrResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	LoginWithGoogle(context.Context, *LoginWithGoogleRequest) (*LoginWithGoogleResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
@@ -346,6 +359,9 @@ func (UnimplementedAuthServiceServer) ResendOtp(context.Context, *ResendOtpReque
 }
 func (UnimplementedAuthServiceServer) SubmitKyc(context.Context, *SubmitKycRequest) (*SubmitKycResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SubmitKyc not implemented")
+}
+func (UnimplementedAuthServiceServer) ExtractKycNicOcr(context.Context, *ExtractKycNicOcrRequest) (*ExtractKycNicOcrResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExtractKycNicOcr not implemented")
 }
 func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RefreshToken not implemented")
@@ -680,6 +696,24 @@ func _AuthService_SubmitKyc_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_ExtractKycNicOcr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExtractKycNicOcrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ExtractKycNicOcr(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ExtractKycNicOcr_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ExtractKycNicOcr(ctx, req.(*ExtractKycNicOcrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefreshTokenRequest)
 	if err := dec(in); err != nil {
@@ -790,6 +824,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitKyc",
 			Handler:    _AuthService_SubmitKyc_Handler,
+		},
+		{
+			MethodName: "ExtractKycNicOcr",
+			Handler:    _AuthService_ExtractKycNicOcr_Handler,
 		},
 		{
 			MethodName: "RefreshToken",

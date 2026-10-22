@@ -110,3 +110,7 @@ Generated from p2p-energy-trading-platform/protobuf@v1.13.0.
 ## v1.14.0
 
 Generated from p2p-energy-trading-platform/protobuf@v1.14.0.
+
+## v1.15.0
+
+Generated from p2p-energy-trading-platform/protobuf@v1.15.0.

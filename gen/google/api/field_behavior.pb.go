@@ -152,7 +152,7 @@ var file_google_api_field_behavior_proto_extTypes = []protoimpl.ExtensionInfo{
 		ExtensionType: ([]FieldBehavior)(nil),
 		Field:         1052,
 		Name:          "google.api.field_behavior",
-		Tag:           "varint,1052,rep,name=field_behavior,enum=google.api.FieldBehavior",
+		Tag:           "varint,1052,rep,packed,name=field_behavior,enum=google.api.FieldBehavior",
 		Filename:      "google/api/field_behavior.proto",
 	},
 }
@@ -193,8 +193,8 @@ const file_google_api_field_behavior_proto_rawDesc = "" +
 	"\x0eUNORDERED_LIST\x10\x06\x12\x15\n" +
 	"\x11NON_EMPTY_DEFAULT\x10\a\x12\x0e\n" +
 	"\n" +
-	"IDENTIFIER\x10\b:d\n" +
-	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\x9c\b \x03(\x0e2\x19.google.api.FieldBehaviorB\x02\x10\x00R\rfieldBehaviorBp\n" +
+	"IDENTIFIER\x10\b:`\n" +
+	"\x0efield_behavior\x12\x1d.google.protobuf.FieldOptions\x18\x9c\b \x03(\x0e2\x19.google.api.FieldBehaviorR\rfieldBehaviorBp\n" +
 	"\x0ecom.google.apiB\x12FieldBehaviorProtoP\x01ZAgoogle.golang.org/genproto/googleapis/api/annotations;annotations\xa2\x02\x04GAPIb\x06proto3"
 
 var (

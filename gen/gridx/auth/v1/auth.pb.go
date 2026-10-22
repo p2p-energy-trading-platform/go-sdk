@@ -1879,8 +1879,8 @@ type SubmitKycRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FullName      string                 `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 	DateOfBirth   *date.Date             `protobuf:"bytes,2,opt,name=date_of_birth,json=dateOfBirth,proto3" json:"date_of_birth,omitempty"`
-	DubaiId       string                 `protobuf:"bytes,3,opt,name=dubai_id,json=dubaiId,proto3" json:"dubai_id,omitempty"`
 	DocumentPath  string                 `protobuf:"bytes,4,opt,name=document_path,json=documentPath,proto3" json:"document_path,omitempty"`
+	NicNumber     string                 `protobuf:"bytes,5,opt,name=nic_number,json=nicNumber,proto3" json:"nic_number,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1929,16 +1929,16 @@ func (x *SubmitKycRequest) GetDateOfBirth() *date.Date {
 	return nil
 }
 
-func (x *SubmitKycRequest) GetDubaiId() string {
+func (x *SubmitKycRequest) GetDocumentPath() string {
 	if x != nil {
-		return x.DubaiId
+		return x.DocumentPath
 	}
 	return ""
 }
 
-func (x *SubmitKycRequest) GetDocumentPath() string {
+func (x *SubmitKycRequest) GetNicNumber() string {
 	if x != nil {
-		return x.DocumentPath
+		return x.NicNumber
 	}
 	return ""
 }
@@ -1993,13 +1993,13 @@ type KycSubmission struct {
 	UserId          string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	FullName        string                 `protobuf:"bytes,3,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 	DateOfBirth     *date.Date             `protobuf:"bytes,4,opt,name=date_of_birth,json=dateOfBirth,proto3" json:"date_of_birth,omitempty"`
-	DubaiId         string                 `protobuf:"bytes,5,opt,name=dubai_id,json=dubaiId,proto3" json:"dubai_id,omitempty"`
 	DocumentPath    string                 `protobuf:"bytes,6,opt,name=document_path,json=documentPath,proto3" json:"document_path,omitempty"`
 	State           KycState               `protobuf:"varint,7,opt,name=state,proto3,enum=gridx.auth.v1.KycState" json:"state,omitempty"`
 	RejectionReason string                 `protobuf:"bytes,8,opt,name=rejection_reason,json=rejectionReason,proto3" json:"rejection_reason,omitempty"`
 	VerifiedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=verified_at,json=verifiedAt,proto3" json:"verified_at,omitempty"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	NicNumber       string                 `protobuf:"bytes,12,opt,name=nic_number,json=nicNumber,proto3" json:"nic_number,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2062,13 +2062,6 @@ func (x *KycSubmission) GetDateOfBirth() *date.Date {
 	return nil
 }
 
-func (x *KycSubmission) GetDubaiId() string {
-	if x != nil {
-		return x.DubaiId
-	}
-	return ""
-}
-
 func (x *KycSubmission) GetDocumentPath() string {
 	if x != nil {
 		return x.DocumentPath
@@ -2111,6 +2104,117 @@ func (x *KycSubmission) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *KycSubmission) GetNicNumber() string {
+	if x != nil {
+		return x.NicNumber
+	}
+	return ""
+}
+
+type ExtractKycNicOcrRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ObjectKey     string                 `protobuf:"bytes,1,opt,name=object_key,json=objectKey,proto3" json:"object_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExtractKycNicOcrRequest) Reset() {
+	*x = ExtractKycNicOcrRequest{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExtractKycNicOcrRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExtractKycNicOcrRequest) ProtoMessage() {}
+
+func (x *ExtractKycNicOcrRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExtractKycNicOcrRequest.ProtoReflect.Descriptor instead.
+func (*ExtractKycNicOcrRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *ExtractKycNicOcrRequest) GetObjectKey() string {
+	if x != nil {
+		return x.ObjectKey
+	}
+	return ""
+}
+
+type ExtractKycNicOcrResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FullName      string                 `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	DateOfBirth   *date.Date             `protobuf:"bytes,2,opt,name=date_of_birth,json=dateOfBirth,proto3" json:"date_of_birth,omitempty"`
+	NicNumber     string                 `protobuf:"bytes,3,opt,name=nic_number,json=nicNumber,proto3" json:"nic_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExtractKycNicOcrResponse) Reset() {
+	*x = ExtractKycNicOcrResponse{}
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExtractKycNicOcrResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExtractKycNicOcrResponse) ProtoMessage() {}
+
+func (x *ExtractKycNicOcrResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExtractKycNicOcrResponse.ProtoReflect.Descriptor instead.
+func (*ExtractKycNicOcrResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *ExtractKycNicOcrResponse) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+func (x *ExtractKycNicOcrResponse) GetDateOfBirth() *date.Date {
+	if x != nil {
+		return x.DateOfBirth
+	}
+	return nil
+}
+
+func (x *ExtractKycNicOcrResponse) GetNicNumber() string {
+	if x != nil {
+		return x.NicNumber
+	}
+	return ""
+}
+
 type LoginWithGoogleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -2123,7 +2227,7 @@ type LoginWithGoogleRequest struct {
 
 func (x *LoginWithGoogleRequest) Reset() {
 	*x = LoginWithGoogleRequest{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[38]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2239,7 @@ func (x *LoginWithGoogleRequest) String() string {
 func (*LoginWithGoogleRequest) ProtoMessage() {}
 
 func (x *LoginWithGoogleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[38]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2148,7 +2252,7 @@ func (x *LoginWithGoogleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginWithGoogleRequest.ProtoReflect.Descriptor instead.
 func (*LoginWithGoogleRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{38}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *LoginWithGoogleRequest) GetCode() string {
@@ -2193,7 +2297,7 @@ type LoginWithGoogleResponse struct {
 
 func (x *LoginWithGoogleResponse) Reset() {
 	*x = LoginWithGoogleResponse{}
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[39]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2205,7 +2309,7 @@ func (x *LoginWithGoogleResponse) String() string {
 func (*LoginWithGoogleResponse) ProtoMessage() {}
 
 func (x *LoginWithGoogleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_auth_v1_auth_proto_msgTypes[39]
+	mi := &file_gridx_auth_v1_auth_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2218,7 +2322,7 @@ func (x *LoginWithGoogleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginWithGoogleResponse.ProtoReflect.Descriptor instead.
 func (*LoginWithGoogleResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{39}
+	return file_gridx_auth_v1_auth_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *LoginWithGoogleResponse) GetUserId() string {
@@ -2380,22 +2484,22 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12'\n" +
 	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\"3\n" +
 	"\x17CheckPermissionResponse\x12\x18\n" +
-	"\aallowed\x18\x01 \x01(\bR\aallowed\"\xa6\x01\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed\"\xba\x01\n" +
 	"\x10SubmitKycRequest\x12\x1b\n" +
 	"\tfull_name\x18\x01 \x01(\tR\bfullName\x125\n" +
-	"\rdate_of_birth\x18\x02 \x01(\v2\x11.google.type.DateR\vdateOfBirth\x12\x19\n" +
-	"\bdubai_id\x18\x03 \x01(\tR\adubaiId\x12#\n" +
-	"\rdocument_path\x18\x04 \x01(\tR\fdocumentPath\"Q\n" +
+	"\rdate_of_birth\x18\x02 \x01(\v2\x11.google.type.DateR\vdateOfBirth\x12#\n" +
+	"\rdocument_path\x18\x04 \x01(\tR\fdocumentPath\x12\x1d\n" +
+	"\n" +
+	"nic_number\x18\x05 \x01(\tR\tnicNumberJ\x04\b\x03\x10\x04R\bdubai_id\"Q\n" +
 	"\x11SubmitKycResponse\x12<\n" +
 	"\n" +
 	"submission\x18\x01 \x01(\v2\x1c.gridx.auth.v1.KycSubmissionR\n" +
-	"submission\"\xd9\x03\n" +
+	"submission\"\xed\x03\n" +
 	"\rKycSubmission\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tfull_name\x18\x03 \x01(\tR\bfullName\x125\n" +
-	"\rdate_of_birth\x18\x04 \x01(\v2\x11.google.type.DateR\vdateOfBirth\x12\x19\n" +
-	"\bdubai_id\x18\x05 \x01(\tR\adubaiId\x12#\n" +
+	"\rdate_of_birth\x18\x04 \x01(\v2\x11.google.type.DateR\vdateOfBirth\x12#\n" +
 	"\rdocument_path\x18\x06 \x01(\tR\fdocumentPath\x12-\n" +
 	"\x05state\x18\a \x01(\x0e2\x17.gridx.auth.v1.KycStateR\x05state\x12)\n" +
 	"\x10rejection_reason\x18\b \x01(\tR\x0frejectionReason\x12;\n" +
@@ -2405,7 +2509,17 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"created_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x8a\x01\n" +
+	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
+	"\n" +
+	"nic_number\x18\f \x01(\tR\tnicNumberJ\x04\b\x05\x10\x06R\bdubai_id\"8\n" +
+	"\x17ExtractKycNicOcrRequest\x12\x1d\n" +
+	"\n" +
+	"object_key\x18\x01 \x01(\tR\tobjectKey\"\x8d\x01\n" +
+	"\x18ExtractKycNicOcrResponse\x12\x1b\n" +
+	"\tfull_name\x18\x01 \x01(\tR\bfullName\x125\n" +
+	"\rdate_of_birth\x18\x02 \x01(\v2\x11.google.type.DateR\vdateOfBirth\x12\x1d\n" +
+	"\n" +
+	"nic_number\x18\x03 \x01(\tR\tnicNumber\"\x8a\x01\n" +
 	"\x16LoginWithGoogleRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12#\n" +
 	"\rcode_verifier\x18\x02 \x01(\tR\fcodeVerifier\x12!\n" +
@@ -2423,7 +2537,7 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x15KYC_STATE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11KYC_STATE_PENDING\x10\x01\x12\x16\n" +
 	"\x12KYC_STATE_VERIFIED\x10\x02\x12\x16\n" +
-	"\x12KYC_STATE_REJECTED\x10\x032\xab\r\n" +
+	"\x12KYC_STATE_REJECTED\x10\x032\x90\x0e\n" +
 	"\vAuthService\x12K\n" +
 	"\bRegister\x12\x1e.gridx.auth.v1.RegisterRequest\x1a\x1f.gridx.auth.v1.RegisterResponse\x12B\n" +
 	"\x05Login\x12\x1b.gridx.auth.v1.LoginRequest\x1a\x1c.gridx.auth.v1.LoginResponse\x12E\n" +
@@ -2442,7 +2556,8 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x0fCheckPermission\x12%.gridx.auth.v1.CheckPermissionRequest\x1a&.gridx.auth.v1.CheckPermissionResponse\x12T\n" +
 	"\vVerifyEmail\x12!.gridx.auth.v1.VerifyEmailRequest\x1a\".gridx.auth.v1.VerifyEmailResponse\x12N\n" +
 	"\tResendOtp\x12\x1f.gridx.auth.v1.ResendOtpRequest\x1a .gridx.auth.v1.ResendOtpResponse\x12N\n" +
-	"\tSubmitKyc\x12\x1f.gridx.auth.v1.SubmitKycRequest\x1a .gridx.auth.v1.SubmitKycResponse\x12W\n" +
+	"\tSubmitKyc\x12\x1f.gridx.auth.v1.SubmitKycRequest\x1a .gridx.auth.v1.SubmitKycResponse\x12c\n" +
+	"\x10ExtractKycNicOcr\x12&.gridx.auth.v1.ExtractKycNicOcrRequest\x1a'.gridx.auth.v1.ExtractKycNicOcrResponse\x12W\n" +
 	"\fRefreshToken\x12\".gridx.auth.v1.RefreshTokenRequest\x1a#.gridx.auth.v1.RefreshTokenResponse\x12`\n" +
 	"\x0fLoginWithGoogle\x12%.gridx.auth.v1.LoginWithGoogleRequest\x1a&.gridx.auth.v1.LoginWithGoogleResponseBHZFgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/auth/v1;authv1b\x06proto3"
 
@@ -2459,7 +2574,7 @@ func file_gridx_auth_v1_auth_proto_rawDescGZIP() []byte {
 }
 
 var file_gridx_auth_v1_auth_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
+var file_gridx_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_gridx_auth_v1_auth_proto_goTypes = []any{
 	(KycState)(0),                        // 0: gridx.auth.v1.KycState
 	(*RegisterRequest)(nil),              // 1: gridx.auth.v1.RegisterRequest
@@ -2500,67 +2615,72 @@ var file_gridx_auth_v1_auth_proto_goTypes = []any{
 	(*SubmitKycRequest)(nil),             // 36: gridx.auth.v1.SubmitKycRequest
 	(*SubmitKycResponse)(nil),            // 37: gridx.auth.v1.SubmitKycResponse
 	(*KycSubmission)(nil),                // 38: gridx.auth.v1.KycSubmission
-	(*LoginWithGoogleRequest)(nil),       // 39: gridx.auth.v1.LoginWithGoogleRequest
-	(*LoginWithGoogleResponse)(nil),      // 40: gridx.auth.v1.LoginWithGoogleResponse
-	(*timestamppb.Timestamp)(nil),        // 41: google.protobuf.Timestamp
-	(*date.Date)(nil),                    // 42: google.type.Date
+	(*ExtractKycNicOcrRequest)(nil),      // 39: gridx.auth.v1.ExtractKycNicOcrRequest
+	(*ExtractKycNicOcrResponse)(nil),     // 40: gridx.auth.v1.ExtractKycNicOcrResponse
+	(*LoginWithGoogleRequest)(nil),       // 41: gridx.auth.v1.LoginWithGoogleRequest
+	(*LoginWithGoogleResponse)(nil),      // 42: gridx.auth.v1.LoginWithGoogleResponse
+	(*timestamppb.Timestamp)(nil),        // 43: google.protobuf.Timestamp
+	(*date.Date)(nil),                    // 44: google.type.Date
 }
 var file_gridx_auth_v1_auth_proto_depIdxs = []int32{
-	41, // 0: gridx.auth.v1.RegisterResponse.created_at_time:type_name -> google.protobuf.Timestamp
-	41, // 1: gridx.auth.v1.UserProfile.created_at_time:type_name -> google.protobuf.Timestamp
+	43, // 0: gridx.auth.v1.RegisterResponse.created_at_time:type_name -> google.protobuf.Timestamp
+	43, // 1: gridx.auth.v1.UserProfile.created_at_time:type_name -> google.protobuf.Timestamp
 	13, // 2: gridx.auth.v1.GetProfileResponse.profile:type_name -> gridx.auth.v1.UserProfile
 	13, // 3: gridx.auth.v1.UpdateProfileResponse.profile:type_name -> gridx.auth.v1.UserProfile
 	13, // 4: gridx.auth.v1.VerifyEmailChangeResponse.profile:type_name -> gridx.auth.v1.UserProfile
-	42, // 5: gridx.auth.v1.SubmitKycRequest.date_of_birth:type_name -> google.type.Date
+	44, // 5: gridx.auth.v1.SubmitKycRequest.date_of_birth:type_name -> google.type.Date
 	38, // 6: gridx.auth.v1.SubmitKycResponse.submission:type_name -> gridx.auth.v1.KycSubmission
-	42, // 7: gridx.auth.v1.KycSubmission.date_of_birth:type_name -> google.type.Date
+	44, // 7: gridx.auth.v1.KycSubmission.date_of_birth:type_name -> google.type.Date
 	0,  // 8: gridx.auth.v1.KycSubmission.state:type_name -> gridx.auth.v1.KycState
-	41, // 9: gridx.auth.v1.KycSubmission.verified_at:type_name -> google.protobuf.Timestamp
-	41, // 10: gridx.auth.v1.KycSubmission.created_at:type_name -> google.protobuf.Timestamp
-	41, // 11: gridx.auth.v1.KycSubmission.updated_at:type_name -> google.protobuf.Timestamp
-	1,  // 12: gridx.auth.v1.AuthService.Register:input_type -> gridx.auth.v1.RegisterRequest
-	3,  // 13: gridx.auth.v1.AuthService.Login:input_type -> gridx.auth.v1.LoginRequest
-	7,  // 14: gridx.auth.v1.AuthService.Logout:input_type -> gridx.auth.v1.LogoutRequest
-	9,  // 15: gridx.auth.v1.AuthService.LogoutAll:input_type -> gridx.auth.v1.LogoutAllRequest
-	11, // 16: gridx.auth.v1.AuthService.CreateKycUploadUrl:input_type -> gridx.auth.v1.CreateKycUploadUrlRequest
-	14, // 17: gridx.auth.v1.AuthService.GetProfile:input_type -> gridx.auth.v1.GetProfileRequest
-	16, // 18: gridx.auth.v1.AuthService.UpdateProfile:input_type -> gridx.auth.v1.UpdateProfileRequest
-	18, // 19: gridx.auth.v1.AuthService.ChangePassword:input_type -> gridx.auth.v1.ChangePasswordRequest
-	20, // 20: gridx.auth.v1.AuthService.RequestPasswordReset:input_type -> gridx.auth.v1.RequestPasswordResetRequest
-	22, // 21: gridx.auth.v1.AuthService.ResetPassword:input_type -> gridx.auth.v1.ResetPasswordRequest
-	24, // 22: gridx.auth.v1.AuthService.RequestEmailChange:input_type -> gridx.auth.v1.RequestEmailChangeRequest
-	26, // 23: gridx.auth.v1.AuthService.VerifyEmailChange:input_type -> gridx.auth.v1.VerifyEmailChangeRequest
-	32, // 24: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
-	34, // 25: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
-	28, // 26: gridx.auth.v1.AuthService.VerifyEmail:input_type -> gridx.auth.v1.VerifyEmailRequest
-	30, // 27: gridx.auth.v1.AuthService.ResendOtp:input_type -> gridx.auth.v1.ResendOtpRequest
-	36, // 28: gridx.auth.v1.AuthService.SubmitKyc:input_type -> gridx.auth.v1.SubmitKycRequest
-	5,  // 29: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
-	39, // 30: gridx.auth.v1.AuthService.LoginWithGoogle:input_type -> gridx.auth.v1.LoginWithGoogleRequest
-	2,  // 31: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
-	4,  // 32: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
-	8,  // 33: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
-	10, // 34: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
-	12, // 35: gridx.auth.v1.AuthService.CreateKycUploadUrl:output_type -> gridx.auth.v1.CreateKycUploadUrlResponse
-	15, // 36: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
-	17, // 37: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
-	19, // 38: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
-	21, // 39: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
-	23, // 40: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
-	25, // 41: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
-	27, // 42: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
-	33, // 43: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
-	35, // 44: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
-	29, // 45: gridx.auth.v1.AuthService.VerifyEmail:output_type -> gridx.auth.v1.VerifyEmailResponse
-	31, // 46: gridx.auth.v1.AuthService.ResendOtp:output_type -> gridx.auth.v1.ResendOtpResponse
-	37, // 47: gridx.auth.v1.AuthService.SubmitKyc:output_type -> gridx.auth.v1.SubmitKycResponse
-	6,  // 48: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
-	40, // 49: gridx.auth.v1.AuthService.LoginWithGoogle:output_type -> gridx.auth.v1.LoginWithGoogleResponse
-	31, // [31:50] is the sub-list for method output_type
-	12, // [12:31] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	43, // 9: gridx.auth.v1.KycSubmission.verified_at:type_name -> google.protobuf.Timestamp
+	43, // 10: gridx.auth.v1.KycSubmission.created_at:type_name -> google.protobuf.Timestamp
+	43, // 11: gridx.auth.v1.KycSubmission.updated_at:type_name -> google.protobuf.Timestamp
+	44, // 12: gridx.auth.v1.ExtractKycNicOcrResponse.date_of_birth:type_name -> google.type.Date
+	1,  // 13: gridx.auth.v1.AuthService.Register:input_type -> gridx.auth.v1.RegisterRequest
+	3,  // 14: gridx.auth.v1.AuthService.Login:input_type -> gridx.auth.v1.LoginRequest
+	7,  // 15: gridx.auth.v1.AuthService.Logout:input_type -> gridx.auth.v1.LogoutRequest
+	9,  // 16: gridx.auth.v1.AuthService.LogoutAll:input_type -> gridx.auth.v1.LogoutAllRequest
+	11, // 17: gridx.auth.v1.AuthService.CreateKycUploadUrl:input_type -> gridx.auth.v1.CreateKycUploadUrlRequest
+	14, // 18: gridx.auth.v1.AuthService.GetProfile:input_type -> gridx.auth.v1.GetProfileRequest
+	16, // 19: gridx.auth.v1.AuthService.UpdateProfile:input_type -> gridx.auth.v1.UpdateProfileRequest
+	18, // 20: gridx.auth.v1.AuthService.ChangePassword:input_type -> gridx.auth.v1.ChangePasswordRequest
+	20, // 21: gridx.auth.v1.AuthService.RequestPasswordReset:input_type -> gridx.auth.v1.RequestPasswordResetRequest
+	22, // 22: gridx.auth.v1.AuthService.ResetPassword:input_type -> gridx.auth.v1.ResetPasswordRequest
+	24, // 23: gridx.auth.v1.AuthService.RequestEmailChange:input_type -> gridx.auth.v1.RequestEmailChangeRequest
+	26, // 24: gridx.auth.v1.AuthService.VerifyEmailChange:input_type -> gridx.auth.v1.VerifyEmailChangeRequest
+	32, // 25: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
+	34, // 26: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
+	28, // 27: gridx.auth.v1.AuthService.VerifyEmail:input_type -> gridx.auth.v1.VerifyEmailRequest
+	30, // 28: gridx.auth.v1.AuthService.ResendOtp:input_type -> gridx.auth.v1.ResendOtpRequest
+	36, // 29: gridx.auth.v1.AuthService.SubmitKyc:input_type -> gridx.auth.v1.SubmitKycRequest
+	39, // 30: gridx.auth.v1.AuthService.ExtractKycNicOcr:input_type -> gridx.auth.v1.ExtractKycNicOcrRequest
+	5,  // 31: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
+	41, // 32: gridx.auth.v1.AuthService.LoginWithGoogle:input_type -> gridx.auth.v1.LoginWithGoogleRequest
+	2,  // 33: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
+	4,  // 34: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
+	8,  // 35: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
+	10, // 36: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
+	12, // 37: gridx.auth.v1.AuthService.CreateKycUploadUrl:output_type -> gridx.auth.v1.CreateKycUploadUrlResponse
+	15, // 38: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
+	17, // 39: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
+	19, // 40: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
+	21, // 41: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
+	23, // 42: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
+	25, // 43: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
+	27, // 44: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
+	33, // 45: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
+	35, // 46: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
+	29, // 47: gridx.auth.v1.AuthService.VerifyEmail:output_type -> gridx.auth.v1.VerifyEmailResponse
+	31, // 48: gridx.auth.v1.AuthService.ResendOtp:output_type -> gridx.auth.v1.ResendOtpResponse
+	37, // 49: gridx.auth.v1.AuthService.SubmitKyc:output_type -> gridx.auth.v1.SubmitKycResponse
+	40, // 50: gridx.auth.v1.AuthService.ExtractKycNicOcr:output_type -> gridx.auth.v1.ExtractKycNicOcrResponse
+	6,  // 51: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
+	42, // 52: gridx.auth.v1.AuthService.LoginWithGoogle:output_type -> gridx.auth.v1.LoginWithGoogleResponse
+	33, // [33:53] is the sub-list for method output_type
+	13, // [13:33] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_gridx_auth_v1_auth_proto_init() }
@@ -2574,7 +2694,7 @@ func file_gridx_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_auth_v1_auth_proto_rawDesc), len(file_gridx_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   40,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
