@@ -1529,6 +1529,546 @@ func (x *GetEnergySummaryResponse) GetPeakDemand() *PeakDemand {
 	return nil
 }
 
+// Initiates a new smart meter registration request.
+type InitiateMeterClaimRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserReference string                 `protobuf:"bytes,1,opt,name=user_reference,json=userReference,proto3" json:"user_reference,omitempty"`
+	MeterId       string                 `protobuf:"bytes,2,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitiateMeterClaimRequest) Reset() {
+	*x = InitiateMeterClaimRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitiateMeterClaimRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitiateMeterClaimRequest) ProtoMessage() {}
+
+func (x *InitiateMeterClaimRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitiateMeterClaimRequest.ProtoReflect.Descriptor instead.
+func (*InitiateMeterClaimRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *InitiateMeterClaimRequest) GetUserReference() string {
+	if x != nil {
+		return x.UserReference
+	}
+	return ""
+}
+
+func (x *InitiateMeterClaimRequest) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
+type InitiateMeterClaimResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	Status         string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message        string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *InitiateMeterClaimResponse) Reset() {
+	*x = InitiateMeterClaimResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitiateMeterClaimResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitiateMeterClaimResponse) ProtoMessage() {}
+
+func (x *InitiateMeterClaimResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitiateMeterClaimResponse.ProtoReflect.Descriptor instead.
+func (*InitiateMeterClaimResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *InitiateMeterClaimResponse) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+func (x *InitiateMeterClaimResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *InitiateMeterClaimResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+// Retrieves the current registration status.
+type GetRegistrationStatusRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetRegistrationStatusRequest) Reset() {
+	*x = GetRegistrationStatusRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegistrationStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegistrationStatusRequest) ProtoMessage() {}
+
+func (x *GetRegistrationStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegistrationStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetRegistrationStatusRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetRegistrationStatusRequest) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+type GetRegistrationStatusResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	MeterId        string                 `protobuf:"bytes,2,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
+	ApprovalStatus string                 `protobuf:"bytes,3,opt,name=approval_status,json=approvalStatus,proto3" json:"approval_status,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetRegistrationStatusResponse) Reset() {
+	*x = GetRegistrationStatusResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegistrationStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegistrationStatusResponse) ProtoMessage() {}
+
+func (x *GetRegistrationStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegistrationStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetRegistrationStatusResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetRegistrationStatusResponse) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+func (x *GetRegistrationStatusResponse) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
+func (x *GetRegistrationStatusResponse) GetApprovalStatus() string {
+	if x != nil {
+		return x.ApprovalStatus
+	}
+	return ""
+}
+
+// Validates whether a smart meter is registered.
+type ValidateDeviceAssociationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MeterId       string                 `protobuf:"bytes,1,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateDeviceAssociationRequest) Reset() {
+	*x = ValidateDeviceAssociationRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateDeviceAssociationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateDeviceAssociationRequest) ProtoMessage() {}
+
+func (x *ValidateDeviceAssociationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateDeviceAssociationRequest.ProtoReflect.Descriptor instead.
+func (*ValidateDeviceAssociationRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ValidateDeviceAssociationRequest) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
+type ValidateDeviceAssociationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsRegistered  bool                   `protobuf:"varint,2,opt,name=is_registered,json=isRegistered,proto3" json:"is_registered,omitempty"`
+	PrimaryUserId string                 `protobuf:"bytes,3,opt,name=primary_user_id,json=primaryUserId,proto3" json:"primary_user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateDeviceAssociationResponse) Reset() {
+	*x = ValidateDeviceAssociationResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateDeviceAssociationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateDeviceAssociationResponse) ProtoMessage() {}
+
+func (x *ValidateDeviceAssociationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateDeviceAssociationResponse.ProtoReflect.Descriptor instead.
+func (*ValidateDeviceAssociationResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ValidateDeviceAssociationResponse) GetIsRegistered() bool {
+	if x != nil {
+		return x.IsRegistered
+	}
+	return false
+}
+
+func (x *ValidateDeviceAssociationResponse) GetPrimaryUserId() string {
+	if x != nil {
+		return x.PrimaryUserId
+	}
+	return ""
+}
+
+// Requests reverification of an existing registration.
+type ReverifyRegistrationRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	UserReference  string                 `protobuf:"bytes,2,opt,name=user_reference,json=userReference,proto3" json:"user_reference,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ReverifyRegistrationRequest) Reset() {
+	*x = ReverifyRegistrationRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReverifyRegistrationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReverifyRegistrationRequest) ProtoMessage() {}
+
+func (x *ReverifyRegistrationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReverifyRegistrationRequest.ProtoReflect.Descriptor instead.
+func (*ReverifyRegistrationRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ReverifyRegistrationRequest) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+func (x *ReverifyRegistrationRequest) GetUserReference() string {
+	if x != nil {
+		return x.UserReference
+	}
+	return ""
+}
+
+type ReverifyRegistrationResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	MeterId        string                 `protobuf:"bytes,2,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
+	Message        string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ReverifyRegistrationResponse) Reset() {
+	*x = ReverifyRegistrationResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReverifyRegistrationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReverifyRegistrationResponse) ProtoMessage() {}
+
+func (x *ReverifyRegistrationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReverifyRegistrationResponse.ProtoReflect.Descriptor instead.
+func (*ReverifyRegistrationResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ReverifyRegistrationResponse) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+func (x *ReverifyRegistrationResponse) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
+func (x *ReverifyRegistrationResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type GetRegistrationByUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserReference string                 `protobuf:"bytes,1,opt,name=user_reference,json=userReference,proto3" json:"user_reference,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRegistrationByUserRequest) Reset() {
+	*x = GetRegistrationByUserRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegistrationByUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegistrationByUserRequest) ProtoMessage() {}
+
+func (x *GetRegistrationByUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegistrationByUserRequest.ProtoReflect.Descriptor instead.
+func (*GetRegistrationByUserRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetRegistrationByUserRequest) GetUserReference() string {
+	if x != nil {
+		return x.UserReference
+	}
+	return ""
+}
+
+type GetRegistrationByUserResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	HasMeter       bool                   `protobuf:"varint,1,opt,name=has_meter,json=hasMeter,proto3" json:"has_meter,omitempty"`
+	RegistrationId string                 `protobuf:"bytes,2,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
+	MeterId        string                 `protobuf:"bytes,3,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
+	ApprovalStatus string                 `protobuf:"bytes,4,opt,name=approval_status,json=approvalStatus,proto3" json:"approval_status,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetRegistrationByUserResponse) Reset() {
+	*x = GetRegistrationByUserResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRegistrationByUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRegistrationByUserResponse) ProtoMessage() {}
+
+func (x *GetRegistrationByUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRegistrationByUserResponse.ProtoReflect.Descriptor instead.
+func (*GetRegistrationByUserResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetRegistrationByUserResponse) GetHasMeter() bool {
+	if x != nil {
+		return x.HasMeter
+	}
+	return false
+}
+
+func (x *GetRegistrationByUserResponse) GetRegistrationId() string {
+	if x != nil {
+		return x.RegistrationId
+	}
+	return ""
+}
+
+func (x *GetRegistrationByUserResponse) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
+func (x *GetRegistrationByUserResponse) GetApprovalStatus() string {
+	if x != nil {
+		return x.ApprovalStatus
+	}
+	return ""
+}
+
 var File_gridx_iot_v1_iot_proto protoreflect.FileDescriptor
 
 const file_gridx_iot_v1_iot_proto_rawDesc = "" +
@@ -1646,7 +2186,39 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\x14self_consumption_pct\x18\x03 \x01(\x01H\x00R\x12selfConsumptionPct\x88\x01\x01\x129\n" +
 	"\vpeak_demand\x18\x04 \x01(\v2\x18.gridx.iot.v1.PeakDemandR\n" +
 	"peakDemandB\x17\n" +
-	"\x15_self_consumption_pct*\x8a\x01\n" +
+	"\x15_self_consumption_pct\"]\n" +
+	"\x19InitiateMeterClaimRequest\x12%\n" +
+	"\x0euser_reference\x18\x01 \x01(\tR\ruserReference\x12\x19\n" +
+	"\bmeter_id\x18\x02 \x01(\tR\ameterId\"w\n" +
+	"\x1aInitiateMeterClaimResponse\x12'\n" +
+	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"G\n" +
+	"\x1cGetRegistrationStatusRequest\x12'\n" +
+	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\"\x8c\x01\n" +
+	"\x1dGetRegistrationStatusResponse\x12'\n" +
+	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12\x19\n" +
+	"\bmeter_id\x18\x02 \x01(\tR\ameterId\x12'\n" +
+	"\x0fapproval_status\x18\x03 \x01(\tR\x0eapprovalStatus\"=\n" +
+	" ValidateDeviceAssociationRequest\x12\x19\n" +
+	"\bmeter_id\x18\x01 \x01(\tR\ameterId\"p\n" +
+	"!ValidateDeviceAssociationResponse\x12#\n" +
+	"\ris_registered\x18\x02 \x01(\bR\fisRegistered\x12&\n" +
+	"\x0fprimary_user_id\x18\x03 \x01(\tR\rprimaryUserId\"m\n" +
+	"\x1bReverifyRegistrationRequest\x12'\n" +
+	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12%\n" +
+	"\x0euser_reference\x18\x02 \x01(\tR\ruserReference\"|\n" +
+	"\x1cReverifyRegistrationResponse\x12'\n" +
+	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12\x19\n" +
+	"\bmeter_id\x18\x02 \x01(\tR\ameterId\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"E\n" +
+	"\x1cGetRegistrationByUserRequest\x12%\n" +
+	"\x0euser_reference\x18\x01 \x01(\tR\ruserReference\"\xa9\x01\n" +
+	"\x1dGetRegistrationByUserResponse\x12\x1b\n" +
+	"\thas_meter\x18\x01 \x01(\bR\bhasMeter\x12'\n" +
+	"\x0fregistration_id\x18\x02 \x01(\tR\x0eregistrationId\x12\x19\n" +
+	"\bmeter_id\x18\x03 \x01(\tR\ameterId\x12'\n" +
+	"\x0fapproval_status\x18\x04 \x01(\tR\x0eapprovalStatus*\x8a\x01\n" +
 	"\vDeviceClass\x12\x1c\n" +
 	"\x18DEVICE_CLASS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15DEVICE_CLASS_CONSUMER\x10\x01\x12%\n" +
@@ -1667,7 +2239,13 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\bGetHouse\x12\x1d.gridx.iot.v1.GetHouseRequest\x1a\x1e.gridx.iot.v1.GetHouseResponse\x12a\n" +
 	"\x10GetLatestReading\x12%.gridx.iot.v1.GetLatestReadingRequest\x1a&.gridx.iot.v1.GetLatestReadingResponse\x12^\n" +
 	"\x0fGetEnergySeries\x12$.gridx.iot.v1.GetEnergySeriesRequest\x1a%.gridx.iot.v1.GetEnergySeriesResponse\x12a\n" +
-	"\x10GetEnergySummary\x12%.gridx.iot.v1.GetEnergySummaryRequest\x1a&.gridx.iot.v1.GetEnergySummaryResponseBFZDgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/iot/v1;iotv1b\x06proto3"
+	"\x10GetEnergySummary\x12%.gridx.iot.v1.GetEnergySummaryRequest\x1a&.gridx.iot.v1.GetEnergySummaryResponse2\xd5\x04\n" +
+	"\x19DeviceRegistrationService\x12g\n" +
+	"\x12InitiateMeterClaim\x12'.gridx.iot.v1.InitiateMeterClaimRequest\x1a(.gridx.iot.v1.InitiateMeterClaimResponse\x12p\n" +
+	"\x15GetRegistrationStatus\x12*.gridx.iot.v1.GetRegistrationStatusRequest\x1a+.gridx.iot.v1.GetRegistrationStatusResponse\x12|\n" +
+	"\x19ValidateDeviceAssociation\x12..gridx.iot.v1.ValidateDeviceAssociationRequest\x1a/.gridx.iot.v1.ValidateDeviceAssociationResponse\x12m\n" +
+	"\x14ReverifyRegistration\x12).gridx.iot.v1.ReverifyRegistrationRequest\x1a*.gridx.iot.v1.ReverifyRegistrationResponse\x12p\n" +
+	"\x15GetRegistrationByUser\x12*.gridx.iot.v1.GetRegistrationByUserRequest\x1a+.gridx.iot.v1.GetRegistrationByUserResponseBFZDgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/iot/v1;iotv1b\x06proto3"
 
 var (
 	file_gridx_iot_v1_iot_proto_rawDescOnce sync.Once
@@ -1682,57 +2260,67 @@ func file_gridx_iot_v1_iot_proto_rawDescGZIP() []byte {
 }
 
 var file_gridx_iot_v1_iot_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_gridx_iot_v1_iot_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_gridx_iot_v1_iot_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_gridx_iot_v1_iot_proto_goTypes = []any{
-	(DeviceClass)(0),                 // 0: gridx.iot.v1.DeviceClass
-	(AssetType)(0),                   // 1: gridx.iot.v1.AssetType
-	(MeterStatus)(0),                 // 2: gridx.iot.v1.MeterStatus
-	(*Grid)(nil),                     // 3: gridx.iot.v1.Grid
-	(*House)(nil),                    // 4: gridx.iot.v1.House
-	(*FlexibleAsset)(nil),            // 5: gridx.iot.v1.FlexibleAsset
-	(*StorageAssetReading)(nil),      // 6: gridx.iot.v1.StorageAssetReading
-	(*MeterReading)(nil),             // 7: gridx.iot.v1.MeterReading
-	(*EnergyTotals)(nil),             // 8: gridx.iot.v1.EnergyTotals
-	(*EnergyFlows)(nil),              // 9: gridx.iot.v1.EnergyFlows
-	(*AveragePower)(nil),             // 10: gridx.iot.v1.AveragePower
-	(*EnergyBucket)(nil),             // 11: gridx.iot.v1.EnergyBucket
-	(*PeakDemand)(nil),               // 12: gridx.iot.v1.PeakDemand
-	(*ListHousesRequest)(nil),        // 13: gridx.iot.v1.ListHousesRequest
-	(*ListHousesResponse)(nil),       // 14: gridx.iot.v1.ListHousesResponse
-	(*GetHouseRequest)(nil),          // 15: gridx.iot.v1.GetHouseRequest
-	(*GetHouseResponse)(nil),         // 16: gridx.iot.v1.GetHouseResponse
-	(*GetLatestReadingRequest)(nil),  // 17: gridx.iot.v1.GetLatestReadingRequest
-	(*GetLatestReadingResponse)(nil), // 18: gridx.iot.v1.GetLatestReadingResponse
-	(*GetEnergySeriesRequest)(nil),   // 19: gridx.iot.v1.GetEnergySeriesRequest
-	(*GetEnergySeriesResponse)(nil),  // 20: gridx.iot.v1.GetEnergySeriesResponse
-	(*GetEnergySummaryRequest)(nil),  // 21: gridx.iot.v1.GetEnergySummaryRequest
-	(*GetEnergySummaryResponse)(nil), // 22: gridx.iot.v1.GetEnergySummaryResponse
-	(*timestamppb.Timestamp)(nil),    // 23: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),      // 24: google.protobuf.Duration
+	(DeviceClass)(0),                          // 0: gridx.iot.v1.DeviceClass
+	(AssetType)(0),                            // 1: gridx.iot.v1.AssetType
+	(MeterStatus)(0),                          // 2: gridx.iot.v1.MeterStatus
+	(*Grid)(nil),                              // 3: gridx.iot.v1.Grid
+	(*House)(nil),                             // 4: gridx.iot.v1.House
+	(*FlexibleAsset)(nil),                     // 5: gridx.iot.v1.FlexibleAsset
+	(*StorageAssetReading)(nil),               // 6: gridx.iot.v1.StorageAssetReading
+	(*MeterReading)(nil),                      // 7: gridx.iot.v1.MeterReading
+	(*EnergyTotals)(nil),                      // 8: gridx.iot.v1.EnergyTotals
+	(*EnergyFlows)(nil),                       // 9: gridx.iot.v1.EnergyFlows
+	(*AveragePower)(nil),                      // 10: gridx.iot.v1.AveragePower
+	(*EnergyBucket)(nil),                      // 11: gridx.iot.v1.EnergyBucket
+	(*PeakDemand)(nil),                        // 12: gridx.iot.v1.PeakDemand
+	(*ListHousesRequest)(nil),                 // 13: gridx.iot.v1.ListHousesRequest
+	(*ListHousesResponse)(nil),                // 14: gridx.iot.v1.ListHousesResponse
+	(*GetHouseRequest)(nil),                   // 15: gridx.iot.v1.GetHouseRequest
+	(*GetHouseResponse)(nil),                  // 16: gridx.iot.v1.GetHouseResponse
+	(*GetLatestReadingRequest)(nil),           // 17: gridx.iot.v1.GetLatestReadingRequest
+	(*GetLatestReadingResponse)(nil),          // 18: gridx.iot.v1.GetLatestReadingResponse
+	(*GetEnergySeriesRequest)(nil),            // 19: gridx.iot.v1.GetEnergySeriesRequest
+	(*GetEnergySeriesResponse)(nil),           // 20: gridx.iot.v1.GetEnergySeriesResponse
+	(*GetEnergySummaryRequest)(nil),           // 21: gridx.iot.v1.GetEnergySummaryRequest
+	(*GetEnergySummaryResponse)(nil),          // 22: gridx.iot.v1.GetEnergySummaryResponse
+	(*InitiateMeterClaimRequest)(nil),         // 23: gridx.iot.v1.InitiateMeterClaimRequest
+	(*InitiateMeterClaimResponse)(nil),        // 24: gridx.iot.v1.InitiateMeterClaimResponse
+	(*GetRegistrationStatusRequest)(nil),      // 25: gridx.iot.v1.GetRegistrationStatusRequest
+	(*GetRegistrationStatusResponse)(nil),     // 26: gridx.iot.v1.GetRegistrationStatusResponse
+	(*ValidateDeviceAssociationRequest)(nil),  // 27: gridx.iot.v1.ValidateDeviceAssociationRequest
+	(*ValidateDeviceAssociationResponse)(nil), // 28: gridx.iot.v1.ValidateDeviceAssociationResponse
+	(*ReverifyRegistrationRequest)(nil),       // 29: gridx.iot.v1.ReverifyRegistrationRequest
+	(*ReverifyRegistrationResponse)(nil),      // 30: gridx.iot.v1.ReverifyRegistrationResponse
+	(*GetRegistrationByUserRequest)(nil),      // 31: gridx.iot.v1.GetRegistrationByUserRequest
+	(*GetRegistrationByUserResponse)(nil),     // 32: gridx.iot.v1.GetRegistrationByUserResponse
+	(*timestamppb.Timestamp)(nil),             // 33: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),               // 34: google.protobuf.Duration
 }
 var file_gridx_iot_v1_iot_proto_depIdxs = []int32{
 	3,  // 0: gridx.iot.v1.House.grid:type_name -> gridx.iot.v1.Grid
 	0,  // 1: gridx.iot.v1.House.device_class:type_name -> gridx.iot.v1.DeviceClass
 	2,  // 2: gridx.iot.v1.House.meter_status:type_name -> gridx.iot.v1.MeterStatus
-	23, // 3: gridx.iot.v1.House.last_heartbeat_at:type_name -> google.protobuf.Timestamp
+	33, // 3: gridx.iot.v1.House.last_heartbeat_at:type_name -> google.protobuf.Timestamp
 	1,  // 4: gridx.iot.v1.FlexibleAsset.asset_type:type_name -> gridx.iot.v1.AssetType
 	1,  // 5: gridx.iot.v1.StorageAssetReading.asset_type:type_name -> gridx.iot.v1.AssetType
-	23, // 6: gridx.iot.v1.MeterReading.measured_at:type_name -> google.protobuf.Timestamp
+	33, // 6: gridx.iot.v1.MeterReading.measured_at:type_name -> google.protobuf.Timestamp
 	6,  // 7: gridx.iot.v1.MeterReading.storage_assets:type_name -> gridx.iot.v1.StorageAssetReading
-	23, // 8: gridx.iot.v1.EnergyBucket.starts_at:type_name -> google.protobuf.Timestamp
+	33, // 8: gridx.iot.v1.EnergyBucket.starts_at:type_name -> google.protobuf.Timestamp
 	8,  // 9: gridx.iot.v1.EnergyBucket.energy:type_name -> gridx.iot.v1.EnergyTotals
 	10, // 10: gridx.iot.v1.EnergyBucket.average_power:type_name -> gridx.iot.v1.AveragePower
-	23, // 11: gridx.iot.v1.PeakDemand.occurred_at:type_name -> google.protobuf.Timestamp
+	33, // 11: gridx.iot.v1.PeakDemand.occurred_at:type_name -> google.protobuf.Timestamp
 	4,  // 12: gridx.iot.v1.ListHousesResponse.houses:type_name -> gridx.iot.v1.House
 	4,  // 13: gridx.iot.v1.GetHouseResponse.house:type_name -> gridx.iot.v1.House
 	5,  // 14: gridx.iot.v1.GetHouseResponse.flexible_assets:type_name -> gridx.iot.v1.FlexibleAsset
 	7,  // 15: gridx.iot.v1.GetLatestReadingResponse.reading:type_name -> gridx.iot.v1.MeterReading
-	23, // 16: gridx.iot.v1.GetEnergySeriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	23, // 17: gridx.iot.v1.GetEnergySeriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	24, // 18: gridx.iot.v1.GetEnergySeriesRequest.bucket_width:type_name -> google.protobuf.Duration
+	33, // 16: gridx.iot.v1.GetEnergySeriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	33, // 17: gridx.iot.v1.GetEnergySeriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	34, // 18: gridx.iot.v1.GetEnergySeriesRequest.bucket_width:type_name -> google.protobuf.Duration
 	11, // 19: gridx.iot.v1.GetEnergySeriesResponse.buckets:type_name -> gridx.iot.v1.EnergyBucket
-	23, // 20: gridx.iot.v1.GetEnergySummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	23, // 21: gridx.iot.v1.GetEnergySummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	33, // 20: gridx.iot.v1.GetEnergySummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	33, // 21: gridx.iot.v1.GetEnergySummaryRequest.end_time:type_name -> google.protobuf.Timestamp
 	8,  // 22: gridx.iot.v1.GetEnergySummaryResponse.totals:type_name -> gridx.iot.v1.EnergyTotals
 	9,  // 23: gridx.iot.v1.GetEnergySummaryResponse.flows:type_name -> gridx.iot.v1.EnergyFlows
 	12, // 24: gridx.iot.v1.GetEnergySummaryResponse.peak_demand:type_name -> gridx.iot.v1.PeakDemand
@@ -1741,13 +2329,23 @@ var file_gridx_iot_v1_iot_proto_depIdxs = []int32{
 	17, // 27: gridx.iot.v1.IotService.GetLatestReading:input_type -> gridx.iot.v1.GetLatestReadingRequest
 	19, // 28: gridx.iot.v1.IotService.GetEnergySeries:input_type -> gridx.iot.v1.GetEnergySeriesRequest
 	21, // 29: gridx.iot.v1.IotService.GetEnergySummary:input_type -> gridx.iot.v1.GetEnergySummaryRequest
-	14, // 30: gridx.iot.v1.IotService.ListHouses:output_type -> gridx.iot.v1.ListHousesResponse
-	16, // 31: gridx.iot.v1.IotService.GetHouse:output_type -> gridx.iot.v1.GetHouseResponse
-	18, // 32: gridx.iot.v1.IotService.GetLatestReading:output_type -> gridx.iot.v1.GetLatestReadingResponse
-	20, // 33: gridx.iot.v1.IotService.GetEnergySeries:output_type -> gridx.iot.v1.GetEnergySeriesResponse
-	22, // 34: gridx.iot.v1.IotService.GetEnergySummary:output_type -> gridx.iot.v1.GetEnergySummaryResponse
-	30, // [30:35] is the sub-list for method output_type
-	25, // [25:30] is the sub-list for method input_type
+	23, // 30: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:input_type -> gridx.iot.v1.InitiateMeterClaimRequest
+	25, // 31: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:input_type -> gridx.iot.v1.GetRegistrationStatusRequest
+	27, // 32: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:input_type -> gridx.iot.v1.ValidateDeviceAssociationRequest
+	29, // 33: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:input_type -> gridx.iot.v1.ReverifyRegistrationRequest
+	31, // 34: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:input_type -> gridx.iot.v1.GetRegistrationByUserRequest
+	14, // 35: gridx.iot.v1.IotService.ListHouses:output_type -> gridx.iot.v1.ListHousesResponse
+	16, // 36: gridx.iot.v1.IotService.GetHouse:output_type -> gridx.iot.v1.GetHouseResponse
+	18, // 37: gridx.iot.v1.IotService.GetLatestReading:output_type -> gridx.iot.v1.GetLatestReadingResponse
+	20, // 38: gridx.iot.v1.IotService.GetEnergySeries:output_type -> gridx.iot.v1.GetEnergySeriesResponse
+	22, // 39: gridx.iot.v1.IotService.GetEnergySummary:output_type -> gridx.iot.v1.GetEnergySummaryResponse
+	24, // 40: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:output_type -> gridx.iot.v1.InitiateMeterClaimResponse
+	26, // 41: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:output_type -> gridx.iot.v1.GetRegistrationStatusResponse
+	28, // 42: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:output_type -> gridx.iot.v1.ValidateDeviceAssociationResponse
+	30, // 43: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:output_type -> gridx.iot.v1.ReverifyRegistrationResponse
+	32, // 44: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:output_type -> gridx.iot.v1.GetRegistrationByUserResponse
+	35, // [35:45] is the sub-list for method output_type
+	25, // [25:35] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
 	25, // [25:25] is the sub-list for extension extendee
 	0,  // [0:25] is the sub-list for field type_name
@@ -1768,9 +2366,9 @@ func file_gridx_iot_v1_iot_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_iot_v1_iot_proto_rawDesc), len(file_gridx_iot_v1_iot_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   20,
+			NumMessages:   30,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_gridx_iot_v1_iot_proto_goTypes,
 		DependencyIndexes: file_gridx_iot_v1_iot_proto_depIdxs,

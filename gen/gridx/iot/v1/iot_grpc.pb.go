@@ -281,3 +281,258 @@ var IotService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "gridx/iot/v1/iot.proto",
 }
+
+const (
+	DeviceRegistrationService_InitiateMeterClaim_FullMethodName        = "/gridx.iot.v1.DeviceRegistrationService/InitiateMeterClaim"
+	DeviceRegistrationService_GetRegistrationStatus_FullMethodName     = "/gridx.iot.v1.DeviceRegistrationService/GetRegistrationStatus"
+	DeviceRegistrationService_ValidateDeviceAssociation_FullMethodName = "/gridx.iot.v1.DeviceRegistrationService/ValidateDeviceAssociation"
+	DeviceRegistrationService_ReverifyRegistration_FullMethodName      = "/gridx.iot.v1.DeviceRegistrationService/ReverifyRegistration"
+	DeviceRegistrationService_GetRegistrationByUser_FullMethodName     = "/gridx.iot.v1.DeviceRegistrationService/GetRegistrationByUser"
+)
+
+// DeviceRegistrationServiceClient is the client API for DeviceRegistrationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DeviceRegistrationServiceClient interface {
+	InitiateMeterClaim(ctx context.Context, in *InitiateMeterClaimRequest, opts ...grpc.CallOption) (*InitiateMeterClaimResponse, error)
+	GetRegistrationStatus(ctx context.Context, in *GetRegistrationStatusRequest, opts ...grpc.CallOption) (*GetRegistrationStatusResponse, error)
+	ValidateDeviceAssociation(ctx context.Context, in *ValidateDeviceAssociationRequest, opts ...grpc.CallOption) (*ValidateDeviceAssociationResponse, error)
+	ReverifyRegistration(ctx context.Context, in *ReverifyRegistrationRequest, opts ...grpc.CallOption) (*ReverifyRegistrationResponse, error)
+	GetRegistrationByUser(ctx context.Context, in *GetRegistrationByUserRequest, opts ...grpc.CallOption) (*GetRegistrationByUserResponse, error)
+}
+
+type deviceRegistrationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDeviceRegistrationServiceClient(cc grpc.ClientConnInterface) DeviceRegistrationServiceClient {
+	return &deviceRegistrationServiceClient{cc}
+}
+
+func (c *deviceRegistrationServiceClient) InitiateMeterClaim(ctx context.Context, in *InitiateMeterClaimRequest, opts ...grpc.CallOption) (*InitiateMeterClaimResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateMeterClaimResponse)
+	err := c.cc.Invoke(ctx, DeviceRegistrationService_InitiateMeterClaim_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceRegistrationServiceClient) GetRegistrationStatus(ctx context.Context, in *GetRegistrationStatusRequest, opts ...grpc.CallOption) (*GetRegistrationStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRegistrationStatusResponse)
+	err := c.cc.Invoke(ctx, DeviceRegistrationService_GetRegistrationStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceRegistrationServiceClient) ValidateDeviceAssociation(ctx context.Context, in *ValidateDeviceAssociationRequest, opts ...grpc.CallOption) (*ValidateDeviceAssociationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateDeviceAssociationResponse)
+	err := c.cc.Invoke(ctx, DeviceRegistrationService_ValidateDeviceAssociation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceRegistrationServiceClient) ReverifyRegistration(ctx context.Context, in *ReverifyRegistrationRequest, opts ...grpc.CallOption) (*ReverifyRegistrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReverifyRegistrationResponse)
+	err := c.cc.Invoke(ctx, DeviceRegistrationService_ReverifyRegistration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *deviceRegistrationServiceClient) GetRegistrationByUser(ctx context.Context, in *GetRegistrationByUserRequest, opts ...grpc.CallOption) (*GetRegistrationByUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRegistrationByUserResponse)
+	err := c.cc.Invoke(ctx, DeviceRegistrationService_GetRegistrationByUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DeviceRegistrationServiceServer is the server API for DeviceRegistrationService service.
+// All implementations must embed UnimplementedDeviceRegistrationServiceServer
+// for forward compatibility.
+type DeviceRegistrationServiceServer interface {
+	InitiateMeterClaim(context.Context, *InitiateMeterClaimRequest) (*InitiateMeterClaimResponse, error)
+	GetRegistrationStatus(context.Context, *GetRegistrationStatusRequest) (*GetRegistrationStatusResponse, error)
+	ValidateDeviceAssociation(context.Context, *ValidateDeviceAssociationRequest) (*ValidateDeviceAssociationResponse, error)
+	ReverifyRegistration(context.Context, *ReverifyRegistrationRequest) (*ReverifyRegistrationResponse, error)
+	GetRegistrationByUser(context.Context, *GetRegistrationByUserRequest) (*GetRegistrationByUserResponse, error)
+	mustEmbedUnimplementedDeviceRegistrationServiceServer()
+}
+
+// UnimplementedDeviceRegistrationServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDeviceRegistrationServiceServer struct{}
+
+func (UnimplementedDeviceRegistrationServiceServer) InitiateMeterClaim(context.Context, *InitiateMeterClaimRequest) (*InitiateMeterClaimResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InitiateMeterClaim not implemented")
+}
+func (UnimplementedDeviceRegistrationServiceServer) GetRegistrationStatus(context.Context, *GetRegistrationStatusRequest) (*GetRegistrationStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRegistrationStatus not implemented")
+}
+func (UnimplementedDeviceRegistrationServiceServer) ValidateDeviceAssociation(context.Context, *ValidateDeviceAssociationRequest) (*ValidateDeviceAssociationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ValidateDeviceAssociation not implemented")
+}
+func (UnimplementedDeviceRegistrationServiceServer) ReverifyRegistration(context.Context, *ReverifyRegistrationRequest) (*ReverifyRegistrationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReverifyRegistration not implemented")
+}
+func (UnimplementedDeviceRegistrationServiceServer) GetRegistrationByUser(context.Context, *GetRegistrationByUserRequest) (*GetRegistrationByUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRegistrationByUser not implemented")
+}
+func (UnimplementedDeviceRegistrationServiceServer) mustEmbedUnimplementedDeviceRegistrationServiceServer() {
+}
+func (UnimplementedDeviceRegistrationServiceServer) testEmbeddedByValue() {}
+
+// UnsafeDeviceRegistrationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DeviceRegistrationServiceServer will
+// result in compilation errors.
+type UnsafeDeviceRegistrationServiceServer interface {
+	mustEmbedUnimplementedDeviceRegistrationServiceServer()
+}
+
+func RegisterDeviceRegistrationServiceServer(s grpc.ServiceRegistrar, srv DeviceRegistrationServiceServer) {
+	// If the following call panics, it indicates UnimplementedDeviceRegistrationServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DeviceRegistrationService_ServiceDesc, srv)
+}
+
+func _DeviceRegistrationService_InitiateMeterClaim_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateMeterClaimRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceRegistrationServiceServer).InitiateMeterClaim(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceRegistrationService_InitiateMeterClaim_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceRegistrationServiceServer).InitiateMeterClaim(ctx, req.(*InitiateMeterClaimRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceRegistrationService_GetRegistrationStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegistrationStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceRegistrationServiceServer).GetRegistrationStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceRegistrationService_GetRegistrationStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceRegistrationServiceServer).GetRegistrationStatus(ctx, req.(*GetRegistrationStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceRegistrationService_ValidateDeviceAssociation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateDeviceAssociationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceRegistrationServiceServer).ValidateDeviceAssociation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceRegistrationService_ValidateDeviceAssociation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceRegistrationServiceServer).ValidateDeviceAssociation(ctx, req.(*ValidateDeviceAssociationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceRegistrationService_ReverifyRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReverifyRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceRegistrationServiceServer).ReverifyRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceRegistrationService_ReverifyRegistration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceRegistrationServiceServer).ReverifyRegistration(ctx, req.(*ReverifyRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DeviceRegistrationService_GetRegistrationByUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegistrationByUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceRegistrationServiceServer).GetRegistrationByUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DeviceRegistrationService_GetRegistrationByUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceRegistrationServiceServer).GetRegistrationByUser(ctx, req.(*GetRegistrationByUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DeviceRegistrationService_ServiceDesc is the grpc.ServiceDesc for DeviceRegistrationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DeviceRegistrationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "gridx.iot.v1.DeviceRegistrationService",
+	HandlerType: (*DeviceRegistrationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "InitiateMeterClaim",
+			Handler:    _DeviceRegistrationService_InitiateMeterClaim_Handler,
+		},
+		{
+			MethodName: "GetRegistrationStatus",
+			Handler:    _DeviceRegistrationService_GetRegistrationStatus_Handler,
+		},
+		{
+			MethodName: "ValidateDeviceAssociation",
+			Handler:    _DeviceRegistrationService_ValidateDeviceAssociation_Handler,
+		},
+		{
+			MethodName: "ReverifyRegistration",
+			Handler:    _DeviceRegistrationService_ReverifyRegistration_Handler,
+		},
+		{
+			MethodName: "GetRegistrationByUser",
+			Handler:    _DeviceRegistrationService_GetRegistrationByUser_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "gridx/iot/v1/iot.proto",
+}
