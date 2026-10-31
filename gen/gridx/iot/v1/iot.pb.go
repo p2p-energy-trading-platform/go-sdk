@@ -1849,6 +1849,7 @@ type ReverifyRegistrationRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
 	UserReference  string                 `protobuf:"bytes,2,opt,name=user_reference,json=userReference,proto3" json:"user_reference,omitempty"`
+	MeterId        string                 `protobuf:"bytes,3,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1897,11 +1898,19 @@ func (x *ReverifyRegistrationRequest) GetUserReference() string {
 	return ""
 }
 
+func (x *ReverifyRegistrationRequest) GetMeterId() string {
+	if x != nil {
+		return x.MeterId
+	}
+	return ""
+}
+
 type ReverifyRegistrationResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	RegistrationId string                 `protobuf:"bytes,1,opt,name=registration_id,json=registrationId,proto3" json:"registration_id,omitempty"`
 	MeterId        string                 `protobuf:"bytes,2,opt,name=meter_id,json=meterId,proto3" json:"meter_id,omitempty"`
 	Message        string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Status         string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1953,6 +1962,13 @@ func (x *ReverifyRegistrationResponse) GetMeterId() string {
 func (x *ReverifyRegistrationResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
+	}
+	return ""
+}
+
+func (x *ReverifyRegistrationResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -2204,14 +2220,16 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\bmeter_id\x18\x01 \x01(\tR\ameterId\"p\n" +
 	"!ValidateDeviceAssociationResponse\x12#\n" +
 	"\ris_registered\x18\x02 \x01(\bR\fisRegistered\x12&\n" +
-	"\x0fprimary_user_id\x18\x03 \x01(\tR\rprimaryUserId\"m\n" +
+	"\x0fprimary_user_id\x18\x03 \x01(\tR\rprimaryUserId\"\x88\x01\n" +
 	"\x1bReverifyRegistrationRequest\x12'\n" +
 	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12%\n" +
-	"\x0euser_reference\x18\x02 \x01(\tR\ruserReference\"|\n" +
+	"\x0euser_reference\x18\x02 \x01(\tR\ruserReference\x12\x19\n" +
+	"\bmeter_id\x18\x03 \x01(\tR\ameterId\"\x94\x01\n" +
 	"\x1cReverifyRegistrationResponse\x12'\n" +
 	"\x0fregistration_id\x18\x01 \x01(\tR\x0eregistrationId\x12\x19\n" +
 	"\bmeter_id\x18\x02 \x01(\tR\ameterId\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\"E\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"E\n" +
 	"\x1cGetRegistrationByUserRequest\x12%\n" +
 	"\x0euser_reference\x18\x01 \x01(\tR\ruserReference\"\xa9\x01\n" +
 	"\x1dGetRegistrationByUserResponse\x12\x1b\n" +
