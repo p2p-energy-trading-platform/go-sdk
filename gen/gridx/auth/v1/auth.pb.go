@@ -1710,6 +1710,7 @@ type GetUserResponse struct {
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	Role          string                 `protobuf:"bytes,4,opt,name=role,proto3" json:"role,omitempty"`
 	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	KycState      KycState               `protobuf:"varint,6,opt,name=kyc_state,json=kycState,proto3,enum=gridx.auth.v1.KycState" json:"kyc_state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1777,6 +1778,13 @@ func (x *GetUserResponse) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *GetUserResponse) GetKycState() KycState {
+	if x != nil {
+		return x.KycState
+	}
+	return KycState_KYC_STATE_UNSPECIFIED
 }
 
 type CheckPermissionRequest struct {
@@ -2473,13 +2481,14 @@ const file_gridx_auth_v1_auth_proto_rawDesc = "" +
 	"\x11ResendOtpResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x80\x01\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xb6\x01\n" +
 	"\x0fGetUserResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x12\n" +
 	"\x04role\x18\x04 \x01(\tR\x04role\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\"Z\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x124\n" +
+	"\tkyc_state\x18\x06 \x01(\x0e2\x17.gridx.auth.v1.KycStateR\bkycState\"Z\n" +
 	"\x16CheckPermissionRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12'\n" +
 	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\"3\n" +
@@ -2628,59 +2637,60 @@ var file_gridx_auth_v1_auth_proto_depIdxs = []int32{
 	13, // 2: gridx.auth.v1.GetProfileResponse.profile:type_name -> gridx.auth.v1.UserProfile
 	13, // 3: gridx.auth.v1.UpdateProfileResponse.profile:type_name -> gridx.auth.v1.UserProfile
 	13, // 4: gridx.auth.v1.VerifyEmailChangeResponse.profile:type_name -> gridx.auth.v1.UserProfile
-	44, // 5: gridx.auth.v1.SubmitKycRequest.date_of_birth:type_name -> google.type.Date
-	38, // 6: gridx.auth.v1.SubmitKycResponse.submission:type_name -> gridx.auth.v1.KycSubmission
-	44, // 7: gridx.auth.v1.KycSubmission.date_of_birth:type_name -> google.type.Date
-	0,  // 8: gridx.auth.v1.KycSubmission.state:type_name -> gridx.auth.v1.KycState
-	43, // 9: gridx.auth.v1.KycSubmission.verified_at:type_name -> google.protobuf.Timestamp
-	43, // 10: gridx.auth.v1.KycSubmission.created_at:type_name -> google.protobuf.Timestamp
-	43, // 11: gridx.auth.v1.KycSubmission.updated_at:type_name -> google.protobuf.Timestamp
-	44, // 12: gridx.auth.v1.ExtractKycNicOcrResponse.date_of_birth:type_name -> google.type.Date
-	1,  // 13: gridx.auth.v1.AuthService.Register:input_type -> gridx.auth.v1.RegisterRequest
-	3,  // 14: gridx.auth.v1.AuthService.Login:input_type -> gridx.auth.v1.LoginRequest
-	7,  // 15: gridx.auth.v1.AuthService.Logout:input_type -> gridx.auth.v1.LogoutRequest
-	9,  // 16: gridx.auth.v1.AuthService.LogoutAll:input_type -> gridx.auth.v1.LogoutAllRequest
-	11, // 17: gridx.auth.v1.AuthService.CreateKycUploadUrl:input_type -> gridx.auth.v1.CreateKycUploadUrlRequest
-	14, // 18: gridx.auth.v1.AuthService.GetProfile:input_type -> gridx.auth.v1.GetProfileRequest
-	16, // 19: gridx.auth.v1.AuthService.UpdateProfile:input_type -> gridx.auth.v1.UpdateProfileRequest
-	18, // 20: gridx.auth.v1.AuthService.ChangePassword:input_type -> gridx.auth.v1.ChangePasswordRequest
-	20, // 21: gridx.auth.v1.AuthService.RequestPasswordReset:input_type -> gridx.auth.v1.RequestPasswordResetRequest
-	22, // 22: gridx.auth.v1.AuthService.ResetPassword:input_type -> gridx.auth.v1.ResetPasswordRequest
-	24, // 23: gridx.auth.v1.AuthService.RequestEmailChange:input_type -> gridx.auth.v1.RequestEmailChangeRequest
-	26, // 24: gridx.auth.v1.AuthService.VerifyEmailChange:input_type -> gridx.auth.v1.VerifyEmailChangeRequest
-	32, // 25: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
-	34, // 26: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
-	28, // 27: gridx.auth.v1.AuthService.VerifyEmail:input_type -> gridx.auth.v1.VerifyEmailRequest
-	30, // 28: gridx.auth.v1.AuthService.ResendOtp:input_type -> gridx.auth.v1.ResendOtpRequest
-	36, // 29: gridx.auth.v1.AuthService.SubmitKyc:input_type -> gridx.auth.v1.SubmitKycRequest
-	39, // 30: gridx.auth.v1.AuthService.ExtractKycNicOcr:input_type -> gridx.auth.v1.ExtractKycNicOcrRequest
-	5,  // 31: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
-	41, // 32: gridx.auth.v1.AuthService.LoginWithGoogle:input_type -> gridx.auth.v1.LoginWithGoogleRequest
-	2,  // 33: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
-	4,  // 34: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
-	8,  // 35: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
-	10, // 36: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
-	12, // 37: gridx.auth.v1.AuthService.CreateKycUploadUrl:output_type -> gridx.auth.v1.CreateKycUploadUrlResponse
-	15, // 38: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
-	17, // 39: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
-	19, // 40: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
-	21, // 41: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
-	23, // 42: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
-	25, // 43: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
-	27, // 44: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
-	33, // 45: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
-	35, // 46: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
-	29, // 47: gridx.auth.v1.AuthService.VerifyEmail:output_type -> gridx.auth.v1.VerifyEmailResponse
-	31, // 48: gridx.auth.v1.AuthService.ResendOtp:output_type -> gridx.auth.v1.ResendOtpResponse
-	37, // 49: gridx.auth.v1.AuthService.SubmitKyc:output_type -> gridx.auth.v1.SubmitKycResponse
-	40, // 50: gridx.auth.v1.AuthService.ExtractKycNicOcr:output_type -> gridx.auth.v1.ExtractKycNicOcrResponse
-	6,  // 51: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
-	42, // 52: gridx.auth.v1.AuthService.LoginWithGoogle:output_type -> gridx.auth.v1.LoginWithGoogleResponse
-	33, // [33:53] is the sub-list for method output_type
-	13, // [13:33] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	0,  // 5: gridx.auth.v1.GetUserResponse.kyc_state:type_name -> gridx.auth.v1.KycState
+	44, // 6: gridx.auth.v1.SubmitKycRequest.date_of_birth:type_name -> google.type.Date
+	38, // 7: gridx.auth.v1.SubmitKycResponse.submission:type_name -> gridx.auth.v1.KycSubmission
+	44, // 8: gridx.auth.v1.KycSubmission.date_of_birth:type_name -> google.type.Date
+	0,  // 9: gridx.auth.v1.KycSubmission.state:type_name -> gridx.auth.v1.KycState
+	43, // 10: gridx.auth.v1.KycSubmission.verified_at:type_name -> google.protobuf.Timestamp
+	43, // 11: gridx.auth.v1.KycSubmission.created_at:type_name -> google.protobuf.Timestamp
+	43, // 12: gridx.auth.v1.KycSubmission.updated_at:type_name -> google.protobuf.Timestamp
+	44, // 13: gridx.auth.v1.ExtractKycNicOcrResponse.date_of_birth:type_name -> google.type.Date
+	1,  // 14: gridx.auth.v1.AuthService.Register:input_type -> gridx.auth.v1.RegisterRequest
+	3,  // 15: gridx.auth.v1.AuthService.Login:input_type -> gridx.auth.v1.LoginRequest
+	7,  // 16: gridx.auth.v1.AuthService.Logout:input_type -> gridx.auth.v1.LogoutRequest
+	9,  // 17: gridx.auth.v1.AuthService.LogoutAll:input_type -> gridx.auth.v1.LogoutAllRequest
+	11, // 18: gridx.auth.v1.AuthService.CreateKycUploadUrl:input_type -> gridx.auth.v1.CreateKycUploadUrlRequest
+	14, // 19: gridx.auth.v1.AuthService.GetProfile:input_type -> gridx.auth.v1.GetProfileRequest
+	16, // 20: gridx.auth.v1.AuthService.UpdateProfile:input_type -> gridx.auth.v1.UpdateProfileRequest
+	18, // 21: gridx.auth.v1.AuthService.ChangePassword:input_type -> gridx.auth.v1.ChangePasswordRequest
+	20, // 22: gridx.auth.v1.AuthService.RequestPasswordReset:input_type -> gridx.auth.v1.RequestPasswordResetRequest
+	22, // 23: gridx.auth.v1.AuthService.ResetPassword:input_type -> gridx.auth.v1.ResetPasswordRequest
+	24, // 24: gridx.auth.v1.AuthService.RequestEmailChange:input_type -> gridx.auth.v1.RequestEmailChangeRequest
+	26, // 25: gridx.auth.v1.AuthService.VerifyEmailChange:input_type -> gridx.auth.v1.VerifyEmailChangeRequest
+	32, // 26: gridx.auth.v1.AuthService.GetUser:input_type -> gridx.auth.v1.GetUserRequest
+	34, // 27: gridx.auth.v1.AuthService.CheckPermission:input_type -> gridx.auth.v1.CheckPermissionRequest
+	28, // 28: gridx.auth.v1.AuthService.VerifyEmail:input_type -> gridx.auth.v1.VerifyEmailRequest
+	30, // 29: gridx.auth.v1.AuthService.ResendOtp:input_type -> gridx.auth.v1.ResendOtpRequest
+	36, // 30: gridx.auth.v1.AuthService.SubmitKyc:input_type -> gridx.auth.v1.SubmitKycRequest
+	39, // 31: gridx.auth.v1.AuthService.ExtractKycNicOcr:input_type -> gridx.auth.v1.ExtractKycNicOcrRequest
+	5,  // 32: gridx.auth.v1.AuthService.RefreshToken:input_type -> gridx.auth.v1.RefreshTokenRequest
+	41, // 33: gridx.auth.v1.AuthService.LoginWithGoogle:input_type -> gridx.auth.v1.LoginWithGoogleRequest
+	2,  // 34: gridx.auth.v1.AuthService.Register:output_type -> gridx.auth.v1.RegisterResponse
+	4,  // 35: gridx.auth.v1.AuthService.Login:output_type -> gridx.auth.v1.LoginResponse
+	8,  // 36: gridx.auth.v1.AuthService.Logout:output_type -> gridx.auth.v1.LogoutResponse
+	10, // 37: gridx.auth.v1.AuthService.LogoutAll:output_type -> gridx.auth.v1.LogoutAllResponse
+	12, // 38: gridx.auth.v1.AuthService.CreateKycUploadUrl:output_type -> gridx.auth.v1.CreateKycUploadUrlResponse
+	15, // 39: gridx.auth.v1.AuthService.GetProfile:output_type -> gridx.auth.v1.GetProfileResponse
+	17, // 40: gridx.auth.v1.AuthService.UpdateProfile:output_type -> gridx.auth.v1.UpdateProfileResponse
+	19, // 41: gridx.auth.v1.AuthService.ChangePassword:output_type -> gridx.auth.v1.ChangePasswordResponse
+	21, // 42: gridx.auth.v1.AuthService.RequestPasswordReset:output_type -> gridx.auth.v1.RequestPasswordResetResponse
+	23, // 43: gridx.auth.v1.AuthService.ResetPassword:output_type -> gridx.auth.v1.ResetPasswordResponse
+	25, // 44: gridx.auth.v1.AuthService.RequestEmailChange:output_type -> gridx.auth.v1.RequestEmailChangeResponse
+	27, // 45: gridx.auth.v1.AuthService.VerifyEmailChange:output_type -> gridx.auth.v1.VerifyEmailChangeResponse
+	33, // 46: gridx.auth.v1.AuthService.GetUser:output_type -> gridx.auth.v1.GetUserResponse
+	35, // 47: gridx.auth.v1.AuthService.CheckPermission:output_type -> gridx.auth.v1.CheckPermissionResponse
+	29, // 48: gridx.auth.v1.AuthService.VerifyEmail:output_type -> gridx.auth.v1.VerifyEmailResponse
+	31, // 49: gridx.auth.v1.AuthService.ResendOtp:output_type -> gridx.auth.v1.ResendOtpResponse
+	37, // 50: gridx.auth.v1.AuthService.SubmitKyc:output_type -> gridx.auth.v1.SubmitKycResponse
+	40, // 51: gridx.auth.v1.AuthService.ExtractKycNicOcr:output_type -> gridx.auth.v1.ExtractKycNicOcrResponse
+	6,  // 52: gridx.auth.v1.AuthService.RefreshToken:output_type -> gridx.auth.v1.RefreshTokenResponse
+	42, // 53: gridx.auth.v1.AuthService.LoginWithGoogle:output_type -> gridx.auth.v1.LoginWithGoogleResponse
+	34, // [34:54] is the sub-list for method output_type
+	14, // [14:34] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_gridx_auth_v1_auth_proto_init() }
