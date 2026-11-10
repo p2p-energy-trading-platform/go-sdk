@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	OrderBillingService_ReserveCredits_FullMethodName     = "/gridx.billing.v1.OrderBillingService/ReserveCredits"
 	OrderBillingService_ReleaseReservation_FullMethodName = "/gridx.billing.v1.OrderBillingService/ReleaseReservation"
+	OrderBillingService_SettleTrade_FullMethodName        = "/gridx.billing.v1.OrderBillingService/SettleTrade"
 )
 
 // OrderBillingServiceClient is the client API for OrderBillingService service.
@@ -36,6 +37,10 @@ type OrderBillingServiceClient interface {
 	ReserveCredits(ctx context.Context, in *ReserveCreditsRequest, opts ...grpc.CallOption) (*ReserveCreditsResponse, error)
 	// Returns whatever is left of a reservation to the user. Idempotent on order_id.
 	ReleaseReservation(ctx context.Context, in *ReleaseReservationRequest, opts ...grpc.CallOption) (*ReleaseReservationResponse, error)
+	// Settles one matched trade: the buyer pays from their reservation, the seller is
+	// paid, and the platform takes both fees. Idempotent on trade_id: a retry returns
+	// the original result with already_settled set.
+	SettleTrade(ctx context.Context, in *SettleTradeRequest, opts ...grpc.CallOption) (*SettleTradeResponse, error)
 }
 
 type orderBillingServiceClient struct {
@@ -66,6 +71,16 @@ func (c *orderBillingServiceClient) ReleaseReservation(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *orderBillingServiceClient) SettleTrade(ctx context.Context, in *SettleTradeRequest, opts ...grpc.CallOption) (*SettleTradeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SettleTradeResponse)
+	err := c.cc.Invoke(ctx, OrderBillingService_SettleTrade_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderBillingServiceServer is the server API for OrderBillingService service.
 // All implementations must embed UnimplementedOrderBillingServiceServer
 // for forward compatibility.
@@ -79,6 +94,10 @@ type OrderBillingServiceServer interface {
 	ReserveCredits(context.Context, *ReserveCreditsRequest) (*ReserveCreditsResponse, error)
 	// Returns whatever is left of a reservation to the user. Idempotent on order_id.
 	ReleaseReservation(context.Context, *ReleaseReservationRequest) (*ReleaseReservationResponse, error)
+	// Settles one matched trade: the buyer pays from their reservation, the seller is
+	// paid, and the platform takes both fees. Idempotent on trade_id: a retry returns
+	// the original result with already_settled set.
+	SettleTrade(context.Context, *SettleTradeRequest) (*SettleTradeResponse, error)
 	mustEmbedUnimplementedOrderBillingServiceServer()
 }
 
@@ -94,6 +113,9 @@ func (UnimplementedOrderBillingServiceServer) ReserveCredits(context.Context, *R
 }
 func (UnimplementedOrderBillingServiceServer) ReleaseReservation(context.Context, *ReleaseReservationRequest) (*ReleaseReservationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReleaseReservation not implemented")
+}
+func (UnimplementedOrderBillingServiceServer) SettleTrade(context.Context, *SettleTradeRequest) (*SettleTradeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SettleTrade not implemented")
 }
 func (UnimplementedOrderBillingServiceServer) mustEmbedUnimplementedOrderBillingServiceServer() {}
 func (UnimplementedOrderBillingServiceServer) testEmbeddedByValue()                             {}
@@ -152,6 +174,24 @@ func _OrderBillingService_ReleaseReservation_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderBillingService_SettleTrade_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SettleTradeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderBillingServiceServer).SettleTrade(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderBillingService_SettleTrade_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderBillingServiceServer).SettleTrade(ctx, req.(*SettleTradeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderBillingService_ServiceDesc is the grpc.ServiceDesc for OrderBillingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -166,6 +206,10 @@ var OrderBillingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReleaseReservation",
 			Handler:    _OrderBillingService_ReleaseReservation_Handler,
+		},
+		{
+			MethodName: "SettleTrade",
+			Handler:    _OrderBillingService_SettleTrade_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

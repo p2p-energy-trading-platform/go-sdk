@@ -374,6 +374,203 @@ func (x *ReleaseReservationResponse) GetReleasedAmount() int64 {
 	return 0
 }
 
+type SettleTradeRequest struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	TradeId      string                 `protobuf:"bytes,1,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`
+	BuyOrderId   string                 `protobuf:"bytes,2,opt,name=buy_order_id,json=buyOrderId,proto3" json:"buy_order_id,omitempty"`
+	SellOrderId  string                 `protobuf:"bytes,3,opt,name=sell_order_id,json=sellOrderId,proto3" json:"sell_order_id,omitempty"`
+	BuyerUserId  string                 `protobuf:"bytes,4,opt,name=buyer_user_id,json=buyerUserId,proto3" json:"buyer_user_id,omitempty"`
+	SellerUserId string                 `protobuf:"bytes,5,opt,name=seller_user_id,json=sellerUserId,proto3" json:"seller_user_id,omitempty"`
+	QtyWh        int64                  `protobuf:"varint,6,opt,name=qty_wh,json=qtyWh,proto3" json:"qty_wh,omitempty"`
+	// Execution price. Must not exceed the buy order's reserved maximum price.
+	PricePerKwh int64 `protobuf:"varint,7,opt,name=price_per_kwh,json=pricePerKwh,proto3" json:"price_per_kwh,omitempty"`
+	// True on the buy order's last fill: whatever is left of its reservation is
+	// returned to the buyer in the same transaction.
+	BuyOrderFinal bool `protobuf:"varint,8,opt,name=buy_order_final,json=buyOrderFinal,proto3" json:"buy_order_final,omitempty"`
+	// Picks the seller's fee rate: the one in effect at this time.
+	ExecutedAt    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=executed_at,json=executedAt,proto3" json:"executed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SettleTradeRequest) Reset() {
+	*x = SettleTradeRequest{}
+	mi := &file_gridx_billing_v1_order_billing_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SettleTradeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SettleTradeRequest) ProtoMessage() {}
+
+func (x *SettleTradeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_order_billing_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SettleTradeRequest.ProtoReflect.Descriptor instead.
+func (*SettleTradeRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_order_billing_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SettleTradeRequest) GetTradeId() string {
+	if x != nil {
+		return x.TradeId
+	}
+	return ""
+}
+
+func (x *SettleTradeRequest) GetBuyOrderId() string {
+	if x != nil {
+		return x.BuyOrderId
+	}
+	return ""
+}
+
+func (x *SettleTradeRequest) GetSellOrderId() string {
+	if x != nil {
+		return x.SellOrderId
+	}
+	return ""
+}
+
+func (x *SettleTradeRequest) GetBuyerUserId() string {
+	if x != nil {
+		return x.BuyerUserId
+	}
+	return ""
+}
+
+func (x *SettleTradeRequest) GetSellerUserId() string {
+	if x != nil {
+		return x.SellerUserId
+	}
+	return ""
+}
+
+func (x *SettleTradeRequest) GetQtyWh() int64 {
+	if x != nil {
+		return x.QtyWh
+	}
+	return 0
+}
+
+func (x *SettleTradeRequest) GetPricePerKwh() int64 {
+	if x != nil {
+		return x.PricePerKwh
+	}
+	return 0
+}
+
+func (x *SettleTradeRequest) GetBuyOrderFinal() bool {
+	if x != nil {
+		return x.BuyOrderFinal
+	}
+	return false
+}
+
+func (x *SettleTradeRequest) GetExecutedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExecutedAt
+	}
+	return nil
+}
+
+type SettleTradeResponse struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	SettlementId           string                 `protobuf:"bytes,1,opt,name=settlement_id,json=settlementId,proto3" json:"settlement_id,omitempty"`
+	TradeValue             int64                  `protobuf:"varint,2,opt,name=trade_value,json=tradeValue,proto3" json:"trade_value,omitempty"`
+	BuyerFee               int64                  `protobuf:"varint,3,opt,name=buyer_fee,json=buyerFee,proto3" json:"buyer_fee,omitempty"`
+	SellerFee              int64                  `protobuf:"varint,4,opt,name=seller_fee,json=sellerFee,proto3" json:"seller_fee,omitempty"`
+	BuyerReleasedRemainder int64                  `protobuf:"varint,5,opt,name=buyer_released_remainder,json=buyerReleasedRemainder,proto3" json:"buyer_released_remainder,omitempty"`
+	// True when this trade was already settled, and these are the original amounts.
+	AlreadySettled bool `protobuf:"varint,6,opt,name=already_settled,json=alreadySettled,proto3" json:"already_settled,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *SettleTradeResponse) Reset() {
+	*x = SettleTradeResponse{}
+	mi := &file_gridx_billing_v1_order_billing_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SettleTradeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SettleTradeResponse) ProtoMessage() {}
+
+func (x *SettleTradeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_order_billing_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SettleTradeResponse.ProtoReflect.Descriptor instead.
+func (*SettleTradeResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_order_billing_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SettleTradeResponse) GetSettlementId() string {
+	if x != nil {
+		return x.SettlementId
+	}
+	return ""
+}
+
+func (x *SettleTradeResponse) GetTradeValue() int64 {
+	if x != nil {
+		return x.TradeValue
+	}
+	return 0
+}
+
+func (x *SettleTradeResponse) GetBuyerFee() int64 {
+	if x != nil {
+		return x.BuyerFee
+	}
+	return 0
+}
+
+func (x *SettleTradeResponse) GetSellerFee() int64 {
+	if x != nil {
+		return x.SellerFee
+	}
+	return 0
+}
+
+func (x *SettleTradeResponse) GetBuyerReleasedRemainder() int64 {
+	if x != nil {
+		return x.BuyerReleasedRemainder
+	}
+	return 0
+}
+
+func (x *SettleTradeResponse) GetAlreadySettled() bool {
+	if x != nil {
+		return x.AlreadySettled
+	}
+	return false
+}
+
 var File_gridx_billing_v1_order_billing_proto protoreflect.FileDescriptor
 
 const file_gridx_billing_v1_order_billing_proto_rawDesc = "" +
@@ -396,7 +593,28 @@ const file_gridx_billing_v1_order_billing_proto_rawDesc = "" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x127\n" +
 	"\x06reason\x18\x02 \x01(\x0e2\x1f.gridx.billing.v1.ReleaseReasonR\x06reason\"E\n" +
 	"\x1aReleaseReservationResponse\x12'\n" +
-	"\x0freleased_amount\x18\x01 \x01(\x03R\x0ereleasedAmount*T\n" +
+	"\x0freleased_amount\x18\x01 \x01(\x03R\x0ereleasedAmount\"\xdf\x02\n" +
+	"\x12SettleTradeRequest\x12\x19\n" +
+	"\btrade_id\x18\x01 \x01(\tR\atradeId\x12 \n" +
+	"\fbuy_order_id\x18\x02 \x01(\tR\n" +
+	"buyOrderId\x12\"\n" +
+	"\rsell_order_id\x18\x03 \x01(\tR\vsellOrderId\x12\"\n" +
+	"\rbuyer_user_id\x18\x04 \x01(\tR\vbuyerUserId\x12$\n" +
+	"\x0eseller_user_id\x18\x05 \x01(\tR\fsellerUserId\x12\x15\n" +
+	"\x06qty_wh\x18\x06 \x01(\x03R\x05qtyWh\x12\"\n" +
+	"\rprice_per_kwh\x18\a \x01(\x03R\vpricePerKwh\x12&\n" +
+	"\x0fbuy_order_final\x18\b \x01(\bR\rbuyOrderFinal\x12;\n" +
+	"\vexecuted_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"executedAt\"\xfa\x01\n" +
+	"\x13SettleTradeResponse\x12#\n" +
+	"\rsettlement_id\x18\x01 \x01(\tR\fsettlementId\x12\x1f\n" +
+	"\vtrade_value\x18\x02 \x01(\x03R\n" +
+	"tradeValue\x12\x1b\n" +
+	"\tbuyer_fee\x18\x03 \x01(\x03R\bbuyerFee\x12\x1d\n" +
+	"\n" +
+	"seller_fee\x18\x04 \x01(\x03R\tsellerFee\x128\n" +
+	"\x18buyer_released_remainder\x18\x05 \x01(\x03R\x16buyerReleasedRemainder\x12'\n" +
+	"\x0falready_settled\x18\x06 \x01(\bR\x0ealreadySettled*T\n" +
 	"\tOrderType\x12\x1a\n" +
 	"\x16ORDER_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10ORDER_TYPE_LIMIT\x10\x01\x12\x15\n" +
@@ -406,10 +624,11 @@ const file_gridx_billing_v1_order_billing_proto_rawDesc = "" +
 	"\x18RELEASE_REASON_CANCELLED\x10\x01\x12\x1a\n" +
 	"\x16RELEASE_REASON_EXPIRED\x10\x02\x12\x19\n" +
 	"\x15RELEASE_REASON_FILLED\x10\x03\x12\x1b\n" +
-	"\x17RELEASE_REASON_REJECTED\x10\x042\xeb\x01\n" +
+	"\x17RELEASE_REASON_REJECTED\x10\x042\xc7\x02\n" +
 	"\x13OrderBillingService\x12c\n" +
 	"\x0eReserveCredits\x12'.gridx.billing.v1.ReserveCreditsRequest\x1a(.gridx.billing.v1.ReserveCreditsResponse\x12o\n" +
-	"\x12ReleaseReservation\x12+.gridx.billing.v1.ReleaseReservationRequest\x1a,.gridx.billing.v1.ReleaseReservationResponseBNZLgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/billing/v1;billingv1b\x06proto3"
+	"\x12ReleaseReservation\x12+.gridx.billing.v1.ReleaseReservationRequest\x1a,.gridx.billing.v1.ReleaseReservationResponse\x12Z\n" +
+	"\vSettleTrade\x12$.gridx.billing.v1.SettleTradeRequest\x1a%.gridx.billing.v1.SettleTradeResponseBNZLgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/billing/v1;billingv1b\x06proto3"
 
 var (
 	file_gridx_billing_v1_order_billing_proto_rawDescOnce sync.Once
@@ -424,7 +643,7 @@ func file_gridx_billing_v1_order_billing_proto_rawDescGZIP() []byte {
 }
 
 var file_gridx_billing_v1_order_billing_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_gridx_billing_v1_order_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_gridx_billing_v1_order_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_gridx_billing_v1_order_billing_proto_goTypes = []any{
 	(OrderType)(0),                     // 0: gridx.billing.v1.OrderType
 	(ReleaseReason)(0),                 // 1: gridx.billing.v1.ReleaseReason
@@ -432,21 +651,26 @@ var file_gridx_billing_v1_order_billing_proto_goTypes = []any{
 	(*ReserveCreditsResponse)(nil),     // 3: gridx.billing.v1.ReserveCreditsResponse
 	(*ReleaseReservationRequest)(nil),  // 4: gridx.billing.v1.ReleaseReservationRequest
 	(*ReleaseReservationResponse)(nil), // 5: gridx.billing.v1.ReleaseReservationResponse
-	(*timestamppb.Timestamp)(nil),      // 6: google.protobuf.Timestamp
+	(*SettleTradeRequest)(nil),         // 6: gridx.billing.v1.SettleTradeRequest
+	(*SettleTradeResponse)(nil),        // 7: gridx.billing.v1.SettleTradeResponse
+	(*timestamppb.Timestamp)(nil),      // 8: google.protobuf.Timestamp
 }
 var file_gridx_billing_v1_order_billing_proto_depIdxs = []int32{
 	0, // 0: gridx.billing.v1.ReserveCreditsRequest.order_type:type_name -> gridx.billing.v1.OrderType
-	6, // 1: gridx.billing.v1.ReserveCreditsRequest.expires_at:type_name -> google.protobuf.Timestamp
+	8, // 1: gridx.billing.v1.ReserveCreditsRequest.expires_at:type_name -> google.protobuf.Timestamp
 	1, // 2: gridx.billing.v1.ReleaseReservationRequest.reason:type_name -> gridx.billing.v1.ReleaseReason
-	2, // 3: gridx.billing.v1.OrderBillingService.ReserveCredits:input_type -> gridx.billing.v1.ReserveCreditsRequest
-	4, // 4: gridx.billing.v1.OrderBillingService.ReleaseReservation:input_type -> gridx.billing.v1.ReleaseReservationRequest
-	3, // 5: gridx.billing.v1.OrderBillingService.ReserveCredits:output_type -> gridx.billing.v1.ReserveCreditsResponse
-	5, // 6: gridx.billing.v1.OrderBillingService.ReleaseReservation:output_type -> gridx.billing.v1.ReleaseReservationResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	8, // 3: gridx.billing.v1.SettleTradeRequest.executed_at:type_name -> google.protobuf.Timestamp
+	2, // 4: gridx.billing.v1.OrderBillingService.ReserveCredits:input_type -> gridx.billing.v1.ReserveCreditsRequest
+	4, // 5: gridx.billing.v1.OrderBillingService.ReleaseReservation:input_type -> gridx.billing.v1.ReleaseReservationRequest
+	6, // 6: gridx.billing.v1.OrderBillingService.SettleTrade:input_type -> gridx.billing.v1.SettleTradeRequest
+	3, // 7: gridx.billing.v1.OrderBillingService.ReserveCredits:output_type -> gridx.billing.v1.ReserveCreditsResponse
+	5, // 8: gridx.billing.v1.OrderBillingService.ReleaseReservation:output_type -> gridx.billing.v1.ReleaseReservationResponse
+	7, // 9: gridx.billing.v1.OrderBillingService.SettleTrade:output_type -> gridx.billing.v1.SettleTradeResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_gridx_billing_v1_order_billing_proto_init() }
@@ -460,7 +684,7 @@ func file_gridx_billing_v1_order_billing_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_billing_v1_order_billing_proto_rawDesc), len(file_gridx_billing_v1_order_billing_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
