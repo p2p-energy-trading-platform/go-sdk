@@ -220,17 +220,20 @@ func (x *MarketId) GetDeliverySlotStart() *timestamppb.Timestamp {
 }
 
 type OrderAccepted struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	EventId           string                 `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
-	OrderId           uint64                 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	UserId            uint64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	MarketId          *MarketId              `protobuf:"bytes,4,opt,name=market_id,json=marketId,proto3" json:"market_id,omitempty"`
-	GridZoneId        uint32                 `protobuf:"varint,5,opt,name=grid_zone_id,json=gridZoneId,proto3" json:"grid_zone_id,omitempty"`
-	Side              Side                   `protobuf:"varint,6,opt,name=side,proto3,enum=gridx.order.v1.Side" json:"side,omitempty"`
-	OrderType         OrderType              `protobuf:"varint,7,opt,name=order_type,json=orderType,proto3,enum=gridx.order.v1.OrderType" json:"order_type,omitempty"`
-	Status            OrderStatus            `protobuf:"varint,8,opt,name=status,proto3,enum=gridx.order.v1.OrderStatus" json:"status,omitempty"`
-	Price             int64                  `protobuf:"varint,9,opt,name=price,proto3" json:"price,omitempty"`
-	Quantity          int64                  `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	EventId    string                 `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	OrderId    uint64                 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	UserId     string                 `protobuf:"bytes,14,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MarketId   *MarketId              `protobuf:"bytes,4,opt,name=market_id,json=marketId,proto3" json:"market_id,omitempty"`
+	GridZoneId uint32                 `protobuf:"varint,5,opt,name=grid_zone_id,json=gridZoneId,proto3" json:"grid_zone_id,omitempty"`
+	Side       Side                   `protobuf:"varint,6,opt,name=side,proto3,enum=gridx.order.v1.Side" json:"side,omitempty"`
+	OrderType  OrderType              `protobuf:"varint,7,opt,name=order_type,json=orderType,proto3,enum=gridx.order.v1.OrderType" json:"order_type,omitempty"`
+	Status     OrderStatus            `protobuf:"varint,8,opt,name=status,proto3,enum=gridx.order.v1.OrderStatus" json:"status,omitempty"`
+	// Limit price, in micro-AED per kWh (1 AED = 1,000,000 micro-AED).
+	Price int64 `protobuf:"varint,9,opt,name=price,proto3" json:"price,omitempty"`
+	// Order quantity, in Wh (1 kWh = 1,000 Wh).
+	Quantity int64 `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	// Unfilled quantity, in Wh (1 kWh = 1,000 Wh).
 	RemainingQuantity float64                `protobuf:"fixed64,11,opt,name=remaining_quantity,json=remainingQuantity,proto3" json:"remaining_quantity,omitempty"`
 	ExpiresAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -282,11 +285,11 @@ func (x *OrderAccepted) GetOrderId() uint64 {
 	return 0
 }
 
-func (x *OrderAccepted) GetUserId() uint64 {
+func (x *OrderAccepted) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 func (x *OrderAccepted) GetMarketId() *MarketId {
@@ -365,11 +368,11 @@ const file_gridx_order_v1_order_events_proto_rawDesc = "" +
 	"\n" +
 	"!gridx/order/v1/order_events.proto\x12\x0egridx.order.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"V\n" +
 	"\bMarketId\x12J\n" +
-	"\x13delivery_slot_start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x11deliverySlotStart\"\xa7\x04\n" +
+	"\x13delivery_slot_start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x11deliverySlotStart\"\xad\x04\n" +
 	"\rOrderAccepted\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\x04R\aorderId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x04R\x06userId\x125\n" +
+	"\auser_id\x18\x0e \x01(\tR\x06userId\x125\n" +
 	"\tmarket_id\x18\x04 \x01(\v2\x18.gridx.order.v1.MarketIdR\bmarketId\x12 \n" +
 	"\fgrid_zone_id\x18\x05 \x01(\rR\n" +
 	"gridZoneId\x12(\n" +
@@ -384,7 +387,7 @@ const file_gridx_order_v1_order_events_proto_rawDesc = "" +
 	"\n" +
 	"expires_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt*9\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtJ\x04\b\x03\x10\x04*9\n" +
 	"\x04Side\x12\x14\n" +
 	"\x10SIDE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bSIDE_BUY\x10\x01\x12\r\n" +

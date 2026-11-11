@@ -28,17 +28,20 @@ type TradeExecuted struct {
 	TradeId          uint64                 `protobuf:"varint,2,opt,name=trade_id,json=tradeId,proto3" json:"trade_id,omitempty"`
 	BuyOrderId       uint64                 `protobuf:"varint,3,opt,name=buy_order_id,json=buyOrderId,proto3" json:"buy_order_id,omitempty"`
 	SellOrderId      uint64                 `protobuf:"varint,4,opt,name=sell_order_id,json=sellOrderId,proto3" json:"sell_order_id,omitempty"`
-	BuyerId          uint64                 `protobuf:"varint,5,opt,name=buyer_id,json=buyerId,proto3" json:"buyer_id,omitempty"`
-	SellerId         uint64                 `protobuf:"varint,6,opt,name=seller_id,json=sellerId,proto3" json:"seller_id,omitempty"`
+	BuyerUserId      string                 `protobuf:"bytes,14,opt,name=buyer_user_id,json=buyerUserId,proto3" json:"buyer_user_id,omitempty"`
+	SellerUserId     string                 `protobuf:"bytes,15,opt,name=seller_user_id,json=sellerUserId,proto3" json:"seller_user_id,omitempty"`
 	BuyerGridZoneId  uint32                 `protobuf:"varint,7,opt,name=buyer_grid_zone_id,json=buyerGridZoneId,proto3" json:"buyer_grid_zone_id,omitempty"`
 	SellerGridZoneId uint32                 `protobuf:"varint,8,opt,name=seller_grid_zone_id,json=sellerGridZoneId,proto3" json:"seller_grid_zone_id,omitempty"`
-	ExecutionPrice   int64                  `protobuf:"varint,9,opt,name=execution_price,json=executionPrice,proto3" json:"execution_price,omitempty"`
-	GridFeePerKwh    int64                  `protobuf:"varint,10,opt,name=grid_fee_per_kwh,json=gridFeePerKwh,proto3" json:"grid_fee_per_kwh,omitempty"`
-	Quantity         int64                  `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	GridRuleVersion  uint32                 `protobuf:"varint,12,opt,name=grid_rule_version,json=gridRuleVersion,proto3" json:"grid_rule_version,omitempty"`
-	ExecutedAt       *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=executed_at,json=executedAt,proto3" json:"executed_at,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Energy price paid to the seller, in micro-AED per kWh (1 AED = 1,000,000 micro-AED).
+	ExecutionPrice int64 `protobuf:"varint,9,opt,name=execution_price,json=executionPrice,proto3" json:"execution_price,omitempty"`
+	// Grid transfer fee charged to the buyer, in micro-AED per kWh (1 AED = 1,000,000 micro-AED).
+	GridFeePerKwh int64 `protobuf:"varint,10,opt,name=grid_fee_per_kwh,json=gridFeePerKwh,proto3" json:"grid_fee_per_kwh,omitempty"`
+	// Traded energy, in Wh (1 kWh = 1,000 Wh).
+	Quantity        int64                  `protobuf:"varint,11,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	GridRuleVersion uint32                 `protobuf:"varint,12,opt,name=grid_rule_version,json=gridRuleVersion,proto3" json:"grid_rule_version,omitempty"`
+	ExecutedAt      *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=executed_at,json=executedAt,proto3" json:"executed_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TradeExecuted) Reset() {
@@ -99,18 +102,18 @@ func (x *TradeExecuted) GetSellOrderId() uint64 {
 	return 0
 }
 
-func (x *TradeExecuted) GetBuyerId() uint64 {
+func (x *TradeExecuted) GetBuyerUserId() string {
 	if x != nil {
-		return x.BuyerId
+		return x.BuyerUserId
 	}
-	return 0
+	return ""
 }
 
-func (x *TradeExecuted) GetSellerId() uint64 {
+func (x *TradeExecuted) GetSellerUserId() string {
 	if x != nil {
-		return x.SellerId
+		return x.SellerUserId
 	}
-	return 0
+	return ""
 }
 
 func (x *TradeExecuted) GetBuyerGridZoneId() uint32 {
@@ -166,15 +169,15 @@ var File_gridx_trade_v1_trade_events_proto protoreflect.FileDescriptor
 
 const file_gridx_trade_v1_trade_events_proto_rawDesc = "" +
 	"\n" +
-	"!gridx/trade/v1/trade_events.proto\x12\x0egridx.trade.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf6\x03\n" +
+	"!gridx/trade/v1/trade_events.proto\x12\x0egridx.trade.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa9\x04\n" +
 	"\rTradeExecuted\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12\x19\n" +
 	"\btrade_id\x18\x02 \x01(\x04R\atradeId\x12 \n" +
 	"\fbuy_order_id\x18\x03 \x01(\x04R\n" +
 	"buyOrderId\x12\"\n" +
-	"\rsell_order_id\x18\x04 \x01(\x04R\vsellOrderId\x12\x19\n" +
-	"\bbuyer_id\x18\x05 \x01(\x04R\abuyerId\x12\x1b\n" +
-	"\tseller_id\x18\x06 \x01(\x04R\bsellerId\x12+\n" +
+	"\rsell_order_id\x18\x04 \x01(\x04R\vsellOrderId\x12\"\n" +
+	"\rbuyer_user_id\x18\x0e \x01(\tR\vbuyerUserId\x12$\n" +
+	"\x0eseller_user_id\x18\x0f \x01(\tR\fsellerUserId\x12+\n" +
 	"\x12buyer_grid_zone_id\x18\a \x01(\rR\x0fbuyerGridZoneId\x12-\n" +
 	"\x13seller_grid_zone_id\x18\b \x01(\rR\x10sellerGridZoneId\x12'\n" +
 	"\x0fexecution_price\x18\t \x01(\x03R\x0eexecutionPrice\x12'\n" +
@@ -183,7 +186,7 @@ const file_gridx_trade_v1_trade_events_proto_rawDesc = "" +
 	"\bquantity\x18\v \x01(\x03R\bquantity\x12*\n" +
 	"\x11grid_rule_version\x18\f \x01(\rR\x0fgridRuleVersion\x12;\n" +
 	"\vexecuted_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"executedAtBJZHgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/trade/v1;tradev1b\x06proto3"
+	"executedAtJ\x04\b\x05\x10\x06J\x04\b\x06\x10\aR\bbuyer_idR\tseller_idBJZHgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/trade/v1;tradev1b\x06proto3"
 
 var (
 	file_gridx_trade_v1_trade_events_proto_rawDescOnce sync.Once
