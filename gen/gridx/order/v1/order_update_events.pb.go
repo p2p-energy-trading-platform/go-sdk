@@ -88,6 +88,8 @@ type OrderUpdated struct {
 	Status            OrderStatus            `protobuf:"varint,4,opt,name=status,proto3,enum=gridx.order.v1.OrderStatus" json:"status,omitempty"`
 	RemainingQuantity int64                  `protobuf:"varint,5,opt,name=remaining_quantity,json=remainingQuantity,proto3" json:"remaining_quantity,omitempty"`
 	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UserId            string                 `protobuf:"bytes,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OriginalQuantity  int64                  `protobuf:"varint,8,opt,name=original_quantity,json=originalQuantity,proto3" json:"original_quantity,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -164,11 +166,25 @@ func (x *OrderUpdated) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *OrderUpdated) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *OrderUpdated) GetOriginalQuantity() int64 {
+	if x != nil {
+		return x.OriginalQuantity
+	}
+	return 0
+}
+
 var File_gridx_order_v1_order_update_events_proto protoreflect.FileDescriptor
 
 const file_gridx_order_v1_order_update_events_proto_rawDesc = "" +
 	"\n" +
-	"(gridx/order/v1/order_update_events.proto\x12\x0egridx.order.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!gridx/order/v1/order_events.proto\"\xa3\x02\n" +
+	"(gridx/order/v1/order_update_events.proto\x12\x0egridx.order.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!gridx/order/v1/order_events.proto\"\xe9\x02\n" +
 	"\fOrderUpdated\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12>\n" +
 	"\n" +
@@ -177,7 +193,9 @@ const file_gridx_order_v1_order_update_events_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\x0e2\x1b.gridx.order.v1.OrderStatusR\x06status\x12-\n" +
 	"\x12remaining_quantity\x18\x05 \x01(\x03R\x11remainingQuantity\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt*\xd9\x01\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x17\n" +
+	"\auser_id\x18\a \x01(\tR\x06userId\x12+\n" +
+	"\x11original_quantity\x18\b \x01(\x03R\x10originalQuantity*\xd9\x01\n" +
 	"\x0fOrderUpdateType\x12!\n" +
 	"\x1dORDER_UPDATE_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19ORDER_UPDATE_TYPE_UPDATED\x10\x01\x12&\n" +
