@@ -1529,6 +1529,196 @@ func (x *GetEnergySummaryResponse) GetPeakDemand() *PeakDemand {
 	return nil
 }
 
+type StreamHouseLiveRequest struct {
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	HouseId string                 `protobuf:"bytes,1,opt,name=house_id,json=houseId,proto3" json:"house_id,omitempty"`
+	// Optional. When set, the house must belong to this user (NOT_FOUND
+	// otherwise). The gateway leaves it empty for its shared per-house stream
+	// and checks ownership when each user subscribes.
+	OwnerUserId   string `protobuf:"bytes,2,opt,name=owner_user_id,json=ownerUserId,proto3" json:"owner_user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamHouseLiveRequest) Reset() {
+	*x = StreamHouseLiveRequest{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamHouseLiveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamHouseLiveRequest) ProtoMessage() {}
+
+func (x *StreamHouseLiveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamHouseLiveRequest.ProtoReflect.Descriptor instead.
+func (*StreamHouseLiveRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *StreamHouseLiveRequest) GetHouseId() string {
+	if x != nil {
+		return x.HouseId
+	}
+	return ""
+}
+
+func (x *StreamHouseLiveRequest) GetOwnerUserId() string {
+	if x != nil {
+		return x.OwnerUserId
+	}
+	return ""
+}
+
+type StreamHouseLiveResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Event:
+	//
+	//	*StreamHouseLiveResponse_Reading
+	//	*StreamHouseLiveResponse_Status
+	Event         isStreamHouseLiveResponse_Event `protobuf_oneof:"event"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamHouseLiveResponse) Reset() {
+	*x = StreamHouseLiveResponse{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamHouseLiveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamHouseLiveResponse) ProtoMessage() {}
+
+func (x *StreamHouseLiveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamHouseLiveResponse.ProtoReflect.Descriptor instead.
+func (*StreamHouseLiveResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *StreamHouseLiveResponse) GetEvent() isStreamHouseLiveResponse_Event {
+	if x != nil {
+		return x.Event
+	}
+	return nil
+}
+
+func (x *StreamHouseLiveResponse) GetReading() *MeterReading {
+	if x != nil {
+		if x, ok := x.Event.(*StreamHouseLiveResponse_Reading); ok {
+			return x.Reading
+		}
+	}
+	return nil
+}
+
+func (x *StreamHouseLiveResponse) GetStatus() *MeterStatusUpdate {
+	if x != nil {
+		if x, ok := x.Event.(*StreamHouseLiveResponse_Status); ok {
+			return x.Status
+		}
+	}
+	return nil
+}
+
+type isStreamHouseLiveResponse_Event interface {
+	isStreamHouseLiveResponse_Event()
+}
+
+type StreamHouseLiveResponse_Reading struct {
+	Reading *MeterReading `protobuf:"bytes,1,opt,name=reading,proto3,oneof"`
+}
+
+type StreamHouseLiveResponse_Status struct {
+	Status *MeterStatusUpdate `protobuf:"bytes,2,opt,name=status,proto3,oneof"`
+}
+
+func (*StreamHouseLiveResponse_Reading) isStreamHouseLiveResponse_Event() {}
+
+func (*StreamHouseLiveResponse_Status) isStreamHouseLiveResponse_Event() {}
+
+type MeterStatusUpdate struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	MeterStatus MeterStatus            `protobuf:"varint,1,opt,name=meter_status,json=meterStatus,proto3,enum=gridx.iot.v1.MeterStatus" json:"meter_status,omitempty"`
+	// Unset when offline.
+	LastHeartbeatAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=last_heartbeat_at,json=lastHeartbeatAt,proto3" json:"last_heartbeat_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *MeterStatusUpdate) Reset() {
+	*x = MeterStatusUpdate{}
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MeterStatusUpdate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MeterStatusUpdate) ProtoMessage() {}
+
+func (x *MeterStatusUpdate) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MeterStatusUpdate.ProtoReflect.Descriptor instead.
+func (*MeterStatusUpdate) Descriptor() ([]byte, []int) {
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *MeterStatusUpdate) GetMeterStatus() MeterStatus {
+	if x != nil {
+		return x.MeterStatus
+	}
+	return MeterStatus_METER_STATUS_UNSPECIFIED
+}
+
+func (x *MeterStatusUpdate) GetLastHeartbeatAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastHeartbeatAt
+	}
+	return nil
+}
+
 // Initiates a new smart meter registration request.
 type InitiateMeterClaimRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1540,7 +1730,7 @@ type InitiateMeterClaimRequest struct {
 
 func (x *InitiateMeterClaimRequest) Reset() {
 	*x = InitiateMeterClaimRequest{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1552,7 +1742,7 @@ func (x *InitiateMeterClaimRequest) String() string {
 func (*InitiateMeterClaimRequest) ProtoMessage() {}
 
 func (x *InitiateMeterClaimRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[20]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1565,7 +1755,7 @@ func (x *InitiateMeterClaimRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateMeterClaimRequest.ProtoReflect.Descriptor instead.
 func (*InitiateMeterClaimRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{20}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InitiateMeterClaimRequest) GetUserReference() string {
@@ -1593,7 +1783,7 @@ type InitiateMeterClaimResponse struct {
 
 func (x *InitiateMeterClaimResponse) Reset() {
 	*x = InitiateMeterClaimResponse{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1605,7 +1795,7 @@ func (x *InitiateMeterClaimResponse) String() string {
 func (*InitiateMeterClaimResponse) ProtoMessage() {}
 
 func (x *InitiateMeterClaimResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[21]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1618,7 +1808,7 @@ func (x *InitiateMeterClaimResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateMeterClaimResponse.ProtoReflect.Descriptor instead.
 func (*InitiateMeterClaimResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{21}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *InitiateMeterClaimResponse) GetRegistrationId() string {
@@ -1652,7 +1842,7 @@ type GetRegistrationStatusRequest struct {
 
 func (x *GetRegistrationStatusRequest) Reset() {
 	*x = GetRegistrationStatusRequest{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1664,7 +1854,7 @@ func (x *GetRegistrationStatusRequest) String() string {
 func (*GetRegistrationStatusRequest) ProtoMessage() {}
 
 func (x *GetRegistrationStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[22]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,7 +1867,7 @@ func (x *GetRegistrationStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRegistrationStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetRegistrationStatusRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{22}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetRegistrationStatusRequest) GetRegistrationId() string {
@@ -1698,7 +1888,7 @@ type GetRegistrationStatusResponse struct {
 
 func (x *GetRegistrationStatusResponse) Reset() {
 	*x = GetRegistrationStatusResponse{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1710,7 +1900,7 @@ func (x *GetRegistrationStatusResponse) String() string {
 func (*GetRegistrationStatusResponse) ProtoMessage() {}
 
 func (x *GetRegistrationStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[23]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1723,7 +1913,7 @@ func (x *GetRegistrationStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRegistrationStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetRegistrationStatusResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{23}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *GetRegistrationStatusResponse) GetRegistrationId() string {
@@ -1757,7 +1947,7 @@ type ValidateDeviceAssociationRequest struct {
 
 func (x *ValidateDeviceAssociationRequest) Reset() {
 	*x = ValidateDeviceAssociationRequest{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1769,7 +1959,7 @@ func (x *ValidateDeviceAssociationRequest) String() string {
 func (*ValidateDeviceAssociationRequest) ProtoMessage() {}
 
 func (x *ValidateDeviceAssociationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[24]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1782,7 +1972,7 @@ func (x *ValidateDeviceAssociationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateDeviceAssociationRequest.ProtoReflect.Descriptor instead.
 func (*ValidateDeviceAssociationRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{24}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ValidateDeviceAssociationRequest) GetMeterId() string {
@@ -1802,7 +1992,7 @@ type ValidateDeviceAssociationResponse struct {
 
 func (x *ValidateDeviceAssociationResponse) Reset() {
 	*x = ValidateDeviceAssociationResponse{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1814,7 +2004,7 @@ func (x *ValidateDeviceAssociationResponse) String() string {
 func (*ValidateDeviceAssociationResponse) ProtoMessage() {}
 
 func (x *ValidateDeviceAssociationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[25]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1827,7 +2017,7 @@ func (x *ValidateDeviceAssociationResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ValidateDeviceAssociationResponse.ProtoReflect.Descriptor instead.
 func (*ValidateDeviceAssociationResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{25}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ValidateDeviceAssociationResponse) GetIsRegistered() bool {
@@ -1856,7 +2046,7 @@ type ReverifyRegistrationRequest struct {
 
 func (x *ReverifyRegistrationRequest) Reset() {
 	*x = ReverifyRegistrationRequest{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1868,7 +2058,7 @@ func (x *ReverifyRegistrationRequest) String() string {
 func (*ReverifyRegistrationRequest) ProtoMessage() {}
 
 func (x *ReverifyRegistrationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[26]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1881,7 +2071,7 @@ func (x *ReverifyRegistrationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReverifyRegistrationRequest.ProtoReflect.Descriptor instead.
 func (*ReverifyRegistrationRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{26}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ReverifyRegistrationRequest) GetRegistrationId() string {
@@ -1917,7 +2107,7 @@ type ReverifyRegistrationResponse struct {
 
 func (x *ReverifyRegistrationResponse) Reset() {
 	*x = ReverifyRegistrationResponse{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1929,7 +2119,7 @@ func (x *ReverifyRegistrationResponse) String() string {
 func (*ReverifyRegistrationResponse) ProtoMessage() {}
 
 func (x *ReverifyRegistrationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[27]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1942,7 +2132,7 @@ func (x *ReverifyRegistrationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReverifyRegistrationResponse.ProtoReflect.Descriptor instead.
 func (*ReverifyRegistrationResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{27}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ReverifyRegistrationResponse) GetRegistrationId() string {
@@ -1982,7 +2172,7 @@ type GetRegistrationByUserRequest struct {
 
 func (x *GetRegistrationByUserRequest) Reset() {
 	*x = GetRegistrationByUserRequest{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1994,7 +2184,7 @@ func (x *GetRegistrationByUserRequest) String() string {
 func (*GetRegistrationByUserRequest) ProtoMessage() {}
 
 func (x *GetRegistrationByUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[28]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2007,7 +2197,7 @@ func (x *GetRegistrationByUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRegistrationByUserRequest.ProtoReflect.Descriptor instead.
 func (*GetRegistrationByUserRequest) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{28}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetRegistrationByUserRequest) GetUserReference() string {
@@ -2029,7 +2219,7 @@ type GetRegistrationByUserResponse struct {
 
 func (x *GetRegistrationByUserResponse) Reset() {
 	*x = GetRegistrationByUserResponse{}
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2041,7 +2231,7 @@ func (x *GetRegistrationByUserResponse) String() string {
 func (*GetRegistrationByUserResponse) ProtoMessage() {}
 
 func (x *GetRegistrationByUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gridx_iot_v1_iot_proto_msgTypes[29]
+	mi := &file_gridx_iot_v1_iot_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2054,7 +2244,7 @@ func (x *GetRegistrationByUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRegistrationByUserResponse.ProtoReflect.Descriptor instead.
 func (*GetRegistrationByUserResponse) Descriptor() ([]byte, []int) {
-	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{29}
+	return file_gridx_iot_v1_iot_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetRegistrationByUserResponse) GetHasMeter() bool {
@@ -2202,7 +2392,17 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\x14self_consumption_pct\x18\x03 \x01(\x01H\x00R\x12selfConsumptionPct\x88\x01\x01\x129\n" +
 	"\vpeak_demand\x18\x04 \x01(\v2\x18.gridx.iot.v1.PeakDemandR\n" +
 	"peakDemandB\x17\n" +
-	"\x15_self_consumption_pct\"]\n" +
+	"\x15_self_consumption_pct\"W\n" +
+	"\x16StreamHouseLiveRequest\x12\x19\n" +
+	"\bhouse_id\x18\x01 \x01(\tR\ahouseId\x12\"\n" +
+	"\rowner_user_id\x18\x02 \x01(\tR\vownerUserId\"\x95\x01\n" +
+	"\x17StreamHouseLiveResponse\x126\n" +
+	"\areading\x18\x01 \x01(\v2\x1a.gridx.iot.v1.MeterReadingH\x00R\areading\x129\n" +
+	"\x06status\x18\x02 \x01(\v2\x1f.gridx.iot.v1.MeterStatusUpdateH\x00R\x06statusB\a\n" +
+	"\x05event\"\x99\x01\n" +
+	"\x11MeterStatusUpdate\x12<\n" +
+	"\fmeter_status\x18\x01 \x01(\x0e2\x19.gridx.iot.v1.MeterStatusR\vmeterStatus\x12F\n" +
+	"\x11last_heartbeat_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastHeartbeatAt\"]\n" +
 	"\x19InitiateMeterClaimRequest\x12%\n" +
 	"\x0euser_reference\x18\x01 \x01(\tR\ruserReference\x12\x19\n" +
 	"\bmeter_id\x18\x02 \x01(\tR\ameterId\"w\n" +
@@ -2249,7 +2449,7 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\vMeterStatus\x12\x1c\n" +
 	"\x18METER_STATUS_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13METER_STATUS_ONLINE\x10\x01\x12\x18\n" +
-	"\x14METER_STATUS_OFFLINE\x10\x022\xce\x03\n" +
+	"\x14METER_STATUS_OFFLINE\x10\x022\xb0\x04\n" +
 	"\n" +
 	"IotService\x12O\n" +
 	"\n" +
@@ -2257,7 +2457,8 @@ const file_gridx_iot_v1_iot_proto_rawDesc = "" +
 	"\bGetHouse\x12\x1d.gridx.iot.v1.GetHouseRequest\x1a\x1e.gridx.iot.v1.GetHouseResponse\x12a\n" +
 	"\x10GetLatestReading\x12%.gridx.iot.v1.GetLatestReadingRequest\x1a&.gridx.iot.v1.GetLatestReadingResponse\x12^\n" +
 	"\x0fGetEnergySeries\x12$.gridx.iot.v1.GetEnergySeriesRequest\x1a%.gridx.iot.v1.GetEnergySeriesResponse\x12a\n" +
-	"\x10GetEnergySummary\x12%.gridx.iot.v1.GetEnergySummaryRequest\x1a&.gridx.iot.v1.GetEnergySummaryResponse2\xd5\x04\n" +
+	"\x10GetEnergySummary\x12%.gridx.iot.v1.GetEnergySummaryRequest\x1a&.gridx.iot.v1.GetEnergySummaryResponse\x12`\n" +
+	"\x0fStreamHouseLive\x12$.gridx.iot.v1.StreamHouseLiveRequest\x1a%.gridx.iot.v1.StreamHouseLiveResponse0\x012\xd5\x04\n" +
 	"\x19DeviceRegistrationService\x12g\n" +
 	"\x12InitiateMeterClaim\x12'.gridx.iot.v1.InitiateMeterClaimRequest\x1a(.gridx.iot.v1.InitiateMeterClaimResponse\x12p\n" +
 	"\x15GetRegistrationStatus\x12*.gridx.iot.v1.GetRegistrationStatusRequest\x1a+.gridx.iot.v1.GetRegistrationStatusResponse\x12|\n" +
@@ -2278,7 +2479,7 @@ func file_gridx_iot_v1_iot_proto_rawDescGZIP() []byte {
 }
 
 var file_gridx_iot_v1_iot_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_gridx_iot_v1_iot_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_gridx_iot_v1_iot_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_gridx_iot_v1_iot_proto_goTypes = []any{
 	(DeviceClass)(0),                          // 0: gridx.iot.v1.DeviceClass
 	(AssetType)(0),                            // 1: gridx.iot.v1.AssetType
@@ -2303,70 +2504,79 @@ var file_gridx_iot_v1_iot_proto_goTypes = []any{
 	(*GetEnergySeriesResponse)(nil),           // 20: gridx.iot.v1.GetEnergySeriesResponse
 	(*GetEnergySummaryRequest)(nil),           // 21: gridx.iot.v1.GetEnergySummaryRequest
 	(*GetEnergySummaryResponse)(nil),          // 22: gridx.iot.v1.GetEnergySummaryResponse
-	(*InitiateMeterClaimRequest)(nil),         // 23: gridx.iot.v1.InitiateMeterClaimRequest
-	(*InitiateMeterClaimResponse)(nil),        // 24: gridx.iot.v1.InitiateMeterClaimResponse
-	(*GetRegistrationStatusRequest)(nil),      // 25: gridx.iot.v1.GetRegistrationStatusRequest
-	(*GetRegistrationStatusResponse)(nil),     // 26: gridx.iot.v1.GetRegistrationStatusResponse
-	(*ValidateDeviceAssociationRequest)(nil),  // 27: gridx.iot.v1.ValidateDeviceAssociationRequest
-	(*ValidateDeviceAssociationResponse)(nil), // 28: gridx.iot.v1.ValidateDeviceAssociationResponse
-	(*ReverifyRegistrationRequest)(nil),       // 29: gridx.iot.v1.ReverifyRegistrationRequest
-	(*ReverifyRegistrationResponse)(nil),      // 30: gridx.iot.v1.ReverifyRegistrationResponse
-	(*GetRegistrationByUserRequest)(nil),      // 31: gridx.iot.v1.GetRegistrationByUserRequest
-	(*GetRegistrationByUserResponse)(nil),     // 32: gridx.iot.v1.GetRegistrationByUserResponse
-	(*timestamppb.Timestamp)(nil),             // 33: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),               // 34: google.protobuf.Duration
+	(*StreamHouseLiveRequest)(nil),            // 23: gridx.iot.v1.StreamHouseLiveRequest
+	(*StreamHouseLiveResponse)(nil),           // 24: gridx.iot.v1.StreamHouseLiveResponse
+	(*MeterStatusUpdate)(nil),                 // 25: gridx.iot.v1.MeterStatusUpdate
+	(*InitiateMeterClaimRequest)(nil),         // 26: gridx.iot.v1.InitiateMeterClaimRequest
+	(*InitiateMeterClaimResponse)(nil),        // 27: gridx.iot.v1.InitiateMeterClaimResponse
+	(*GetRegistrationStatusRequest)(nil),      // 28: gridx.iot.v1.GetRegistrationStatusRequest
+	(*GetRegistrationStatusResponse)(nil),     // 29: gridx.iot.v1.GetRegistrationStatusResponse
+	(*ValidateDeviceAssociationRequest)(nil),  // 30: gridx.iot.v1.ValidateDeviceAssociationRequest
+	(*ValidateDeviceAssociationResponse)(nil), // 31: gridx.iot.v1.ValidateDeviceAssociationResponse
+	(*ReverifyRegistrationRequest)(nil),       // 32: gridx.iot.v1.ReverifyRegistrationRequest
+	(*ReverifyRegistrationResponse)(nil),      // 33: gridx.iot.v1.ReverifyRegistrationResponse
+	(*GetRegistrationByUserRequest)(nil),      // 34: gridx.iot.v1.GetRegistrationByUserRequest
+	(*GetRegistrationByUserResponse)(nil),     // 35: gridx.iot.v1.GetRegistrationByUserResponse
+	(*timestamppb.Timestamp)(nil),             // 36: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),               // 37: google.protobuf.Duration
 }
 var file_gridx_iot_v1_iot_proto_depIdxs = []int32{
 	3,  // 0: gridx.iot.v1.House.grid:type_name -> gridx.iot.v1.Grid
 	0,  // 1: gridx.iot.v1.House.device_class:type_name -> gridx.iot.v1.DeviceClass
 	2,  // 2: gridx.iot.v1.House.meter_status:type_name -> gridx.iot.v1.MeterStatus
-	33, // 3: gridx.iot.v1.House.last_heartbeat_at:type_name -> google.protobuf.Timestamp
+	36, // 3: gridx.iot.v1.House.last_heartbeat_at:type_name -> google.protobuf.Timestamp
 	1,  // 4: gridx.iot.v1.FlexibleAsset.asset_type:type_name -> gridx.iot.v1.AssetType
 	1,  // 5: gridx.iot.v1.StorageAssetReading.asset_type:type_name -> gridx.iot.v1.AssetType
-	33, // 6: gridx.iot.v1.MeterReading.measured_at:type_name -> google.protobuf.Timestamp
+	36, // 6: gridx.iot.v1.MeterReading.measured_at:type_name -> google.protobuf.Timestamp
 	6,  // 7: gridx.iot.v1.MeterReading.storage_assets:type_name -> gridx.iot.v1.StorageAssetReading
-	33, // 8: gridx.iot.v1.EnergyBucket.starts_at:type_name -> google.protobuf.Timestamp
+	36, // 8: gridx.iot.v1.EnergyBucket.starts_at:type_name -> google.protobuf.Timestamp
 	8,  // 9: gridx.iot.v1.EnergyBucket.energy:type_name -> gridx.iot.v1.EnergyTotals
 	10, // 10: gridx.iot.v1.EnergyBucket.average_power:type_name -> gridx.iot.v1.AveragePower
-	33, // 11: gridx.iot.v1.PeakDemand.occurred_at:type_name -> google.protobuf.Timestamp
+	36, // 11: gridx.iot.v1.PeakDemand.occurred_at:type_name -> google.protobuf.Timestamp
 	4,  // 12: gridx.iot.v1.ListHousesResponse.houses:type_name -> gridx.iot.v1.House
 	4,  // 13: gridx.iot.v1.GetHouseResponse.house:type_name -> gridx.iot.v1.House
 	5,  // 14: gridx.iot.v1.GetHouseResponse.flexible_assets:type_name -> gridx.iot.v1.FlexibleAsset
 	7,  // 15: gridx.iot.v1.GetLatestReadingResponse.reading:type_name -> gridx.iot.v1.MeterReading
-	33, // 16: gridx.iot.v1.GetEnergySeriesRequest.start_time:type_name -> google.protobuf.Timestamp
-	33, // 17: gridx.iot.v1.GetEnergySeriesRequest.end_time:type_name -> google.protobuf.Timestamp
-	34, // 18: gridx.iot.v1.GetEnergySeriesRequest.bucket_width:type_name -> google.protobuf.Duration
+	36, // 16: gridx.iot.v1.GetEnergySeriesRequest.start_time:type_name -> google.protobuf.Timestamp
+	36, // 17: gridx.iot.v1.GetEnergySeriesRequest.end_time:type_name -> google.protobuf.Timestamp
+	37, // 18: gridx.iot.v1.GetEnergySeriesRequest.bucket_width:type_name -> google.protobuf.Duration
 	11, // 19: gridx.iot.v1.GetEnergySeriesResponse.buckets:type_name -> gridx.iot.v1.EnergyBucket
-	33, // 20: gridx.iot.v1.GetEnergySummaryRequest.start_time:type_name -> google.protobuf.Timestamp
-	33, // 21: gridx.iot.v1.GetEnergySummaryRequest.end_time:type_name -> google.protobuf.Timestamp
+	36, // 20: gridx.iot.v1.GetEnergySummaryRequest.start_time:type_name -> google.protobuf.Timestamp
+	36, // 21: gridx.iot.v1.GetEnergySummaryRequest.end_time:type_name -> google.protobuf.Timestamp
 	8,  // 22: gridx.iot.v1.GetEnergySummaryResponse.totals:type_name -> gridx.iot.v1.EnergyTotals
 	9,  // 23: gridx.iot.v1.GetEnergySummaryResponse.flows:type_name -> gridx.iot.v1.EnergyFlows
 	12, // 24: gridx.iot.v1.GetEnergySummaryResponse.peak_demand:type_name -> gridx.iot.v1.PeakDemand
-	13, // 25: gridx.iot.v1.IotService.ListHouses:input_type -> gridx.iot.v1.ListHousesRequest
-	15, // 26: gridx.iot.v1.IotService.GetHouse:input_type -> gridx.iot.v1.GetHouseRequest
-	17, // 27: gridx.iot.v1.IotService.GetLatestReading:input_type -> gridx.iot.v1.GetLatestReadingRequest
-	19, // 28: gridx.iot.v1.IotService.GetEnergySeries:input_type -> gridx.iot.v1.GetEnergySeriesRequest
-	21, // 29: gridx.iot.v1.IotService.GetEnergySummary:input_type -> gridx.iot.v1.GetEnergySummaryRequest
-	23, // 30: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:input_type -> gridx.iot.v1.InitiateMeterClaimRequest
-	25, // 31: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:input_type -> gridx.iot.v1.GetRegistrationStatusRequest
-	27, // 32: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:input_type -> gridx.iot.v1.ValidateDeviceAssociationRequest
-	29, // 33: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:input_type -> gridx.iot.v1.ReverifyRegistrationRequest
-	31, // 34: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:input_type -> gridx.iot.v1.GetRegistrationByUserRequest
-	14, // 35: gridx.iot.v1.IotService.ListHouses:output_type -> gridx.iot.v1.ListHousesResponse
-	16, // 36: gridx.iot.v1.IotService.GetHouse:output_type -> gridx.iot.v1.GetHouseResponse
-	18, // 37: gridx.iot.v1.IotService.GetLatestReading:output_type -> gridx.iot.v1.GetLatestReadingResponse
-	20, // 38: gridx.iot.v1.IotService.GetEnergySeries:output_type -> gridx.iot.v1.GetEnergySeriesResponse
-	22, // 39: gridx.iot.v1.IotService.GetEnergySummary:output_type -> gridx.iot.v1.GetEnergySummaryResponse
-	24, // 40: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:output_type -> gridx.iot.v1.InitiateMeterClaimResponse
-	26, // 41: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:output_type -> gridx.iot.v1.GetRegistrationStatusResponse
-	28, // 42: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:output_type -> gridx.iot.v1.ValidateDeviceAssociationResponse
-	30, // 43: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:output_type -> gridx.iot.v1.ReverifyRegistrationResponse
-	32, // 44: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:output_type -> gridx.iot.v1.GetRegistrationByUserResponse
-	35, // [35:45] is the sub-list for method output_type
-	25, // [25:35] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	7,  // 25: gridx.iot.v1.StreamHouseLiveResponse.reading:type_name -> gridx.iot.v1.MeterReading
+	25, // 26: gridx.iot.v1.StreamHouseLiveResponse.status:type_name -> gridx.iot.v1.MeterStatusUpdate
+	2,  // 27: gridx.iot.v1.MeterStatusUpdate.meter_status:type_name -> gridx.iot.v1.MeterStatus
+	36, // 28: gridx.iot.v1.MeterStatusUpdate.last_heartbeat_at:type_name -> google.protobuf.Timestamp
+	13, // 29: gridx.iot.v1.IotService.ListHouses:input_type -> gridx.iot.v1.ListHousesRequest
+	15, // 30: gridx.iot.v1.IotService.GetHouse:input_type -> gridx.iot.v1.GetHouseRequest
+	17, // 31: gridx.iot.v1.IotService.GetLatestReading:input_type -> gridx.iot.v1.GetLatestReadingRequest
+	19, // 32: gridx.iot.v1.IotService.GetEnergySeries:input_type -> gridx.iot.v1.GetEnergySeriesRequest
+	21, // 33: gridx.iot.v1.IotService.GetEnergySummary:input_type -> gridx.iot.v1.GetEnergySummaryRequest
+	23, // 34: gridx.iot.v1.IotService.StreamHouseLive:input_type -> gridx.iot.v1.StreamHouseLiveRequest
+	26, // 35: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:input_type -> gridx.iot.v1.InitiateMeterClaimRequest
+	28, // 36: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:input_type -> gridx.iot.v1.GetRegistrationStatusRequest
+	30, // 37: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:input_type -> gridx.iot.v1.ValidateDeviceAssociationRequest
+	32, // 38: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:input_type -> gridx.iot.v1.ReverifyRegistrationRequest
+	34, // 39: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:input_type -> gridx.iot.v1.GetRegistrationByUserRequest
+	14, // 40: gridx.iot.v1.IotService.ListHouses:output_type -> gridx.iot.v1.ListHousesResponse
+	16, // 41: gridx.iot.v1.IotService.GetHouse:output_type -> gridx.iot.v1.GetHouseResponse
+	18, // 42: gridx.iot.v1.IotService.GetLatestReading:output_type -> gridx.iot.v1.GetLatestReadingResponse
+	20, // 43: gridx.iot.v1.IotService.GetEnergySeries:output_type -> gridx.iot.v1.GetEnergySeriesResponse
+	22, // 44: gridx.iot.v1.IotService.GetEnergySummary:output_type -> gridx.iot.v1.GetEnergySummaryResponse
+	24, // 45: gridx.iot.v1.IotService.StreamHouseLive:output_type -> gridx.iot.v1.StreamHouseLiveResponse
+	27, // 46: gridx.iot.v1.DeviceRegistrationService.InitiateMeterClaim:output_type -> gridx.iot.v1.InitiateMeterClaimResponse
+	29, // 47: gridx.iot.v1.DeviceRegistrationService.GetRegistrationStatus:output_type -> gridx.iot.v1.GetRegistrationStatusResponse
+	31, // 48: gridx.iot.v1.DeviceRegistrationService.ValidateDeviceAssociation:output_type -> gridx.iot.v1.ValidateDeviceAssociationResponse
+	33, // 49: gridx.iot.v1.DeviceRegistrationService.ReverifyRegistration:output_type -> gridx.iot.v1.ReverifyRegistrationResponse
+	35, // 50: gridx.iot.v1.DeviceRegistrationService.GetRegistrationByUser:output_type -> gridx.iot.v1.GetRegistrationByUserResponse
+	40, // [40:51] is the sub-list for method output_type
+	29, // [29:40] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_gridx_iot_v1_iot_proto_init() }
@@ -2378,13 +2588,17 @@ func file_gridx_iot_v1_iot_proto_init() {
 	file_gridx_iot_v1_iot_proto_msgTypes[2].OneofWrappers = []any{}
 	file_gridx_iot_v1_iot_proto_msgTypes[3].OneofWrappers = []any{}
 	file_gridx_iot_v1_iot_proto_msgTypes[19].OneofWrappers = []any{}
+	file_gridx_iot_v1_iot_proto_msgTypes[21].OneofWrappers = []any{
+		(*StreamHouseLiveResponse_Reading)(nil),
+		(*StreamHouseLiveResponse_Status)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_iot_v1_iot_proto_rawDesc), len(file_gridx_iot_v1_iot_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   30,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

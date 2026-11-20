@@ -24,6 +24,7 @@ const (
 	IotService_GetLatestReading_FullMethodName = "/gridx.iot.v1.IotService/GetLatestReading"
 	IotService_GetEnergySeries_FullMethodName  = "/gridx.iot.v1.IotService/GetEnergySeries"
 	IotService_GetEnergySummary_FullMethodName = "/gridx.iot.v1.IotService/GetEnergySummary"
+	IotService_StreamHouseLive_FullMethodName  = "/gridx.iot.v1.IotService/StreamHouseLive"
 )
 
 // IotServiceClient is the client API for IotService service.
@@ -40,6 +41,15 @@ type IotServiceClient interface {
 	GetLatestReading(ctx context.Context, in *GetLatestReadingRequest, opts ...grpc.CallOption) (*GetLatestReadingResponse, error)
 	GetEnergySeries(ctx context.Context, in *GetEnergySeriesRequest, opts ...grpc.CallOption) (*GetEnergySeriesResponse, error)
 	GetEnergySummary(ctx context.Context, in *GetEnergySummaryRequest, opts ...grpc.CallOption) (*GetEnergySummaryResponse, error)
+	// Streams live updates for one house: first the current status and latest
+	// reading (if any), then each newer reading and every meter status change.
+	// Delivery is best effort with no replay; callers resync over the unary RPCs.
+	// The server ends the stream after its maximum age; callers reopen it.
+	// Errors: INVALID_ARGUMENT (bad house ID), NOT_FOUND (unknown house, or not
+	// owned when owner_user_id is set), UNAVAILABLE (live feed down or the server
+	// shutting down; retry with backoff), DEADLINE_EXCEEDED (the stream reached
+	// its maximum age; reopen it).
+	StreamHouseLive(ctx context.Context, in *StreamHouseLiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamHouseLiveResponse], error)
 }
 
 type iotServiceClient struct {
@@ -100,6 +110,25 @@ func (c *iotServiceClient) GetEnergySummary(ctx context.Context, in *GetEnergySu
 	return out, nil
 }
 
+func (c *iotServiceClient) StreamHouseLive(ctx context.Context, in *StreamHouseLiveRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamHouseLiveResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &IotService_ServiceDesc.Streams[0], IotService_StreamHouseLive_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamHouseLiveRequest, StreamHouseLiveResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type IotService_StreamHouseLiveClient = grpc.ServerStreamingClient[StreamHouseLiveResponse]
+
 // IotServiceServer is the server API for IotService service.
 // All implementations must embed UnimplementedIotServiceServer
 // for forward compatibility.
@@ -114,6 +143,15 @@ type IotServiceServer interface {
 	GetLatestReading(context.Context, *GetLatestReadingRequest) (*GetLatestReadingResponse, error)
 	GetEnergySeries(context.Context, *GetEnergySeriesRequest) (*GetEnergySeriesResponse, error)
 	GetEnergySummary(context.Context, *GetEnergySummaryRequest) (*GetEnergySummaryResponse, error)
+	// Streams live updates for one house: first the current status and latest
+	// reading (if any), then each newer reading and every meter status change.
+	// Delivery is best effort with no replay; callers resync over the unary RPCs.
+	// The server ends the stream after its maximum age; callers reopen it.
+	// Errors: INVALID_ARGUMENT (bad house ID), NOT_FOUND (unknown house, or not
+	// owned when owner_user_id is set), UNAVAILABLE (live feed down or the server
+	// shutting down; retry with backoff), DEADLINE_EXCEEDED (the stream reached
+	// its maximum age; reopen it).
+	StreamHouseLive(*StreamHouseLiveRequest, grpc.ServerStreamingServer[StreamHouseLiveResponse]) error
 	mustEmbedUnimplementedIotServiceServer()
 }
 
@@ -138,6 +176,9 @@ func (UnimplementedIotServiceServer) GetEnergySeries(context.Context, *GetEnergy
 }
 func (UnimplementedIotServiceServer) GetEnergySummary(context.Context, *GetEnergySummaryRequest) (*GetEnergySummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetEnergySummary not implemented")
+}
+func (UnimplementedIotServiceServer) StreamHouseLive(*StreamHouseLiveRequest, grpc.ServerStreamingServer[StreamHouseLiveResponse]) error {
+	return status.Error(codes.Unimplemented, "method StreamHouseLive not implemented")
 }
 func (UnimplementedIotServiceServer) mustEmbedUnimplementedIotServiceServer() {}
 func (UnimplementedIotServiceServer) testEmbeddedByValue()                    {}
@@ -250,6 +291,17 @@ func _IotService_GetEnergySummary_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IotService_StreamHouseLive_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamHouseLiveRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(IotServiceServer).StreamHouseLive(m, &grpc.GenericServerStream[StreamHouseLiveRequest, StreamHouseLiveResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type IotService_StreamHouseLiveServer = grpc.ServerStreamingServer[StreamHouseLiveResponse]
+
 // IotService_ServiceDesc is the grpc.ServiceDesc for IotService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -278,7 +330,13 @@ var IotService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IotService_GetEnergySummary_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamHouseLive",
+			Handler:       _IotService_StreamHouseLive_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "gridx/iot/v1/iot.proto",
 }
 
