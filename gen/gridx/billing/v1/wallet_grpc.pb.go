@@ -19,7 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WalletService_GetWallet_FullMethodName = "/gridx.billing.v1.WalletService/GetWallet"
+	WalletService_GetWallet_FullMethodName           = "/gridx.billing.v1.WalletService/GetWallet"
+	WalletService_ListTransactions_FullMethodName    = "/gridx.billing.v1.WalletService/ListTransactions"
+	WalletService_CreateDepositIntent_FullMethodName = "/gridx.billing.v1.WalletService/CreateDepositIntent"
+	WalletService_ConfirmDeposit_FullMethodName      = "/gridx.billing.v1.WalletService/ConfirmDeposit"
+	WalletService_GetDeposit_FullMethodName          = "/gridx.billing.v1.WalletService/GetDeposit"
+	WalletService_RequestWithdrawal_FullMethodName   = "/gridx.billing.v1.WalletService/RequestWithdrawal"
+	WalletService_CancelWithdrawal_FullMethodName    = "/gridx.billing.v1.WalletService/CancelWithdrawal"
+	WalletService_ListWithdrawals_FullMethodName     = "/gridx.billing.v1.WalletService/ListWithdrawals"
 )
 
 // WalletServiceClient is the client API for WalletService service.
@@ -32,6 +39,15 @@ const (
 type WalletServiceClient interface {
 	// Returns the caller's wallet, creating an empty one on first use.
 	GetWallet(ctx context.Context, in *GetWalletRequest, opts ...grpc.CallOption) (*GetWalletResponse, error)
+	ListTransactions(ctx context.Context, in *ListTransactionsRequest, opts ...grpc.CallOption) (*ListTransactionsResponse, error)
+	// Deposits
+	CreateDepositIntent(ctx context.Context, in *CreateDepositIntentRequest, opts ...grpc.CallOption) (*CreateDepositIntentResponse, error)
+	ConfirmDeposit(ctx context.Context, in *ConfirmDepositRequest, opts ...grpc.CallOption) (*ConfirmDepositResponse, error)
+	GetDeposit(ctx context.Context, in *GetDepositRequest, opts ...grpc.CallOption) (*GetDepositResponse, error)
+	// Withdrawals
+	RequestWithdrawal(ctx context.Context, in *RequestWithdrawalRequest, opts ...grpc.CallOption) (*RequestWithdrawalResponse, error)
+	CancelWithdrawal(ctx context.Context, in *CancelWithdrawalRequest, opts ...grpc.CallOption) (*CancelWithdrawalResponse, error)
+	ListWithdrawals(ctx context.Context, in *ListWithdrawalsRequest, opts ...grpc.CallOption) (*ListWithdrawalsResponse, error)
 }
 
 type walletServiceClient struct {
@@ -52,6 +68,76 @@ func (c *walletServiceClient) GetWallet(ctx context.Context, in *GetWalletReques
 	return out, nil
 }
 
+func (c *walletServiceClient) ListTransactions(ctx context.Context, in *ListTransactionsRequest, opts ...grpc.CallOption) (*ListTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTransactionsResponse)
+	err := c.cc.Invoke(ctx, WalletService_ListTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) CreateDepositIntent(ctx context.Context, in *CreateDepositIntentRequest, opts ...grpc.CallOption) (*CreateDepositIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateDepositIntentResponse)
+	err := c.cc.Invoke(ctx, WalletService_CreateDepositIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) ConfirmDeposit(ctx context.Context, in *ConfirmDepositRequest, opts ...grpc.CallOption) (*ConfirmDepositResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmDepositResponse)
+	err := c.cc.Invoke(ctx, WalletService_ConfirmDeposit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) GetDeposit(ctx context.Context, in *GetDepositRequest, opts ...grpc.CallOption) (*GetDepositResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDepositResponse)
+	err := c.cc.Invoke(ctx, WalletService_GetDeposit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) RequestWithdrawal(ctx context.Context, in *RequestWithdrawalRequest, opts ...grpc.CallOption) (*RequestWithdrawalResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestWithdrawalResponse)
+	err := c.cc.Invoke(ctx, WalletService_RequestWithdrawal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) CancelWithdrawal(ctx context.Context, in *CancelWithdrawalRequest, opts ...grpc.CallOption) (*CancelWithdrawalResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelWithdrawalResponse)
+	err := c.cc.Invoke(ctx, WalletService_CancelWithdrawal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) ListWithdrawals(ctx context.Context, in *ListWithdrawalsRequest, opts ...grpc.CallOption) (*ListWithdrawalsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWithdrawalsResponse)
+	err := c.cc.Invoke(ctx, WalletService_ListWithdrawals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServiceServer is the server API for WalletService service.
 // All implementations must embed UnimplementedWalletServiceServer
 // for forward compatibility.
@@ -62,6 +148,15 @@ func (c *walletServiceClient) GetWallet(ctx context.Context, in *GetWalletReques
 type WalletServiceServer interface {
 	// Returns the caller's wallet, creating an empty one on first use.
 	GetWallet(context.Context, *GetWalletRequest) (*GetWalletResponse, error)
+	ListTransactions(context.Context, *ListTransactionsRequest) (*ListTransactionsResponse, error)
+	// Deposits
+	CreateDepositIntent(context.Context, *CreateDepositIntentRequest) (*CreateDepositIntentResponse, error)
+	ConfirmDeposit(context.Context, *ConfirmDepositRequest) (*ConfirmDepositResponse, error)
+	GetDeposit(context.Context, *GetDepositRequest) (*GetDepositResponse, error)
+	// Withdrawals
+	RequestWithdrawal(context.Context, *RequestWithdrawalRequest) (*RequestWithdrawalResponse, error)
+	CancelWithdrawal(context.Context, *CancelWithdrawalRequest) (*CancelWithdrawalResponse, error)
+	ListWithdrawals(context.Context, *ListWithdrawalsRequest) (*ListWithdrawalsResponse, error)
 	mustEmbedUnimplementedWalletServiceServer()
 }
 
@@ -74,6 +169,27 @@ type UnimplementedWalletServiceServer struct{}
 
 func (UnimplementedWalletServiceServer) GetWallet(context.Context, *GetWalletRequest) (*GetWalletResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetWallet not implemented")
+}
+func (UnimplementedWalletServiceServer) ListTransactions(context.Context, *ListTransactionsRequest) (*ListTransactionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListTransactions not implemented")
+}
+func (UnimplementedWalletServiceServer) CreateDepositIntent(context.Context, *CreateDepositIntentRequest) (*CreateDepositIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDepositIntent not implemented")
+}
+func (UnimplementedWalletServiceServer) ConfirmDeposit(context.Context, *ConfirmDepositRequest) (*ConfirmDepositResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfirmDeposit not implemented")
+}
+func (UnimplementedWalletServiceServer) GetDeposit(context.Context, *GetDepositRequest) (*GetDepositResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDeposit not implemented")
+}
+func (UnimplementedWalletServiceServer) RequestWithdrawal(context.Context, *RequestWithdrawalRequest) (*RequestWithdrawalResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestWithdrawal not implemented")
+}
+func (UnimplementedWalletServiceServer) CancelWithdrawal(context.Context, *CancelWithdrawalRequest) (*CancelWithdrawalResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelWithdrawal not implemented")
+}
+func (UnimplementedWalletServiceServer) ListWithdrawals(context.Context, *ListWithdrawalsRequest) (*ListWithdrawalsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListWithdrawals not implemented")
 }
 func (UnimplementedWalletServiceServer) mustEmbedUnimplementedWalletServiceServer() {}
 func (UnimplementedWalletServiceServer) testEmbeddedByValue()                       {}
@@ -114,6 +230,132 @@ func _WalletService_GetWallet_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalletService_ListTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).ListTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_ListTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).ListTransactions(ctx, req.(*ListTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_CreateDepositIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDepositIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).CreateDepositIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_CreateDepositIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).CreateDepositIntent(ctx, req.(*CreateDepositIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_ConfirmDeposit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmDepositRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).ConfirmDeposit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_ConfirmDeposit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).ConfirmDeposit(ctx, req.(*ConfirmDepositRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_GetDeposit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).GetDeposit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_GetDeposit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).GetDeposit(ctx, req.(*GetDepositRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_RequestWithdrawal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestWithdrawalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).RequestWithdrawal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_RequestWithdrawal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).RequestWithdrawal(ctx, req.(*RequestWithdrawalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_CancelWithdrawal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelWithdrawalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).CancelWithdrawal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_CancelWithdrawal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).CancelWithdrawal(ctx, req.(*CancelWithdrawalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_ListWithdrawals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWithdrawalsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).ListWithdrawals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_ListWithdrawals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).ListWithdrawals(ctx, req.(*ListWithdrawalsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalletService_ServiceDesc is the grpc.ServiceDesc for WalletService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -124,6 +366,34 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWallet",
 			Handler:    _WalletService_GetWallet_Handler,
+		},
+		{
+			MethodName: "ListTransactions",
+			Handler:    _WalletService_ListTransactions_Handler,
+		},
+		{
+			MethodName: "CreateDepositIntent",
+			Handler:    _WalletService_CreateDepositIntent_Handler,
+		},
+		{
+			MethodName: "ConfirmDeposit",
+			Handler:    _WalletService_ConfirmDeposit_Handler,
+		},
+		{
+			MethodName: "GetDeposit",
+			Handler:    _WalletService_GetDeposit_Handler,
+		},
+		{
+			MethodName: "RequestWithdrawal",
+			Handler:    _WalletService_RequestWithdrawal_Handler,
+		},
+		{
+			MethodName: "CancelWithdrawal",
+			Handler:    _WalletService_CancelWithdrawal_Handler,
+		},
+		{
+			MethodName: "ListWithdrawals",
+			Handler:    _WalletService_ListWithdrawals_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

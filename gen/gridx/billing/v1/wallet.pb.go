@@ -75,6 +75,128 @@ func (WalletStatus) EnumDescriptor() ([]byte, []int) {
 	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{0}
 }
 
+type DepositStatus int32
+
+const (
+	DepositStatus_DEPOSIT_STATUS_UNSPECIFIED DepositStatus = 0
+	DepositStatus_DEPOSIT_STATUS_PENDING     DepositStatus = 1
+	DepositStatus_DEPOSIT_STATUS_COMPLETED   DepositStatus = 2
+	DepositStatus_DEPOSIT_STATUS_FAILED      DepositStatus = 3
+	DepositStatus_DEPOSIT_STATUS_EXPIRED     DepositStatus = 4
+	DepositStatus_DEPOSIT_STATUS_REFUNDED    DepositStatus = 5
+	DepositStatus_DEPOSIT_STATUS_DISPUTED    DepositStatus = 6
+)
+
+// Enum value maps for DepositStatus.
+var (
+	DepositStatus_name = map[int32]string{
+		0: "DEPOSIT_STATUS_UNSPECIFIED",
+		1: "DEPOSIT_STATUS_PENDING",
+		2: "DEPOSIT_STATUS_COMPLETED",
+		3: "DEPOSIT_STATUS_FAILED",
+		4: "DEPOSIT_STATUS_EXPIRED",
+		5: "DEPOSIT_STATUS_REFUNDED",
+		6: "DEPOSIT_STATUS_DISPUTED",
+	}
+	DepositStatus_value = map[string]int32{
+		"DEPOSIT_STATUS_UNSPECIFIED": 0,
+		"DEPOSIT_STATUS_PENDING":     1,
+		"DEPOSIT_STATUS_COMPLETED":   2,
+		"DEPOSIT_STATUS_FAILED":      3,
+		"DEPOSIT_STATUS_EXPIRED":     4,
+		"DEPOSIT_STATUS_REFUNDED":    5,
+		"DEPOSIT_STATUS_DISPUTED":    6,
+	}
+)
+
+func (x DepositStatus) Enum() *DepositStatus {
+	p := new(DepositStatus)
+	*p = x
+	return p
+}
+
+func (x DepositStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DepositStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_gridx_billing_v1_wallet_proto_enumTypes[1].Descriptor()
+}
+
+func (DepositStatus) Type() protoreflect.EnumType {
+	return &file_gridx_billing_v1_wallet_proto_enumTypes[1]
+}
+
+func (x DepositStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DepositStatus.Descriptor instead.
+func (DepositStatus) EnumDescriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{1}
+}
+
+type WithdrawalStatus int32
+
+const (
+	WithdrawalStatus_WITHDRAWAL_STATUS_UNSPECIFIED WithdrawalStatus = 0
+	WithdrawalStatus_WITHDRAWAL_STATUS_PENDING     WithdrawalStatus = 1
+	WithdrawalStatus_WITHDRAWAL_STATUS_APPROVED    WithdrawalStatus = 2
+	WithdrawalStatus_WITHDRAWAL_STATUS_PAID        WithdrawalStatus = 3
+	WithdrawalStatus_WITHDRAWAL_STATUS_REJECTED    WithdrawalStatus = 4
+	WithdrawalStatus_WITHDRAWAL_STATUS_CANCELLED   WithdrawalStatus = 5
+	WithdrawalStatus_WITHDRAWAL_STATUS_FAILED      WithdrawalStatus = 6
+)
+
+// Enum value maps for WithdrawalStatus.
+var (
+	WithdrawalStatus_name = map[int32]string{
+		0: "WITHDRAWAL_STATUS_UNSPECIFIED",
+		1: "WITHDRAWAL_STATUS_PENDING",
+		2: "WITHDRAWAL_STATUS_APPROVED",
+		3: "WITHDRAWAL_STATUS_PAID",
+		4: "WITHDRAWAL_STATUS_REJECTED",
+		5: "WITHDRAWAL_STATUS_CANCELLED",
+		6: "WITHDRAWAL_STATUS_FAILED",
+	}
+	WithdrawalStatus_value = map[string]int32{
+		"WITHDRAWAL_STATUS_UNSPECIFIED": 0,
+		"WITHDRAWAL_STATUS_PENDING":     1,
+		"WITHDRAWAL_STATUS_APPROVED":    2,
+		"WITHDRAWAL_STATUS_PAID":        3,
+		"WITHDRAWAL_STATUS_REJECTED":    4,
+		"WITHDRAWAL_STATUS_CANCELLED":   5,
+		"WITHDRAWAL_STATUS_FAILED":      6,
+	}
+)
+
+func (x WithdrawalStatus) Enum() *WithdrawalStatus {
+	p := new(WithdrawalStatus)
+	*p = x
+	return p
+}
+
+func (x WithdrawalStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (WithdrawalStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_gridx_billing_v1_wallet_proto_enumTypes[2].Descriptor()
+}
+
+func (WithdrawalStatus) Type() protoreflect.EnumType {
+	return &file_gridx_billing_v1_wallet_proto_enumTypes[2]
+}
+
+func (x WithdrawalStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use WithdrawalStatus.Descriptor instead.
+func (WithdrawalStatus) EnumDescriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{2}
+}
+
 // All amounts are minor units: 1 credit = 100 units.
 type Wallet struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -248,6 +370,986 @@ func (x *GetWalletResponse) GetWallet() *Wallet {
 	return nil
 }
 
+type DepositIntent struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	DepositId      string                 `protobuf:"bytes,1,opt,name=deposit_id,json=depositId,proto3" json:"deposit_id,omitempty"`
+	Status         DepositStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=gridx.billing.v1.DepositStatus" json:"status,omitempty"`
+	CheckoutUrl    string                 `protobuf:"bytes,3,opt,name=checkout_url,json=checkoutUrl,proto3" json:"checkout_url,omitempty"`
+	Amount         int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	ChargeCurrency string                 `protobuf:"bytes,5,opt,name=charge_currency,json=chargeCurrency,proto3" json:"charge_currency,omitempty"`
+	ChargeAmount   int64                  `protobuf:"varint,6,opt,name=charge_amount,json=chargeAmount,proto3" json:"charge_amount,omitempty"`
+	ExpiresAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *DepositIntent) Reset() {
+	*x = DepositIntent{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DepositIntent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DepositIntent) ProtoMessage() {}
+
+func (x *DepositIntent) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DepositIntent.ProtoReflect.Descriptor instead.
+func (*DepositIntent) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DepositIntent) GetDepositId() string {
+	if x != nil {
+		return x.DepositId
+	}
+	return ""
+}
+
+func (x *DepositIntent) GetStatus() DepositStatus {
+	if x != nil {
+		return x.Status
+	}
+	return DepositStatus_DEPOSIT_STATUS_UNSPECIFIED
+}
+
+func (x *DepositIntent) GetCheckoutUrl() string {
+	if x != nil {
+		return x.CheckoutUrl
+	}
+	return ""
+}
+
+func (x *DepositIntent) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *DepositIntent) GetChargeCurrency() string {
+	if x != nil {
+		return x.ChargeCurrency
+	}
+	return ""
+}
+
+func (x *DepositIntent) GetChargeAmount() int64 {
+	if x != nil {
+		return x.ChargeAmount
+	}
+	return 0
+}
+
+func (x *DepositIntent) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
+func (x *DepositIntent) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type CreateDepositIntentRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	Amount         int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	SuccessUrl     string                 `protobuf:"bytes,3,opt,name=success_url,json=successUrl,proto3" json:"success_url,omitempty"`
+	CancelUrl      string                 `protobuf:"bytes,4,opt,name=cancel_url,json=cancelUrl,proto3" json:"cancel_url,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateDepositIntentRequest) Reset() {
+	*x = CreateDepositIntentRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDepositIntentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDepositIntentRequest) ProtoMessage() {}
+
+func (x *CreateDepositIntentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDepositIntentRequest.ProtoReflect.Descriptor instead.
+func (*CreateDepositIntentRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateDepositIntentRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *CreateDepositIntentRequest) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *CreateDepositIntentRequest) GetSuccessUrl() string {
+	if x != nil {
+		return x.SuccessUrl
+	}
+	return ""
+}
+
+func (x *CreateDepositIntentRequest) GetCancelUrl() string {
+	if x != nil {
+		return x.CancelUrl
+	}
+	return ""
+}
+
+type CreateDepositIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Deposit       *DepositIntent         `protobuf:"bytes,1,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDepositIntentResponse) Reset() {
+	*x = CreateDepositIntentResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDepositIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDepositIntentResponse) ProtoMessage() {}
+
+func (x *CreateDepositIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDepositIntentResponse.ProtoReflect.Descriptor instead.
+func (*CreateDepositIntentResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateDepositIntentResponse) GetDeposit() *DepositIntent {
+	if x != nil {
+		return x.Deposit
+	}
+	return nil
+}
+
+type ConfirmDepositRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RawBody       []byte                 `protobuf:"bytes,1,opt,name=raw_body,json=rawBody,proto3" json:"raw_body,omitempty"`
+	Headers       map[string]string      `protobuf:"bytes,2,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmDepositRequest) Reset() {
+	*x = ConfirmDepositRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmDepositRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmDepositRequest) ProtoMessage() {}
+
+func (x *ConfirmDepositRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmDepositRequest.ProtoReflect.Descriptor instead.
+func (*ConfirmDepositRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ConfirmDepositRequest) GetRawBody() []byte {
+	if x != nil {
+		return x.RawBody
+	}
+	return nil
+}
+
+func (x *ConfirmDepositRequest) GetHeaders() map[string]string {
+	if x != nil {
+		return x.Headers
+	}
+	return nil
+}
+
+type ConfirmDepositResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Processed     bool                   `protobuf:"varint,1,opt,name=processed,proto3" json:"processed,omitempty"`
+	DespositId    string                 `protobuf:"bytes,2,opt,name=desposit_id,json=despositId,proto3" json:"desposit_id,omitempty"`
+	Status        DepositStatus          `protobuf:"varint,3,opt,name=status,proto3,enum=gridx.billing.v1.DepositStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmDepositResponse) Reset() {
+	*x = ConfirmDepositResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmDepositResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmDepositResponse) ProtoMessage() {}
+
+func (x *ConfirmDepositResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmDepositResponse.ProtoReflect.Descriptor instead.
+func (*ConfirmDepositResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConfirmDepositResponse) GetProcessed() bool {
+	if x != nil {
+		return x.Processed
+	}
+	return false
+}
+
+func (x *ConfirmDepositResponse) GetDespositId() string {
+	if x != nil {
+		return x.DespositId
+	}
+	return ""
+}
+
+func (x *ConfirmDepositResponse) GetStatus() DepositStatus {
+	if x != nil {
+		return x.Status
+	}
+	return DepositStatus_DEPOSIT_STATUS_UNSPECIFIED
+}
+
+type GetDepositRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DepositId     string                 `protobuf:"bytes,1,opt,name=deposit_id,json=depositId,proto3" json:"deposit_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDepositRequest) Reset() {
+	*x = GetDepositRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDepositRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDepositRequest) ProtoMessage() {}
+
+func (x *GetDepositRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDepositRequest.ProtoReflect.Descriptor instead.
+func (*GetDepositRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetDepositRequest) GetDepositId() string {
+	if x != nil {
+		return x.DepositId
+	}
+	return ""
+}
+
+type GetDepositResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Deposit       *DepositIntent         `protobuf:"bytes,1,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDepositResponse) Reset() {
+	*x = GetDepositResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDepositResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDepositResponse) ProtoMessage() {}
+
+func (x *GetDepositResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDepositResponse.ProtoReflect.Descriptor instead.
+func (*GetDepositResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetDepositResponse) GetDeposit() *DepositIntent {
+	if x != nil {
+		return x.Deposit
+	}
+	return nil
+}
+
+type Withdrawal struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WithdrawalId  string                 `protobuf:"bytes,1,opt,name=withdrawal_id,json=withdrawalId,proto3" json:"withdrawal_id,omitempty"`
+	WalletId      string                 `protobuf:"bytes,2,opt,name=wallet_id,json=walletId,proto3" json:"wallet_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Status        WithdrawalStatus       `protobuf:"varint,4,opt,name=status,proto3,enum=gridx.billing.v1.WithdrawalStatus" json:"status,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Withdrawal) Reset() {
+	*x = Withdrawal{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Withdrawal) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Withdrawal) ProtoMessage() {}
+
+func (x *Withdrawal) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Withdrawal.ProtoReflect.Descriptor instead.
+func (*Withdrawal) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Withdrawal) GetWithdrawalId() string {
+	if x != nil {
+		return x.WithdrawalId
+	}
+	return ""
+}
+
+func (x *Withdrawal) GetWalletId() string {
+	if x != nil {
+		return x.WalletId
+	}
+	return ""
+}
+
+func (x *Withdrawal) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *Withdrawal) GetStatus() WithdrawalStatus {
+	if x != nil {
+		return x.Status
+	}
+	return WithdrawalStatus_WITHDRAWAL_STATUS_UNSPECIFIED
+}
+
+func (x *Withdrawal) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Withdrawal) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type RequestWithdrawalRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey  string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	Amount          int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	DestinationJson []byte                 `protobuf:"bytes,3,opt,name=destination_json,json=destinationJson,proto3" json:"destination_json,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *RequestWithdrawalRequest) Reset() {
+	*x = RequestWithdrawalRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestWithdrawalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestWithdrawalRequest) ProtoMessage() {}
+
+func (x *RequestWithdrawalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestWithdrawalRequest.ProtoReflect.Descriptor instead.
+func (*RequestWithdrawalRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RequestWithdrawalRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *RequestWithdrawalRequest) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *RequestWithdrawalRequest) GetDestinationJson() []byte {
+	if x != nil {
+		return x.DestinationJson
+	}
+	return nil
+}
+
+type RequestWithdrawalResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Withdrawal    *Withdrawal            `protobuf:"bytes,1,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestWithdrawalResponse) Reset() {
+	*x = RequestWithdrawalResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestWithdrawalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestWithdrawalResponse) ProtoMessage() {}
+
+func (x *RequestWithdrawalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestWithdrawalResponse.ProtoReflect.Descriptor instead.
+func (*RequestWithdrawalResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *RequestWithdrawalResponse) GetWithdrawal() *Withdrawal {
+	if x != nil {
+		return x.Withdrawal
+	}
+	return nil
+}
+
+type CancelWithdrawalRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WithdrawalId  string                 `protobuf:"bytes,1,opt,name=withdrawal_id,json=withdrawalId,proto3" json:"withdrawal_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelWithdrawalRequest) Reset() {
+	*x = CancelWithdrawalRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelWithdrawalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelWithdrawalRequest) ProtoMessage() {}
+
+func (x *CancelWithdrawalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelWithdrawalRequest.ProtoReflect.Descriptor instead.
+func (*CancelWithdrawalRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CancelWithdrawalRequest) GetWithdrawalId() string {
+	if x != nil {
+		return x.WithdrawalId
+	}
+	return ""
+}
+
+type CancelWithdrawalResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Withdrawal    *Withdrawal            `protobuf:"bytes,1,opt,name=withdrawal,proto3" json:"withdrawal,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelWithdrawalResponse) Reset() {
+	*x = CancelWithdrawalResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelWithdrawalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelWithdrawalResponse) ProtoMessage() {}
+
+func (x *CancelWithdrawalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelWithdrawalResponse.ProtoReflect.Descriptor instead.
+func (*CancelWithdrawalResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CancelWithdrawalResponse) GetWithdrawal() *Withdrawal {
+	if x != nil {
+		return x.Withdrawal
+	}
+	return nil
+}
+
+type ListWithdrawalsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PageSize      int32                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWithdrawalsRequest) Reset() {
+	*x = ListWithdrawalsRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWithdrawalsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWithdrawalsRequest) ProtoMessage() {}
+
+func (x *ListWithdrawalsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWithdrawalsRequest.ProtoReflect.Descriptor instead.
+func (*ListWithdrawalsRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListWithdrawalsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListWithdrawalsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListWithdrawalsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Withdrawals   []*Withdrawal          `protobuf:"bytes,1,rep,name=withdrawals,proto3" json:"withdrawals,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWithdrawalsResponse) Reset() {
+	*x = ListWithdrawalsResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWithdrawalsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWithdrawalsResponse) ProtoMessage() {}
+
+func (x *ListWithdrawalsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWithdrawalsResponse.ProtoReflect.Descriptor instead.
+func (*ListWithdrawalsResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListWithdrawalsResponse) GetWithdrawals() []*Withdrawal {
+	if x != nil {
+		return x.Withdrawals
+	}
+	return nil
+}
+
+func (x *ListWithdrawalsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type ListTransactionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PageSize      int32                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTransactionsRequest) Reset() {
+	*x = ListTransactionsRequest{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTransactionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTransactionsRequest) ProtoMessage() {}
+
+func (x *ListTransactionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTransactionsRequest.ProtoReflect.Descriptor instead.
+func (*ListTransactionsRequest) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListTransactionsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTransactionsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type TransactionItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EntryId       int64                  `protobuf:"varint,1,opt,name=entry_id,json=entryId,proto3" json:"entry_id,omitempty"`
+	JournalId     string                 `protobuf:"bytes,2,opt,name=journal_id,json=journalId,proto3" json:"journal_id,omitempty"`
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // DEPOSIT | WITHDRAWAL | TRADE_SETTLEMENT | ADJUSTMENT
+	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	BalanceAfter  int64                  `protobuf:"varint,5,opt,name=balance_after,json=balanceAfter,proto3" json:"balance_after,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionItem) Reset() {
+	*x = TransactionItem{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionItem) ProtoMessage() {}
+
+func (x *TransactionItem) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionItem.ProtoReflect.Descriptor instead.
+func (*TransactionItem) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *TransactionItem) GetEntryId() int64 {
+	if x != nil {
+		return x.EntryId
+	}
+	return 0
+}
+
+func (x *TransactionItem) GetJournalId() string {
+	if x != nil {
+		return x.JournalId
+	}
+	return ""
+}
+
+func (x *TransactionItem) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *TransactionItem) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *TransactionItem) GetBalanceAfter() int64 {
+	if x != nil {
+		return x.BalanceAfter
+	}
+	return 0
+}
+
+func (x *TransactionItem) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type ListTransactionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Transactions  []*TransactionItem     `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTransactionsResponse) Reset() {
+	*x = ListTransactionsResponse{}
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTransactionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTransactionsResponse) ProtoMessage() {}
+
+func (x *ListTransactionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gridx_billing_v1_wallet_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTransactionsResponse.ProtoReflect.Descriptor instead.
+func (*ListTransactionsResponse) Descriptor() ([]byte, []int) {
+	return file_gridx_billing_v1_wallet_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListTransactionsResponse) GetTransactions() []*TransactionItem {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
+}
+
+func (x *ListTransactionsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_gridx_billing_v1_wallet_proto protoreflect.FileDescriptor
 
 const file_gridx_billing_v1_wallet_proto_rawDesc = "" +
@@ -264,14 +1366,122 @@ const file_gridx_billing_v1_wallet_proto_rawDesc = "" +
 	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x12\n" +
 	"\x10GetWalletRequest\"E\n" +
 	"\x11GetWalletResponse\x120\n" +
-	"\x06wallet\x18\x01 \x01(\v2\x18.gridx.billing.v1.WalletR\x06wallet*{\n" +
+	"\x06wallet\x18\x01 \x01(\v2\x18.gridx.billing.v1.WalletR\x06wallet\"\xe6\x02\n" +
+	"\rDepositIntent\x12\x1d\n" +
+	"\n" +
+	"deposit_id\x18\x01 \x01(\tR\tdepositId\x127\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x1f.gridx.billing.v1.DepositStatusR\x06status\x12!\n" +
+	"\fcheckout_url\x18\x03 \x01(\tR\vcheckoutUrl\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12'\n" +
+	"\x0fcharge_currency\x18\x05 \x01(\tR\x0echargeCurrency\x12#\n" +
+	"\rcharge_amount\x18\x06 \x01(\x03R\fchargeAmount\x129\n" +
+	"\n" +
+	"expires_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x9d\x01\n" +
+	"\x1aCreateDepositIntentRequest\x12'\n" +
+	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12\x1f\n" +
+	"\vsuccess_url\x18\x03 \x01(\tR\n" +
+	"successUrl\x12\x1d\n" +
+	"\n" +
+	"cancel_url\x18\x04 \x01(\tR\tcancelUrl\"X\n" +
+	"\x1bCreateDepositIntentResponse\x129\n" +
+	"\adeposit\x18\x01 \x01(\v2\x1f.gridx.billing.v1.DepositIntentR\adeposit\"\xbe\x01\n" +
+	"\x15ConfirmDepositRequest\x12\x19\n" +
+	"\braw_body\x18\x01 \x01(\fR\arawBody\x12N\n" +
+	"\aheaders\x18\x02 \x03(\v24.gridx.billing.v1.ConfirmDepositRequest.HeadersEntryR\aheaders\x1a:\n" +
+	"\fHeadersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x90\x01\n" +
+	"\x16ConfirmDepositResponse\x12\x1c\n" +
+	"\tprocessed\x18\x01 \x01(\bR\tprocessed\x12\x1f\n" +
+	"\vdesposit_id\x18\x02 \x01(\tR\n" +
+	"despositId\x127\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.gridx.billing.v1.DepositStatusR\x06status\"2\n" +
+	"\x11GetDepositRequest\x12\x1d\n" +
+	"\n" +
+	"deposit_id\x18\x01 \x01(\tR\tdepositId\"O\n" +
+	"\x12GetDepositResponse\x129\n" +
+	"\adeposit\x18\x01 \x01(\v2\x1f.gridx.billing.v1.DepositIntentR\adeposit\"\x98\x02\n" +
+	"\n" +
+	"Withdrawal\x12#\n" +
+	"\rwithdrawal_id\x18\x01 \x01(\tR\fwithdrawalId\x12\x1b\n" +
+	"\twallet_id\x18\x02 \x01(\tR\bwalletId\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\x03R\x06amount\x12:\n" +
+	"\x06status\x18\x04 \x01(\x0e2\".gridx.billing.v1.WithdrawalStatusR\x06status\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x86\x01\n" +
+	"\x18RequestWithdrawalRequest\x12'\n" +
+	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x03R\x06amount\x12)\n" +
+	"\x10destination_json\x18\x03 \x01(\fR\x0fdestinationJson\"Y\n" +
+	"\x19RequestWithdrawalResponse\x12<\n" +
+	"\n" +
+	"withdrawal\x18\x01 \x01(\v2\x1c.gridx.billing.v1.WithdrawalR\n" +
+	"withdrawal\">\n" +
+	"\x17CancelWithdrawalRequest\x12#\n" +
+	"\rwithdrawal_id\x18\x01 \x01(\tR\fwithdrawalId\"X\n" +
+	"\x18CancelWithdrawalResponse\x12<\n" +
+	"\n" +
+	"withdrawal\x18\x01 \x01(\v2\x1c.gridx.billing.v1.WithdrawalR\n" +
+	"withdrawal\"T\n" +
+	"\x16ListWithdrawalsRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x81\x01\n" +
+	"\x17ListWithdrawalsResponse\x12>\n" +
+	"\vwithdrawals\x18\x01 \x03(\v2\x1c.gridx.billing.v1.WithdrawalR\vwithdrawals\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"U\n" +
+	"\x17ListTransactionsRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xd7\x01\n" +
+	"\x0fTransactionItem\x12\x19\n" +
+	"\bentry_id\x18\x01 \x01(\x03R\aentryId\x12\x1d\n" +
+	"\n" +
+	"journal_id\x18\x02 \x01(\tR\tjournalId\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12#\n" +
+	"\rbalance_after\x18\x05 \x01(\x03R\fbalanceAfter\x129\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x89\x01\n" +
+	"\x18ListTransactionsResponse\x12E\n" +
+	"\ftransactions\x18\x01 \x03(\v2!.gridx.billing.v1.TransactionItemR\ftransactions\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*{\n" +
 	"\fWalletStatus\x12\x1d\n" +
 	"\x19WALLET_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14WALLET_STATUS_ACTIVE\x10\x01\x12\x18\n" +
 	"\x14WALLET_STATUS_FROZEN\x10\x02\x12\x18\n" +
-	"\x14WALLET_STATUS_CLOSED\x10\x032e\n" +
+	"\x14WALLET_STATUS_CLOSED\x10\x03*\xda\x01\n" +
+	"\rDepositStatus\x12\x1e\n" +
+	"\x1aDEPOSIT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16DEPOSIT_STATUS_PENDING\x10\x01\x12\x1c\n" +
+	"\x18DEPOSIT_STATUS_COMPLETED\x10\x02\x12\x19\n" +
+	"\x15DEPOSIT_STATUS_FAILED\x10\x03\x12\x1a\n" +
+	"\x16DEPOSIT_STATUS_EXPIRED\x10\x04\x12\x1b\n" +
+	"\x17DEPOSIT_STATUS_REFUNDED\x10\x05\x12\x1b\n" +
+	"\x17DEPOSIT_STATUS_DISPUTED\x10\x06*\xef\x01\n" +
+	"\x10WithdrawalStatus\x12!\n" +
+	"\x1dWITHDRAWAL_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19WITHDRAWAL_STATUS_PENDING\x10\x01\x12\x1e\n" +
+	"\x1aWITHDRAWAL_STATUS_APPROVED\x10\x02\x12\x1a\n" +
+	"\x16WITHDRAWAL_STATUS_PAID\x10\x03\x12\x1e\n" +
+	"\x1aWITHDRAWAL_STATUS_REJECTED\x10\x04\x12\x1f\n" +
+	"\x1bWITHDRAWAL_STATUS_CANCELLED\x10\x05\x12\x1c\n" +
+	"\x18WITHDRAWAL_STATUS_FAILED\x10\x062\xc3\x06\n" +
 	"\rWalletService\x12T\n" +
-	"\tGetWallet\x12\".gridx.billing.v1.GetWalletRequest\x1a#.gridx.billing.v1.GetWalletResponseBNZLgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/billing/v1;billingv1b\x06proto3"
+	"\tGetWallet\x12\".gridx.billing.v1.GetWalletRequest\x1a#.gridx.billing.v1.GetWalletResponse\x12i\n" +
+	"\x10ListTransactions\x12).gridx.billing.v1.ListTransactionsRequest\x1a*.gridx.billing.v1.ListTransactionsResponse\x12r\n" +
+	"\x13CreateDepositIntent\x12,.gridx.billing.v1.CreateDepositIntentRequest\x1a-.gridx.billing.v1.CreateDepositIntentResponse\x12c\n" +
+	"\x0eConfirmDeposit\x12'.gridx.billing.v1.ConfirmDepositRequest\x1a(.gridx.billing.v1.ConfirmDepositResponse\x12W\n" +
+	"\n" +
+	"GetDeposit\x12#.gridx.billing.v1.GetDepositRequest\x1a$.gridx.billing.v1.GetDepositResponse\x12l\n" +
+	"\x11RequestWithdrawal\x12*.gridx.billing.v1.RequestWithdrawalRequest\x1a+.gridx.billing.v1.RequestWithdrawalResponse\x12i\n" +
+	"\x10CancelWithdrawal\x12).gridx.billing.v1.CancelWithdrawalRequest\x1a*.gridx.billing.v1.CancelWithdrawalResponse\x12f\n" +
+	"\x0fListWithdrawals\x12(.gridx.billing.v1.ListWithdrawalsRequest\x1a).gridx.billing.v1.ListWithdrawalsResponseBNZLgithub.com/p2p-energy-trading-platform/go-sdk/gen/gridx/billing/v1;billingv1b\x06proto3"
 
 var (
 	file_gridx_billing_v1_wallet_proto_rawDescOnce sync.Once
@@ -285,26 +1495,75 @@ func file_gridx_billing_v1_wallet_proto_rawDescGZIP() []byte {
 	return file_gridx_billing_v1_wallet_proto_rawDescData
 }
 
-var file_gridx_billing_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_gridx_billing_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_gridx_billing_v1_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_gridx_billing_v1_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_gridx_billing_v1_wallet_proto_goTypes = []any{
-	(WalletStatus)(0),             // 0: gridx.billing.v1.WalletStatus
-	(*Wallet)(nil),                // 1: gridx.billing.v1.Wallet
-	(*GetWalletRequest)(nil),      // 2: gridx.billing.v1.GetWalletRequest
-	(*GetWalletResponse)(nil),     // 3: gridx.billing.v1.GetWalletResponse
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(WalletStatus)(0),                   // 0: gridx.billing.v1.WalletStatus
+	(DepositStatus)(0),                  // 1: gridx.billing.v1.DepositStatus
+	(WithdrawalStatus)(0),               // 2: gridx.billing.v1.WithdrawalStatus
+	(*Wallet)(nil),                      // 3: gridx.billing.v1.Wallet
+	(*GetWalletRequest)(nil),            // 4: gridx.billing.v1.GetWalletRequest
+	(*GetWalletResponse)(nil),           // 5: gridx.billing.v1.GetWalletResponse
+	(*DepositIntent)(nil),               // 6: gridx.billing.v1.DepositIntent
+	(*CreateDepositIntentRequest)(nil),  // 7: gridx.billing.v1.CreateDepositIntentRequest
+	(*CreateDepositIntentResponse)(nil), // 8: gridx.billing.v1.CreateDepositIntentResponse
+	(*ConfirmDepositRequest)(nil),       // 9: gridx.billing.v1.ConfirmDepositRequest
+	(*ConfirmDepositResponse)(nil),      // 10: gridx.billing.v1.ConfirmDepositResponse
+	(*GetDepositRequest)(nil),           // 11: gridx.billing.v1.GetDepositRequest
+	(*GetDepositResponse)(nil),          // 12: gridx.billing.v1.GetDepositResponse
+	(*Withdrawal)(nil),                  // 13: gridx.billing.v1.Withdrawal
+	(*RequestWithdrawalRequest)(nil),    // 14: gridx.billing.v1.RequestWithdrawalRequest
+	(*RequestWithdrawalResponse)(nil),   // 15: gridx.billing.v1.RequestWithdrawalResponse
+	(*CancelWithdrawalRequest)(nil),     // 16: gridx.billing.v1.CancelWithdrawalRequest
+	(*CancelWithdrawalResponse)(nil),    // 17: gridx.billing.v1.CancelWithdrawalResponse
+	(*ListWithdrawalsRequest)(nil),      // 18: gridx.billing.v1.ListWithdrawalsRequest
+	(*ListWithdrawalsResponse)(nil),     // 19: gridx.billing.v1.ListWithdrawalsResponse
+	(*ListTransactionsRequest)(nil),     // 20: gridx.billing.v1.ListTransactionsRequest
+	(*TransactionItem)(nil),             // 21: gridx.billing.v1.TransactionItem
+	(*ListTransactionsResponse)(nil),    // 22: gridx.billing.v1.ListTransactionsResponse
+	nil,                                 // 23: gridx.billing.v1.ConfirmDepositRequest.HeadersEntry
+	(*timestamppb.Timestamp)(nil),       // 24: google.protobuf.Timestamp
 }
 var file_gridx_billing_v1_wallet_proto_depIdxs = []int32{
-	0, // 0: gridx.billing.v1.Wallet.status:type_name -> gridx.billing.v1.WalletStatus
-	4, // 1: gridx.billing.v1.Wallet.updated_at:type_name -> google.protobuf.Timestamp
-	1, // 2: gridx.billing.v1.GetWalletResponse.wallet:type_name -> gridx.billing.v1.Wallet
-	2, // 3: gridx.billing.v1.WalletService.GetWallet:input_type -> gridx.billing.v1.GetWalletRequest
-	3, // 4: gridx.billing.v1.WalletService.GetWallet:output_type -> gridx.billing.v1.GetWalletResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: gridx.billing.v1.Wallet.status:type_name -> gridx.billing.v1.WalletStatus
+	24, // 1: gridx.billing.v1.Wallet.updated_at:type_name -> google.protobuf.Timestamp
+	3,  // 2: gridx.billing.v1.GetWalletResponse.wallet:type_name -> gridx.billing.v1.Wallet
+	1,  // 3: gridx.billing.v1.DepositIntent.status:type_name -> gridx.billing.v1.DepositStatus
+	24, // 4: gridx.billing.v1.DepositIntent.expires_at:type_name -> google.protobuf.Timestamp
+	24, // 5: gridx.billing.v1.DepositIntent.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 6: gridx.billing.v1.CreateDepositIntentResponse.deposit:type_name -> gridx.billing.v1.DepositIntent
+	23, // 7: gridx.billing.v1.ConfirmDepositRequest.headers:type_name -> gridx.billing.v1.ConfirmDepositRequest.HeadersEntry
+	1,  // 8: gridx.billing.v1.ConfirmDepositResponse.status:type_name -> gridx.billing.v1.DepositStatus
+	6,  // 9: gridx.billing.v1.GetDepositResponse.deposit:type_name -> gridx.billing.v1.DepositIntent
+	2,  // 10: gridx.billing.v1.Withdrawal.status:type_name -> gridx.billing.v1.WithdrawalStatus
+	24, // 11: gridx.billing.v1.Withdrawal.created_at:type_name -> google.protobuf.Timestamp
+	24, // 12: gridx.billing.v1.Withdrawal.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 13: gridx.billing.v1.RequestWithdrawalResponse.withdrawal:type_name -> gridx.billing.v1.Withdrawal
+	13, // 14: gridx.billing.v1.CancelWithdrawalResponse.withdrawal:type_name -> gridx.billing.v1.Withdrawal
+	13, // 15: gridx.billing.v1.ListWithdrawalsResponse.withdrawals:type_name -> gridx.billing.v1.Withdrawal
+	24, // 16: gridx.billing.v1.TransactionItem.created_at:type_name -> google.protobuf.Timestamp
+	21, // 17: gridx.billing.v1.ListTransactionsResponse.transactions:type_name -> gridx.billing.v1.TransactionItem
+	4,  // 18: gridx.billing.v1.WalletService.GetWallet:input_type -> gridx.billing.v1.GetWalletRequest
+	20, // 19: gridx.billing.v1.WalletService.ListTransactions:input_type -> gridx.billing.v1.ListTransactionsRequest
+	7,  // 20: gridx.billing.v1.WalletService.CreateDepositIntent:input_type -> gridx.billing.v1.CreateDepositIntentRequest
+	9,  // 21: gridx.billing.v1.WalletService.ConfirmDeposit:input_type -> gridx.billing.v1.ConfirmDepositRequest
+	11, // 22: gridx.billing.v1.WalletService.GetDeposit:input_type -> gridx.billing.v1.GetDepositRequest
+	14, // 23: gridx.billing.v1.WalletService.RequestWithdrawal:input_type -> gridx.billing.v1.RequestWithdrawalRequest
+	16, // 24: gridx.billing.v1.WalletService.CancelWithdrawal:input_type -> gridx.billing.v1.CancelWithdrawalRequest
+	18, // 25: gridx.billing.v1.WalletService.ListWithdrawals:input_type -> gridx.billing.v1.ListWithdrawalsRequest
+	5,  // 26: gridx.billing.v1.WalletService.GetWallet:output_type -> gridx.billing.v1.GetWalletResponse
+	22, // 27: gridx.billing.v1.WalletService.ListTransactions:output_type -> gridx.billing.v1.ListTransactionsResponse
+	8,  // 28: gridx.billing.v1.WalletService.CreateDepositIntent:output_type -> gridx.billing.v1.CreateDepositIntentResponse
+	10, // 29: gridx.billing.v1.WalletService.ConfirmDeposit:output_type -> gridx.billing.v1.ConfirmDepositResponse
+	12, // 30: gridx.billing.v1.WalletService.GetDeposit:output_type -> gridx.billing.v1.GetDepositResponse
+	15, // 31: gridx.billing.v1.WalletService.RequestWithdrawal:output_type -> gridx.billing.v1.RequestWithdrawalResponse
+	17, // 32: gridx.billing.v1.WalletService.CancelWithdrawal:output_type -> gridx.billing.v1.CancelWithdrawalResponse
+	19, // 33: gridx.billing.v1.WalletService.ListWithdrawals:output_type -> gridx.billing.v1.ListWithdrawalsResponse
+	26, // [26:34] is the sub-list for method output_type
+	18, // [18:26] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_gridx_billing_v1_wallet_proto_init() }
@@ -317,8 +1576,8 @@ func file_gridx_billing_v1_wallet_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gridx_billing_v1_wallet_proto_rawDesc), len(file_gridx_billing_v1_wallet_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   3,
+			NumEnums:      3,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
