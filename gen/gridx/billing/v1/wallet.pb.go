@@ -637,8 +637,8 @@ func (x *ConfirmDepositRequest) GetHeaders() map[string]string {
 type ConfirmDepositResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Processed     bool                   `protobuf:"varint,1,opt,name=processed,proto3" json:"processed,omitempty"`
-	DespositId    string                 `protobuf:"bytes,2,opt,name=desposit_id,json=despositId,proto3" json:"desposit_id,omitempty"`
 	Status        DepositStatus          `protobuf:"varint,3,opt,name=status,proto3,enum=gridx.billing.v1.DepositStatus" json:"status,omitempty"`
+	DepositId     string                 `protobuf:"bytes,4,opt,name=deposit_id,json=depositId,proto3" json:"deposit_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -680,18 +680,18 @@ func (x *ConfirmDepositResponse) GetProcessed() bool {
 	return false
 }
 
-func (x *ConfirmDepositResponse) GetDespositId() string {
-	if x != nil {
-		return x.DespositId
-	}
-	return ""
-}
-
 func (x *ConfirmDepositResponse) GetStatus() DepositStatus {
 	if x != nil {
 		return x.Status
 	}
 	return DepositStatus_DEPOSIT_STATUS_UNSPECIFIED
+}
+
+func (x *ConfirmDepositResponse) GetDepositId() string {
+	if x != nil {
+		return x.DepositId
+	}
+	return ""
 }
 
 type GetDepositRequest struct {
@@ -1393,12 +1393,12 @@ const file_gridx_billing_v1_wallet_proto_rawDesc = "" +
 	"\aheaders\x18\x02 \x03(\v24.gridx.billing.v1.ConfirmDepositRequest.HeadersEntryR\aheaders\x1a:\n" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x90\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa1\x01\n" +
 	"\x16ConfirmDepositResponse\x12\x1c\n" +
-	"\tprocessed\x18\x01 \x01(\bR\tprocessed\x12\x1f\n" +
-	"\vdesposit_id\x18\x02 \x01(\tR\n" +
-	"despositId\x127\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x1f.gridx.billing.v1.DepositStatusR\x06status\"2\n" +
+	"\tprocessed\x18\x01 \x01(\bR\tprocessed\x127\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.gridx.billing.v1.DepositStatusR\x06status\x12\x1d\n" +
+	"\n" +
+	"deposit_id\x18\x04 \x01(\tR\tdepositIdJ\x04\b\x02\x10\x03R\vdesposit_id\"2\n" +
 	"\x11GetDepositRequest\x12\x1d\n" +
 	"\n" +
 	"deposit_id\x18\x01 \x01(\tR\tdepositId\"O\n" +
